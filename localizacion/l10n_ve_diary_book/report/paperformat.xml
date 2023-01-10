@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_account_diary_nook" model="report.paperformat">
+            <field name="default" eval="True"/>
+            <field name="name">A4 Landscape - Diary Book</field>
+            <field name="format">custom</field>
+            <field name="page_height">330</field>
+            <field name="page_width">219</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_spacing">35</field>
+            <field name="header_line" eval="False"/>
+        </record>
+    </data>
+</odoo>

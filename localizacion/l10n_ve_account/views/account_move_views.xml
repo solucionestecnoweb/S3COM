@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_invoice_inherit_view_tree" model="ir.ui.view">
+            <field name="name">account.move.inherit.view.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total_signed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_untaxed_signed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_tax_signed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_total_signed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_residual_signed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="amount_untaxed" readonly="1"/>
+                    <field name="amount_tax" readonly="1"/>
+                    <field name="amount_total" readonly="1"/>
+                </xpath>
+
+               <xpath expr="//field[@name='amount_total_signed']" position="after">
+                   <field name="amount_untaxed_signed_rate" string="Base Imponible al Cambio"
+                          sum="amount_residual_signed_rate" widget="monetary"
+                          options="{'currency_field': 'currency_id2', 'field_digits': True}"
+                          readonly="1" optional="hide"/>
+
+                   <field name="amount_tax_rate"
+                          string="Impuestos al Cambio"
+                          sum="amount_tax_rate" widget="monetary"
+                          options="{'currency_field': 'currency_id2', 'field_digits': True}"
+                          readonly="1" optional="hide"/>
+
+                   <field name="amount_total_signed_aux_rate" decoration-bf="1" string="Total al Cambio"
+                          sum="amount_total_signed_aux_rate" widget="monetary"
+                          options="{'currency_field': 'currency_id2', 'field_digits': True}" readonly="1"/>
+               </xpath>
+
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="os_currency_rate" decoration-bf="1" optional="show" readonly="1"/>
+                    <field name="currency_id" decoration-bf="1" optional="show" readonly="1"/>
+                    <field name="currency_id2" decoration-bf="1" invisible="1"/>
+               </xpath>
+            </field>
+        </record>
+
+
+        <record id="account_view_rate_tree" model="ir.ui.view">
+            <field name="name">account.move.rate.view.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//field[@name='amount_total_signed']" position="after">-->
+<!--                    <field name="amount_total_signed_aux_rate" decoration-bf="1"-->
+<!--                           string="Total al Cambio" sum="amount_total_signed_aux_rate"-->
+<!--                            widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"-->
+<!--                           optional="show"/>-->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="os_currency_rate" decoration-bf="1" optional="show" readonly="1"/>
+                    <field name="currency_id" decoration-bf="1" optional="show" readonly="1"/>
+                    <field name="currency_id2" decoration-bf="1" invisible="1"/>
+               </xpath>
+            </field>
+        </record>
+
+        <record id="account_inherit_view_form" model="ir.ui.view">
+            <field name="name">account.inherit.view.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="context">{'show_vat': False}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <label for="vat" string="Grupo Contribuyente" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+                    <div attrs="{'invisible': [('move_type', '=', 'entry')]}">
+                        <field name="doc_type"  class="oe_inline" nolabel="1"/>
+                        <span class="oe_read_only"> - </span>
+                        <field name="vat" class="oe_inline"/>
+                    </div>
+                </xpath>
+                <xpath expr="//group[@id='header_right_group']" position="inside">
+                    <field name="import_form_num" attrs="{'invisible': [('move_type', '!=', 'in_invoice')]}"/>
+                    <field name="import_dossier" attrs="{'invisible': [('move_type', '!=', 'in_invoice')]}"/>
+                    <field name="import_date" attrs="{'invisible': [('move_type', '!=', 'in_invoice')]}"/>
+                    <field name="currency_id2" invisible="1" groups="base.group_multi_currency" options="{'no_open': True, 'no_create': True}"/>
+                </xpath>
+
+                <xpath expr="//notebook/page[1]/group[1]" position="after">
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="amount_tax" invisible="1"/>
+                        <field name="amount_untaxed_signed_rate" string="Base Imponible"
+                               widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+
+                        <field name="amount_tax_rate" string="Impuesto" attrs="{'invisible': [('amount_tax', '=', 0)]}"
+                               widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+
+                        <field name="amount_total_signed_aux_rate" string="Total"
+                               class="oe_subtotal_footer_separator" attrs="{'invisible': [('amount_tax', '=', 0)]}"
+                               widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+
+                        <field name="amount_residual_signed_rate" string="Importe Adeudado"
+                               class="oe_subtotal_footer_separator" attrs="{'invisible': [('state', '=', 'draft')]}"
+                               widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+
+                        <field name="amount_total_signed_rate" invisible="1"
+                               widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[2]/field[@name='line_ids']/tree[1]/field[@name='debit']" position="before">
+                    <field name="currency_id2" readonly="1" invisible="1" options="{'no_open': True, 'no_create': True}" groups="base.group_multi_currency"/>
+                    <field name="currency_id3" readonly="1" invisible="1" options="{'no_open': True, 'no_create': True}" groups="base.group_multi_currency"/>
+                    <field name="debit_rate" string="Debito" sum="debit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+
+                    <field name="credit_rate" string="Credito" sum="credit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='price_unit']" position="before">
+                    <field name="currency_id2" readonly="1" invisible="1" options="{'no_open': True, 'no_create': True}" groups="base.group_multi_currency"/>
+                    <field name="currency_id3" readonly="1" invisible="1" options="{'no_open': True, 'no_create': True}" groups="base.group_multi_currency"/>
+                    <field name="price_unit_rate"  widget="monetary" readonly="1"
+                           options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='price_subtotal']" position="before">
+                    <field name="price_subtotal_rate" widget="monetary" readonly="1"
+                           options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

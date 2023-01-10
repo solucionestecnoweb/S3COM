@@ -1,0 +1,295 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ve_resume_alicuota
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-30 19:37+0000\n"
+"PO-Revision-Date: 2022-08-30 15:43-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ve\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.1\n"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.actions.act_window,name:l10n_ve_resume_alicuota.action_alicuota
+#: model:ir.model,name:l10n_ve_resume_alicuota.model_alicuota
+msgid "Alicuota"
+msgstr "Alícuota"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__ali_general
+msgid "Alicuota General"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__ali_additional
+msgid "Alicuota General/Reducida"
+msgstr "Alícuota General/Reducida"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__ali_reduced
+msgid "Alicuota Reducida"
+msgstr "Alícuota Reducida"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_account_bank_statement_line__alicuota_ids
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_account_move__alicuota_ids
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_account_payment__alicuota_ids
+#: model_terms:ir.ui.view,arch_db:l10n_ve_resume_alicuota.view_alicuota_form
+#: model_terms:ir.ui.view,arch_db:l10n_ve_resume_alicuota.view_alicuota_tree
+msgid "Alicuotas"
+msgstr "Alícuotas"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields.selection,name:l10n_ve_resume_alicuota.selection__account_tax__aliquot__general
+msgid "Aliquiota General"
+msgstr "Alícuota General"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields.selection,name:l10n_ve_resume_alicuota.selection__account_tax__aliquot__additional
+msgid "Aliquiota General/Adicional"
+msgstr "Alícuota General/Adicional"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_account_tax__aliquot
+msgid "Aliquota"
+msgstr "Alícuota"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields.selection,name:l10n_ve_resume_alicuota.selection__account_tax__aliquot__reduced
+msgid "Aliquota Reducida"
+msgstr "Alícuota Reducida"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__currency_id
+msgid "Currency"
+msgstr "Divisa"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__doc_type
+msgid "Doc Type"
+msgstr "Tipo Doc"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__move_id
+msgid "Factura"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__date_voucher
+msgid "Fecha de Comprobante"
+msgstr "Fecha del Comprobante"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__date_invoice
+msgid "Fecha de Factura"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__tax_ids
+msgid "Impuestos"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model,name:l10n_ve_resume_alicuota.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota____last_update
+msgid "Last Modified on"
+msgstr "Última modificación "
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model_terms:ir.ui.view,arch_db:l10n_ve_resume_alicuota.view_alicuota_form
+msgid "Montos Alicuotas"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model_terms:ir.ui.view,arch_db:l10n_ve_resume_alicuota.view_alicuota_form
+msgid "Montos Retenidos"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model_terms:ir.ui.view,arch_db:l10n_ve_resume_alicuota.view_alicuota_form
+msgid "Montos Totales"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__partner_name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__invoice_number_control
+msgid "Nro Control"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__invoice_number_unique
+msgid "Nro Control Unique"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__invoice_number_next
+msgid "Nro Invoice"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__retention_iva_name
+msgid "Nro. Comprobante"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__percentage_ret
+msgid "Porcentaje de Retencion IVA"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model_terms:ir.ui.view,arch_db:l10n_ve_resume_alicuota.view_move_alicuota_form
+msgid "Resumem de IVA por Alicuota"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__retention_iva_id
+msgid "Retencion IVA"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__detained_general
+msgid "Retenido General"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__detained_additional
+msgid "Retenido General/Reducida"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__detained_reduced
+msgid "Retenido Reducida"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__state
+msgid "Status"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model,name:l10n_ve_resume_alicuota.model_account_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__vat
+msgid "Tax ID"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,help:l10n_ve_resume_alicuota.field_alicuota__vat
+msgid ""
+"The Tax Identification Number. Complete it if the contact is subjected to "
+"government taxes. Used in some legal statements."
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__type_doc
+msgid "Tipo de Documento"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__base_general
+msgid "Total Base General"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__base_additional
+msgid "Total Base General + Reducida"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__total_base
+msgid "Total Base Imponible"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__base_reduced
+msgid "Total Base Reducida"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__total_exempt
+msgid "Total Excento"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__total_valor_iva
+msgid "Total IVA"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__total_ret_iva
+msgid "Total IVA Retenido"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__total_amount_iva
+msgid "Total con IVA"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__move_type
+msgid "Type"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields.selection,name:l10n_ve_resume_alicuota.selection__account_tax__aliquot__exempt
+msgid "exento"
+msgstr ""
+
+#. module: l10n_ve_resume_alicuota
+#: model:ir.model.fields,field_description:l10n_ve_resume_alicuota.field_alicuota__retention_iva_state
+msgid "states"
+msgstr ""

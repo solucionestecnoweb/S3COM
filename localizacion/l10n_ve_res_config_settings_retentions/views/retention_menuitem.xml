@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <menuitem
+                id="menu_retention_islr_xml"
+                name="Retencion ISLR"
+                parent="account.menu_finance_reports"
+                sequence="40"
+        />
+        <menuitem
+                id="menu_iva_txt"
+                name="Declaracion IVA"
+                parent="account.menu_finance_reports"
+                sequence="40"
+        />
+</odoo>

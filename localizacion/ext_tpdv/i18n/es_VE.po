@@ -1,0 +1,167 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ext_tpdv
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-31 16:00+0000\n"
+"PO-Revision-Date: 2022-08-31 12:04-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ve\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.1\n"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/OrderlineCustomerNoteButtonNew.js:0
+#, python-format
+msgid "Add Customer Note"
+msgstr "Añadir nota de cliente"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/xml/Screens/PaymentScreen/ClientLine.xml:0
+#, python-format
+msgid "Cedula"
+msgstr "Cédula "
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Cedula del cliente requerido"
+msgstr "Cédula del cliente requerido"
+
+#. module: ext_tpdv
+#: model:ir.model.fields,field_description:ext_tpdv.field_pos_config__customer_recepit_vat_required
+msgid "Cedula en recibo"
+msgstr "Cédula en recibo"
+
+#. module: ext_tpdv
+#: model:ir.model.fields,field_description:ext_tpdv.field_pos_config__vat_required
+msgid "Cedula requerido"
+msgstr "Cédula requerido"
+
+#. module: ext_tpdv
+#: model:ir.model.fields,field_description:ext_tpdv.field_pos_config__customer_recepit_required
+msgid "Cliente en recibo"
+msgstr ""
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Cliente requerido"
+msgstr ""
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/xml/Screens/PaymentScreen/PaymentScreen.xml:0
+#, python-format
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Direccion del cliente requerido"
+msgstr "Dirección del cliente requerido"
+
+#. module: ext_tpdv
+#: model:ir.model.fields,field_description:ext_tpdv.field_pos_config__street_required
+msgid "Direccion requerido"
+msgstr "Dirección requerido"
+
+#. module: ext_tpdv
+#: model_terms:ir.ui.view,arch_db:ext_tpdv.pos_config_view_form_inherit_required_customer
+msgid "Mostrar cedula del cliente en recibo de pedido de venta"
+msgstr "Mostrar cédula del cliente en recibo de pedido de venta"
+
+#. module: ext_tpdv
+#: model_terms:ir.ui.view,arch_db:ext_tpdv.pos_config_view_form_inherit_required_customer
+msgid "Mostrar cliente en recibo de pedido de venta"
+msgstr ""
+
+#. module: ext_tpdv
+#: model_terms:ir.ui.view,arch_db:ext_tpdv.pos_config_view_form_inherit_required_customer
+msgid "Mostrar telefono del cliente en recibo de pedido de venta"
+msgstr "Mostrar teléfono del cliente en recibo de pedido de venta"
+
+#. module: ext_tpdv
+#: model:ir.model,name:ext_tpdv.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuración del TPV"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/xml/Screens/PaymentScreen/ProductScreem.xml:0
+#, python-format
+msgid "Recibo"
+msgstr ""
+
+#. module: ext_tpdv
+#: model_terms:ir.ui.view,arch_db:ext_tpdv.pos_config_view_form_inherit_required_customer
+msgid "Requerir el telefono del cliente en pedidos pos"
+msgstr "Requerir el teléfono del cliente en pedidos pos"
+
+#. module: ext_tpdv
+#: model_terms:ir.ui.view,arch_db:ext_tpdv.pos_config_view_form_inherit_required_customer
+msgid "Requerir la de cedula del cliente en pedidos pos"
+msgstr "Requerir la de cédula del cliente en pedidos pos"
+
+#. module: ext_tpdv
+#: model_terms:ir.ui.view,arch_db:ext_tpdv.pos_config_view_form_inherit_required_customer
+msgid "Requerir la direccion del cliente en pedidos pos"
+msgstr "Requerir la dirección del cliente en pedidos pos"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Seleccione el cliente antes de validar el pedido!"
+msgstr ""
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Seleccione un cliente con cedula antes de validar el pedido!"
+msgstr "Seleccione un cliente con cédula antes de validar el pedido!"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Seleccione un cliente con direccion antes de validar el pedido!"
+msgstr "Seleccione un cliente con dirección antes de validar el pedido!"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Seleccione un cliente con telefono antes de validar el pedido!"
+msgstr "Seleccione un cliente con teléfono antes de validar el pedido!"
+
+#. module: ext_tpdv
+#. openerp-web
+#: code:addons/ext_tpdv/static/src/js/PaymentScreen.js:0
+#, python-format
+msgid "Telefono del cliente requerido"
+msgstr "Teléfono del cliente requerido"
+
+#. module: ext_tpdv
+#: model:ir.model.fields,field_description:ext_tpdv.field_pos_config__customer_recepit_phone_required
+msgid "Telefono en recibo"
+msgstr "Teléfono en recibo"
+
+#. module: ext_tpdv
+#: model:ir.model.fields,field_description:ext_tpdv.field_pos_config__phone_required
+msgid "Telefono requerido"
+msgstr "Teléfono requerido"

@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tax_municipal_user,tax.municipal,model_tax_municipal,account.group_account_user,1,0,0,0
+access_tax_municipal_invoice,tax.municipal,model_tax_municipal,account.group_account_invoice,1,1,1,1
+access_tax_municipal_manager,tax.municipal,model_tax_municipal,account.group_account_manager,1,1,1,1
+access_tax_municipal_line_user,tax.municipal.line,model_tax_municipal_line,account.group_account_user,1,0,0,0
+access_tax_municipal_line_invoice,tax.municipal.line,model_tax_municipal_line,account.group_account_invoice,1,1,1,1
+access_tax_municipal_line_manager,tax.municipal.line,model_tax_municipal_line,account.group_account_manager,1,1,1,1
+access_municipal_period_month_user,municipal.period.month,model_municipal_period_month,account.group_account_user,1,0,0,0
+access_municipal_period_month_invoice,municipal.period.month,model_municipal_period_month,account.group_account_invoice,1,1,1,1
+access_municipal_period_month_manager,municipal.period.month,model_municipal_period_month,account.group_account_manager,1,1,1,1
+access_municipal_period_year_user,municipal.period.year,model_municipal_period_year,account.group_account_user,1,0,0,0
+access_municipal_period_year_invoice,municipal.period.year,model_municipal_period_year,account.group_account_invoice,1,1,1,1
+access_municipal_period_year_manager,municipal.period.year,model_municipal_period_year,account.group_account_manager,1,1,1,1
+access_municipal_concept_user,municipal.concept,model_municipal_concept,account.group_account_user,1,0,0,0
+access_municipal_concept_invoice,municipal.concept,model_municipal_concept,account.group_account_invoice,1,1,1,1
+access_municipal_concept_manager,municipal.concept,model_municipal_concept,account.group_account_manager,1,1,1,1
+

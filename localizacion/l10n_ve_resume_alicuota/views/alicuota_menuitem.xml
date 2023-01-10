@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="menu_out_invoice_alicuota"
+            name="Alicuota"
+            action="action_alicuota"
+            parent="account.menu_finance_receivables"
+            sequence="10"
+        />
+        <menuitem
+            id="menu_in_invoice_alicuota"
+            name="Alicuota"
+            action="action_alicuota"
+            parent="account.menu_finance_payables"
+            sequence="10"
+        />
+    </data> 
+</odoo>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_municipal_period_month_tree" model="ir.ui.view">
+        <field name="name">municipal.period.month.view.tree</field>
+        <field name="model">municipal.period.month</field>
+        <field name="arch" type="xml">
+            <tree string="Municipal Period Month">
+                <field name="name" decoration-bf="1"/>
+                <field name="months_number"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_municipal_period_month_form" model="ir.ui.view">
+        <field name="name">municipal.period.month.view.form</field>
+        <field name="model">municipal.period.month</field>
+        <field name="arch" type="xml">
+            <form string="Municipal Period Month">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="months_number"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_municipal_period_month" model="ir.actions.act_window">
+        <field name="name">Periodo Municipal Mensual</field>
+        <field name="res_model">municipal.period.month</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="view_municipal_period_year_tree" model="ir.ui.view">
+        <field name="name">municipal.period.year.view.tree</field>
+        <field name="model">municipal.period.year</field>
+        <field name="arch" type="xml">
+            <tree string="Municipal Period Month">
+                <field name="name" decoration-bf="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_municipal_period_year_form" model="ir.ui.view">
+        <field name="name">municipal.period.year.view.form</field>
+        <field name="model">municipal.period.year</field>
+        <field name="arch" type="xml">
+            <form string="Municipal Period Month">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_municipal_period_year" model="ir.actions.act_window">
+        <field name="name">Periodo Municipal Anual</field>
+        <field name="res_model">municipal.period.year</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

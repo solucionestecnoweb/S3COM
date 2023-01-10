@@ -1,0 +1,13 @@
+<odoo>
+
+    <record id="view_bank_statement_ref_form" model="ir.ui.view" >
+        <field name="name">view.bank.statement.ref.form</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[last()]" position="after">
+                <button name="action_organize_ref" type='object' string='Re-organizar Extracto del Banco'/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

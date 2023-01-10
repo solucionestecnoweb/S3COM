@@ -1,0 +1,22 @@
+.payment-screen .payment-buttons .button .fa {
+
+    position: relative;
+    left: 0;
+    top: 0;
+    margin-top: 10px;
+   
+}
+
+.payment-screen .payment-buttons .button {
+
+    line-height: 50px;
+} 
+
+
+@media screen and (min-width: 1026px){
+
+    .pos .payment-buttons {
+
+        max-width: 250px;
+    }
+}

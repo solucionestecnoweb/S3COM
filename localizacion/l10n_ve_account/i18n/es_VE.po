@@ -1,0 +1,262 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ve_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-31 16:05+0000\n"
+"PO-Revision-Date: 2022-08-31 13:42-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ve\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.1\n"
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+msgid "<span class=\"oe_read_only\"> - </span>"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__amount_residual_signed_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__amount_residual_signed_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__amount_residual_signed_rate
+msgid "Amount Residual Signed Rate"
+msgstr "Monto Residual Tasa "
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__amount_tax_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__amount_tax_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__amount_tax_rate
+msgid "Amount Tax Rate"
+msgstr "Importe Tasa de impuesto"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__amount_total_signed_aux_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__amount_total_signed_aux_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__amount_total_signed_aux_rate
+msgid "Amount Total Signed Aux Rate"
+msgstr "Monto Total Tasa auxiliar "
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__amount_total_signed_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__amount_total_signed_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__amount_total_signed_rate
+msgid "Amount Total Signed Rate"
+msgstr "Monto Total Tasa "
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__amount_untaxed_signed_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__amount_untaxed_signed_rate
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__amount_untaxed_signed_rate
+msgid "Amount Untaxed Signed Rate"
+msgstr "Monto no gravado Tasa "
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move_line__balance_rate
+msgid "Balance Rate"
+msgstr "Tasa de saldo"
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+msgid "Base Imponible"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_invoice_inherit_view_tree
+msgid "Base Imponible al Cambio"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move_line__credit_rate
+msgid "Credit Rate"
+msgstr "Tasa de crédito"
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_bank_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_general_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_grouped_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_misc_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_partner_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_rate_tree
+msgid "Credito"
+msgstr "Crédito"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move_line__debit_rate
+msgid "Debit Rate"
+msgstr "Tasa de Débito"
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_bank_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_general_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_grouped_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_misc_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_partner_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_rate_tree
+msgid "Debito"
+msgstr "Débito"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__doc_type
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__doc_type
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__doc_type
+msgid "Doc Type"
+msgstr "Tipo Doc"
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+msgid "Grupo Contribuyente"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__import_date
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__import_date
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__import_date
+msgid "Import date"
+msgstr "Fecha de importación"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__import_dossier
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__import_dossier
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__import_dossier
+msgid "Import dossier number"
+msgstr "Número de expediente de importación"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__import_form_num
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__import_form_num
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__import_form_num
+msgid "Import form number"
+msgstr "Número de formulario de importación"
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+msgid "Importe Adeudado"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+msgid "Impuesto"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_invoice_inherit_view_tree
+msgid "Impuestos al Cambio"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model,name:l10n_ve_account.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: l10n_ve_account
+#: model:ir.model,name:l10n_ve_account.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__currency_id2
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__currency_id2
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move_line__currency_id2
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move_line__currency_id3
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__currency_id2
+msgid "Moneda Secundaria"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model,name:l10n_ve_account.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move_line__price_unit_rate
+msgid "Precio unidad"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move_line__price_subtotal_rate
+msgid "Subtotal"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_bank_statement_line__vat
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_move__vat
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__vat
+msgid "Tax ID"
+msgstr "Identificación del impuesto"
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,help:l10n_ve_account.field_account_bank_statement_line__vat
+#: model:ir.model.fields,help:l10n_ve_account.field_account_move__vat
+#: model:ir.model.fields,help:l10n_ve_account.field_account_payment__vat
+msgid ""
+"The Tax Identification Number. Complete it if the contact is subjected to "
+"government taxes. Used in some legal statements."
+msgstr ""
+"El Número de Identificación Fiscal. Complételo si el contacto está sujeto "
+"a impuestos gubernamentales. Se utiliza en algunas declaraciones legales."
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__os_currency_rate
+msgid "Tipo de Cambio"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+msgid "Total"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_invoice_inherit_view_tree
+msgid "Total al Cambio"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_invoice_inherit_view_tree
+msgid "amount_residual_signed_rate"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_invoice_inherit_view_tree
+msgid "amount_tax_rate"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_invoice_inherit_view_tree
+msgid "amount_total_signed_aux_rate"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_bank_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_general_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_grouped_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_misc_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_partner_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_rate_tree
+msgid "credit_rate"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.account_inherit_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_bank_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_general_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_grouped_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_misc_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_partner_rate_tree
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account.view_account_move_line_rate_tree
+msgid "debit_rate"
+msgstr ""
+
+#. module: l10n_ve_account
+#: model:ir.model.fields,field_description:l10n_ve_account.field_account_payment__custom_rate
+msgid "¿Usar Tasa de Cambio Personalizada?"
+msgstr ""

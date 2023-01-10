@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_islr_xml_wizard_form" model="ir.ui.view">
+            <field name="name">islr.xml.wizard.form</field>
+            <field name="model">islr.xml.wizard</field>
+            <field name="arch" type="xml">
+                <form string="xml islr">
+                    <group>
+                        <field name="from_date" string="Fecha Inicio" required="1"/>
+                        <field name="to_date"  string="Fecha Fin" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_post_xml" string="Generar XML" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_islr_xml_wizard" model="ir.actions.act_window">
+            <field name="name">XML ISLR</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">islr.xml.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_account_xml_download_wizard" model="ir.ui.view">
+            <field name="name">XML Proveedores download</field>
+            <field name="model">islr.xml.download.wizard</field>
+            <field name="arch" type="xml">
+                <form string="XML de Proveedores" create="false" edit="false">
+                    <group>
+                        <field name="name" string="url" required="1" invisible="1"/>
+                        <field name="report" filename="name" colspan="4"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_xml_download_wizard" model="ir.actions.act_window">
+            <field name="name">XML Proveedores download</field>
+            <field name="res_model">islr.xml.download.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                id="menu_retention"
+                name="XML Retencion Proveedores"
+                parent="l10n_ve_res_config_settings_retentions.menu_retention_islr_xml"
+                action="action_islr_xml_wizard"
+        />
+
+    </data>
+</odoo>

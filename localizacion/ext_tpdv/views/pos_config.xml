@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_config_view_form_inherit_required_customer" model="ir.ui.view"> 
+        <field name="name">pos.config.form.inherit.required.customer</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <div id="category_reference" position="after">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="vat_required"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="vat_required"/>
+                        <div class="text-muted">
+                            Requerir la de cedula del cliente en pedidos pos
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="phone_required"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="phone_required"/>
+                        <div class="text-muted">
+                            Requerir el telefono del cliente en pedidos pos
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="street_required"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="street_required"/>
+                        <div class="text-muted">
+                            Requerir la direccion del cliente en pedidos pos
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="auto_printing" position="after">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="customer_recepit_required"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="customer_recepit_required"/>
+                        <div class="text-muted">
+                            Mostrar cliente en recibo de pedido de venta
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="customer_recepit_vat_required"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="customer_recepit_vat_required"/>
+                        <div class="text-muted">
+                            Mostrar cedula del cliente en recibo de pedido de venta
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="customer_recepit_phone_required"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="customer_recepit_phone_required"/>
+                        <div class="text-muted">
+                            Mostrar telefono del cliente en recibo de pedido de venta
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

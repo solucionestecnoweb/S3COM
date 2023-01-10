@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tax_municipal_tree" model="ir.ui.view">
+        <field name="name">tax.municipal.view.tree</field>
+        <field name="model">tax.municipal</field>
+        <field name="arch" type="xml">
+            <tree string="Municipal Tax">
+                <field name="name" decoration-bf="1"/>
+                <field name="transaction_date"/>
+                <field name="partner_id"/>
+                <field name="move_id"/>
+                <field name="withheld_amount" string="Base Imponible" sum="Base Imponible" decoration-bf="1"/>
+                <field name="amount" string="Total Retenido" sum="Total Retenido" decoration-bf="1"/>
+                <field name="withheld_amount_usd" string="Base Imponible Usd" sum="Base Imponible Usd" decoration-bf="1"/>
+                <field name="amount_usd" string="Total Retenido Usd" sum="Total Retenido Usd" decoration-bf="1"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'posted'" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tax_municipal_form" model="ir.ui.view">
+        <field name="name">tax.municipal.view.form</field>
+        <field name="model">tax.municipal</field>
+        <field name="arch" type="xml">
+            <form string="Municipal Tax">
+                <header>
+                    <button name="action_post" string="Post" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_cancel" string="Cancelar" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="done" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <div class="oe_title">
+                            <span class="o_form_label"><field name="move_type" readonly="1" nolabel="1" invisible="1"/></span>
+                            <span class="o_form_label"><field name="mun_tax_type" readonly="1" nolabel="1"/></span>
+                            <h1 attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('name', '!=', '/')]}">
+                                <span>Draft</span>
+                            </h1>
+                            <h1 class="mt0" attrs="{'invisible':[('name', '=', '/'), ('state', '=', 'draft')]}">
+                                <field name="name" attrs="{'readonly': [('state', '!=', 'draft')]}" placeholder="check number"/>
+                            </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <div class="o_td_label">
+                                <label for="partner_id" string="Customer" style="font-weight:bold;"
+                                           attrs="{'invisible': [('mun_tax_type', '=', 'in_tax')]}"/>
+                                <label for="partner_id" string="Vendor" style="font-weight:bold;"
+                                           attrs="{'invisible': [('mun_tax_type', '=', 'out_tax')]}"/>
+                            </div>
+                            <field name="partner_id" widget="res_partner_many2one" nolabel="1"
+                                   context="{'show_address': 1, 'default_is_company': True, 'show_vat': True}"
+                                   options='{"always_reload": True, "no_quick_create": True}' required="1"/>
+                            <field name="move_id" domain="[('partner_id', '=', partner_id), ('move_type', 'in', ('in_invoice', 'in_receipt', 'in_refund',))]"
+                                   attrs="{'invisible': [('mun_tax_type', '=', 'out_tax')]}"/>
+                            <field name="move_id" domain="[('partner_id', '=', partner_id), ('move_type', 'in', ('out_refund', 'out_invoice','out_receipt'))]"
+                                   attrs="{'invisible': [('mun_tax_type', '=', 'in_tax')]}"/>
+                            <field name="move_entry_id"/>
+                            <field name="invoice_number_next"/>
+                            <field name="invoice_number_control"/>
+                            <field name="invoice_number_unique"/>
+                        </group>
+                        <group>
+                            <field name="transaction_date" required="1" attrs="{'readonly': [('state', '=','done')]}"/>
+                            <field name="journal_id" required="1" attrs="{'readonly': [('state', '=','done')]}"
+                                   domain="[('type', '=', 'mun_tax')]"/>
+                            <field name="company_id" readonly="1"/>
+                            <field name="company_currency_id" readonly="1"/>
+                            <field name="company_currency_id2" readonly="1"/>
+                            <field name="os_currency_rate" readonly="1"/>
+                        </group>
+                    </group>
+                     <notebook>
+                        <page string="Municipal Line">
+                            <field name="line_mun_ids">
+                                <tree mode="tree">
+                                    <field name="mun_tax_id" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="code"/>
+                                    <field name="base_tax"/>
+                                    <field name="wh_amount"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="withheld_amount"/>
+                                <field name="amount" class="oe_subtotal_footer_separator"/>
+                            </group>
+                            <group class="oe_subtotal_footer oe_left">
+                                <field name="withheld_amount_usd"/>
+                                <field name="amount_usd" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tax_municipal_out_invoice" model="ir.actions.act_window">
+        <field name="name">Retencion Municipal CLiente</field>
+        <field name="res_model">tax.municipal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('mun_tax_type', '=', 'out_tax')]</field>
+        <field name="context">{'default_iva_mun_tax_type': 'out_tax'}</field>
+    </record>
+
+    <record id="action_tax_municipal_out_invoice_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_tax_municipal_tree"/>
+        <field name="act_window_id" ref="action_tax_municipal_out_invoice"/>
+    </record>
+
+    <record id="action_tax_municipal_out_invoice_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_tax_municipal_form"/>
+        <field name="act_window_id" ref="action_tax_municipal_out_invoice"/>
+    </record>
+
+    <record id="action_tax_municipal_in_invoice" model="ir.actions.act_window">
+        <field name="name">Retencion Municipal Proveedores</field>
+        <field name="res_model">retention.iva</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('mun_tax_type', '=', 'in_tax')]</field>
+        <field name="context">{'default_iva_mun_tax_type': 'in_tax'}</field>
+    </record>
+
+    <record id="action_tax_municipal_in_invoice_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_tax_municipal_tree"/>
+        <field name="act_window_id" ref="action_tax_municipal_in_invoice"/>
+    </record>
+
+    <record id="action_tax_municipal_in_invoice_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_tax_municipal_form"/>
+        <field name="act_window_id" ref="action_tax_municipal_in_invoice"/>
+    </record>
+</odoo>

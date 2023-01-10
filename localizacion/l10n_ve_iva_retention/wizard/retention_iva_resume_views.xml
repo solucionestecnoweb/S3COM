@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_retention_iva_resume_wizard_form" model="ir.ui.view">
+            <field name="name">retention.iva.resume.wizard.form</field>
+            <field name="model">retention.iva.resume.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Iva Resume">
+                    <group>
+                        <field name="from_date" string="Fecha Inicio" required="1"/>
+                        <field name="to_date"  string="Fecha Fin" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Generar Resume" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_retention_iva_resume_wizard" model="ir.actions.act_window">
+            <field name="name">IVA Resume</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">retention.iva.resume.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                id="menu_iva_resume"
+                name="Resumen Retenciones IVA"
+                parent="l10n_ve_res_config_settings_retentions.menu_iva_txt"
+                action="action_retention_iva_resume_wizard"
+        />
+
+    </data>
+</odoo>

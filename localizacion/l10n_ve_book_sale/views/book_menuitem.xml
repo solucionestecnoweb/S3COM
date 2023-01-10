@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            name="Venta"
+            id="menu_book_sale"
+            parent="account.menu_finance_reports"
+            sequence="40"
+        />
+        <menuitem
+            name="Libro de Ventas"
+            id="menu_account_book_sale"
+            action="action_account_book_sale"
+            parent="menu_book_sale"
+        />
+
+    </data>
+</odoo>

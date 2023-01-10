@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="account_invoice_branch_office_view_tree" model="ir.ui.view">
+            <field name="name">account.move.branch.office.view.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="branch_office_id" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_move_branch_office_view_form" model="ir.ui.view">
+            <field name="name">account.move.branch.office.view.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@id='header_right_group']" position="inside">
+                    <field name="branch_office_id" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

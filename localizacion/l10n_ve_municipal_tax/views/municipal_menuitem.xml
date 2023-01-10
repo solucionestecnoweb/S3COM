@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="menu_out_invoice_tax_municipal"
+            action="action_tax_municipal_out_invoice"
+            parent="account.menu_finance_receivables"
+            sequence="10"
+        />
+        <menuitem
+            id="menu_in_invoice_tax_municipal"
+            action="action_tax_municipal_in_invoice"
+            parent="account.menu_finance_payables"
+            sequence="10"
+        />
+        <menuitem id="menu_municipal_conf" name="Periodos Municipal/Conceptos" parent="account.menu_finance_configuration" sequence="30"/>
+            <menuitem
+                id="menu_municipal_period_month"
+                action="action_municipal_period_month"
+                parent="menu_municipal_conf"
+                sequence="5"
+            />
+            <menuitem
+                id="menu_municipal_period_year"
+                action="action_municipal_period_year"
+                parent="menu_municipal_conf"
+                sequence="10"
+            />
+            <menuitem
+                 id="menu_municipal_concept"
+                 action="action_municipal_concept"
+                 parent="menu_municipal_conf"
+                 sequence="15"
+            />
+    </data> 
+</odoo>

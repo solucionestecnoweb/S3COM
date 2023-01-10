@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+{
+        'name': ' Venezuela - Municipal Tax',
+        'version': '14.0.1.0',
+        'author': 'INM & LDR Soluciones Tecnológicas y Empresariales C.A',
+        'contribuitors': "Bryan Gómez <bryan.gomez1311@gmail.com>",
+        'summary': '',
+        'description': """""",
+        'category': 'Accounting/Accounting',
+        'website': 'http://soluciones-tecno.com/',
+        'depends': [
+                'account',
+                'l10n_ve_account_sequence_number',
+                'l10n_ve_res_config_settings_retentions',
+                'l10n_ve_base',
+                'l10n_ve_currency_rate',
+        ],
+        'data': [
+                'security/ir.model.access.csv',
+                'data/municipal.concept.csv',
+                'data/municipal.period.month.csv',
+                'data/municipal.period.year.csv',
+                'data/ir_sequence.xml',
+                'data/account_journal.xml',
+                'views/municipal_views.xml',
+                'views/period_views.xml',
+                'views/municipal_concept_views.xml',
+                'views/res_partner_views.xml',
+                'views/account_move_views.xml',
+                'views/res_config_settings_views.xml',
+                'views/municipal_menuitem.xml',
+        ],
+        'license': 'LGPL-3',
+        'installable': True,
+        'application': True,
+        'auto_install': False,
+
+}

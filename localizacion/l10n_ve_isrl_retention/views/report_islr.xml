@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_islr_retention">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <style>
+                    .border-left-right-top-bottom{
+                        border-bottom: 1px solid black !important;
+                        border-top: 1px solid black !important;
+                        border-right: 1px solid black !important;
+                        border-left: 1px solid black !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="o">
+                     <div class="header">
+                         <div class="container">
+                            <div class="row">
+                                <div class="col-3 mb4">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                    <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-left">
+                                    <ul class="list-inline mb4">
+                                        <li style="font-size:20px;"><strong>Comprobante de Retención de ISLR Nº:</strong> <span t-field="o.name"/></li>
+                                        <li style="font-size:20px;"><strong>Fecha:</strong><span t-field="o.isrl_date"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="border border-dark rounded">
+                                <div class="row">
+                                    <div class="col-5 text-left" style="margin-top:5px;">
+                                        <ul class="list-inline mb4" style="font-size:14px;">
+                                            <li>
+                                                <strong>Nombre o razón social del agente de retención.</strong>
+                                                <br/>
+                                                <span t-field="o.company_id.name"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-5 text-left">
+                                        <ul class="list-inline mb4" style="font-size:14px;">
+                                            <li t-if="o.company_id.vat">
+                                                <strong>Registro de la información fiscal del agente de retención</strong>
+                                                <br/>
+                                                <span t-field="o.company_id.doc_type"/>-<span t-field="o.company_id.vat"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-2 text-left" >
+                                        <ul class="list-inline mb4" style="font-size:14px;">
+                                            <li t-if="o.company_id.vat">
+                                                <strong>Periodo Fiscal</strong>
+                                                <br/>
+                                                <span t-esc="o.move_id.date.year"/>-<span t-esc="o.move_id.date.month"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-left" style="margin-top:5px;">
+                                        <ul class="list-inline mb4" style="font-size:14px;">
+                                            <li>
+                                                <strong>Dirección Fiscal</strong>
+                                                <br/>
+                                                <span t-field="o.company_id.street"/>,
+                                                <span t-field="o.company_id.street2"/>,
+                                                <span t-field="o.company_id.state_id.name"/>,
+                                                <span t-field="o.company_id.city"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border border-dark rounded" style="margin-top:25px;">
+                                <div class="row">
+                                    <div class="col-5 text-left" style="margin-top:5px;">
+                                        <ul class="list-inline mb4" style="font-size:14px;">
+                                            <li>
+                                                <strong>Nombre o razón social del agente retenido.</strong>
+                                                <br/>
+                                                <span t-field="o.partner_id.name"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-5 text-left">
+                                        <ul class="list-inline mb4" style="font-size:14px;">
+                                            <li t-if="o.company_id.vat">
+                                                <strong>Registro de la información fiscal del agente retenido</strong>
+                                                <br/>
+                                                <span t-field="o.partner_id.doc_type"/>-<span t-field="o.partner_id.vat"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-2"/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-left" style="margin-top:5px;">
+                                        <ul class="list-inline mb4" style="font-size:14px;">
+                                            <li>
+                                                <strong>Dirección Fiscal</strong>
+                                                <br/>
+                                                <span t-field="o.partner_id.street"/>,
+                                                <span t-field="o.partner_id.street2"/>,
+                                                <span t-field="o.partner_id.state_id.name"/>,
+                                                <span t-field="o.partner_id.city"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <t t-set="total_ret" t-value="0.0"/>
+                        <div class="container">
+                            <table class="table table-bordered" style="margin-top:10px;">
+                                <thead class="border-left-right-top-bottom text-center">
+                                    <tr class="text-center" style="font-size:12px;">
+                                        <th class="border-left-right-top-bottom">Código</th>
+                                        <th class="border-left-right-top-bottom">Fecha Factura</th>
+                                        <th class="border-left-right-top-bottom">Nº de Factura</th>
+                                        <th class="border-left-right-top-bottom">Nº de Control</th>
+                                        <th class="border-left-right-top-bottom">Concepto de la Rentención</th>
+                                        <th class="border-left-right-top-bottom">Total Facturado</th>
+                                        <th class="border-left-right-top-bottom">Monto Base</th>
+                                        <th class="border-left-right-top-bottom">% Rentención</th>
+                                        <th class="border-left-right-top-bottom">Sustraendo</th>
+                                        <th class="border-left-right-top-bottom">ISLR Monto Retenido</th>
+                                    </tr>
+                                </thead>
+                                 <tbody>
+                                     <t t-foreach="o.line_ids" t-as="line">
+                                          <tr class="text-center">
+                                              <td class="border-left-right-top-bottom" t-esc="line.code"/>
+                                              <td class="border-left-right-top-bottom" t-esc="time.strftime('%d/%m/%Y', time.strptime(str(o.move_id.invoice_date),'%Y-%m-%d'))"/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.retention_id.move_id.invoice_number_next"/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.retention_id.move_id.invoice_number_control"/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.islr_concept_id.name"/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.retention_id.move_id.amount_total" t-options='{"widget": "float", "precision": 2}'/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.base" t-options='{"widget": "float", "precision": 2}'/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.qty" t-options='{"widget": "float", "precision": 2}'/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.subtracting" t-options='{"widget": "float", "precision": 2}'/>
+                                              <td class="border-left-right-top-bottom" t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                          </tr>
+                                     </t>
+                                 </tbody>
+                            </table>
+                            <div class="clearfix" style="margin-top:5px;">
+                                <div class="row">
+                                     <div class="col-10"/>
+                                     <div id="total" class="col-2">
+                                         <table style="page-break-inside: avoid; font-size:12px; width: 100%;">
+                                             <tr>
+                                                <td><strong>Total:</strong></td>
+                                                <td class="text-right">
+                                                    <span t-field="o.amount_total_retention" t-options='{"widget": "float", "precision": 2}'/>
+                                                </td>
+                                            </tr>
+                                         </table>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:35px;">
+                                <div class="col-5 text-center">
+                                    _______________________________
+                                    <br/>
+                                    <span t-field="o.company_id.name"/>
+                                    <br/>
+                                    Firma y Sello
+                                </div>
+                                <div class="col-5 text-center" name="firma1">
+                                    _______________________________
+                                    <br/>
+                                    <span t-field="o.partner_id.name"/>
+                                    <br/>
+                                    Firma y Sello
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

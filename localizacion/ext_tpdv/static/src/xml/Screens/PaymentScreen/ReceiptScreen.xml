@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+
+
+        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="after">
+            <t t-if="receipt.client and env.pos.config.customer_recepit_required">
+                <br/>
+                <br/>
+                <div><t t-esc="receipt.client.name" /></div>
+                <br />
+            </t>
+            <t t-if="receipt.client.vat and env.pos.config.customer_recepit_vat_required">
+                <div><t t-esc="receipt.client.vat"/></div>
+                <br />
+            </t>
+            <t t-if="receipt.client.phone and env.pos.config.customer_recepit_phone_required">
+                <div><t t-esc="receipt.client.phone"/></div>
+                <br />
+            </t>
+             
+            
+        </xpath>
+        <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="before">
+            <div>
+                <t t-if="receipt.note_receipt">
+                    <div><t t-esc="receipt.note_receipt" /></div>
+                </t>
+            </div>
+            <br />
+            
+        </xpath>
+    </t>
+</templates>

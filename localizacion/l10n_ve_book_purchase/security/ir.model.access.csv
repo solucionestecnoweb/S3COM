@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_book_purchase_user,account.book.purchase,model_account_book_purchase,account.group_account_user,1,0,0,0
+access_account_book_purchase_invoice,account.book.purchase,model_account_book_purchase,account.group_account_invoice,1,1,1,1
+access_account_book_purchase_manager,account.book.purchase,model_account_book_purchase,account.group_account_manager,1,1,1,1
+access_account_book_purchase_line_user,account.book.purchase.line,model_account_book_purchase_line,account.group_account_user,1,0,0,0
+access_account_book_purchase_line_invoice,account.book.purchase.line,model_account_book_purchase_line,account.group_account_invoice,1,1,1,1
+access_account_book_purchase_line_manager,account.book.purchase.line,model_account_book_purchase_line,account.group_account_manager,1,1,1,1

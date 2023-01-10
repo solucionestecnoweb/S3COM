@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_ve_account_bank_statement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-31 17:42+0000\n"
+"PO-Revision-Date: 2022-08-31 17:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_ve_account_bank_statement
+#: model:ir.model,name:l10n_ve_account_bank_statement.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Extracto bancario"
+
+#. module: l10n_ve_account_bank_statement
+#: model:ir.model,name:l10n_ve_account_bank_statement.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Línea de estado bancario"
+
+#. module: l10n_ve_account_bank_statement
+#: model_terms:ir.ui.view,arch_db:l10n_ve_account_bank_statement.view_bank_statement_ref_form
+msgid "Re-organizar Extracto del Banco"
+msgstr ""
+
+#. module: l10n_ve_account_bank_statement
+#: model:ir.model.fields,field_description:l10n_ve_account_bank_statement.field_account_bank_statement_line__validador
+msgid "Validador"
+msgstr ""

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_islr_retention_arc">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <style>
+                    .border-left-right-top-bottom{
+                        border-bottom: 1px solid black !important;
+                        border-top: 1px solid black !important;
+                        border-right: 1px solid black !important;
+                        border-left: 1px solid black !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="o">
+                     <div class="header">
+                         <div class="container">
+                            <div class="row">
+                                <div class="col-3 mb4">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
+                                    <br/>
+                                    <span style="font-size:17px;">RIF:
+                                        <span style="font-size:17px;" t-field="o.company_id.doc_type"/>-
+                                        <span style="font-size:17px;" t-field="o.company_id.vat"/></span>
+                                </div>
+                                <div class="col-9 mb4 text-right">
+                                    <span style="font-size:17px;"><strong>Fecha:</strong> <span t-esc="datetime.datetime.now().strftime('%Y-%m-%d')" t-options="{'widget': 'date'}"/></span>
+                                    <br/>
+                                    <span style="font-size:17px;">Página:</span> <span class="page" style="font-size:17px;"/> / <span class="topage" style="font-size:17px;"/>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                    <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <ul class="list-inline mb4">
+                                        <li style="font-size:20px; color: #0406b3;"><span>RELACIÓN ANUAL DE RETENCIONES DE ISLR</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <span style="font-size:12px;">DESDE:  <span t-field="o.from_date"/> &amp;nbsp;&amp;nbsp;HASTA: <span t-field="o.to_date" /></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Proveedor: &amp;nbsp;<span t-field="o.partner_id.name"/></span>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <span>RIF:&amp;nbsp; <span t-field="o.partner_id.doc_type"/>-<span t-field="o.partner_id.vat"/></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <table class="table table-bordered" style="margin-top:20px;">
+                                <thead>
+                                    <tr class="text-center" style="font-size:12px;">
+                                        <th>NRO COMPROBANTE</th>
+                                        <th>FECHA FACT.</th>
+                                        <th>NRO FACT.</th>
+                                        <th>NRO CONTROL</th>
+                                        <th>CONCEPTO</th>
+                                        <th>TOTAL FACTURA</th>
+                                        <th>MONTO BASE</th>
+                                        <th>% ISLR</th>
+                                        <th>MONTO RETENIDO</th>
+                                    </tr>
+                                </thead>
+                                <t t-set="amount_total" t-value="0.0"/>
+                                <t t-set="base" t-value="0.0"/>
+                                <t t-set="total" t-value="0.0"/>
+                                <tbody>
+                                    <t t-foreach="o.get_islr_arc()" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="line['name']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="time.strftime('%d/%m/%Y', time.strptime(str(line['move_date']),'%Y-%m-%d'))"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="line['invoice_number_next']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="line['invoice_number_control']"/>
+                                                <span t-if="line['invoice_number_unique']" t-esc="line['invoice_number_unique']"/>
+                                            </td>
+                                            <t t-if="line['move_type'] == 'in_refund'">
+                                                <td>
+                                                    <span t-esc="line['concept']"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['amount_total']"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['base']"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['qty']"/>%
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['amount_total_retention']"/>
+                                                </td>
+                                                <t t-set="base" t-value="base - line['base']"/>
+                                                <t t-set="amount_total" t-value="amount_total - line['amount_total']"/>
+                                                <t t-set="total" t-value="total - line['amount_total_retention']"/>
+                                            </t>
+                                            <t t-else="">
+                                                <td>
+                                                    <span t-esc="line['concept']"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['amount_total']"/>
+                                                </td >
+                                                <td class="text-right">
+                                                    <span t-esc="line['base']"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['qty']"/>%
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['amount_total_retention']"/>
+                                                </td>
+                                                <t t-set="base" t-value="base + line['base']"/>
+                                                <t t-set="amount_total" t-value="amount_total + line['amount_total']"/>
+                                                <t t-set="total" t-value="total + line['amount_total_retention']"/>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr style="font-size:12px;">
+                                        <td colspan="5" class="text-right"> Total</td>
+                                        <td class="text-right"><t t-esc="amount_total" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td class="text-right"><t t-esc="base" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        <td/>
+                                        <td class="text-right"><t t-esc="total" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-5 text-center">
+                                _______________________________________
+                                <br/>
+                                <span t-field="o.partner_id.name"/>
+                                <br/>
+                                Firma y Sello
+                            </div>
+
+                            <div class="col-5 text-center" name="firma2">
+                                _______________________________________
+                                <br/>
+                                Usuario:<span t-field="o.write_uid.name"/>
+                                <br/>
+                                <span t-field="o.company_id.name"/>
+                                <br/>
+                                Firma y Sello
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

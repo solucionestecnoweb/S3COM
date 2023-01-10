@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_islr_retention_resume">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3 mb4">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
+                                    <br/>
+                                    <span style="font-size:17px;">RIF:
+                                        <span style="font-size:17px;" t-field="o.company_id.doc_type"/>-
+                                        <span style="font-size:17px;" t-field="o.company_id.vat"/></span>
+                                </div>
+                                <div class="col-9 mb4 text-right">
+                                    <span style="font-size:17px;"><strong>Fecha:</strong> <span t-esc="datetime.datetime.now().strftime('%Y-%m-%d')" t-options="{'widget': 'date'}"/></span>
+                                    <br/>
+                                    <span style="font-size:17px;">Página:</span> <span class="page" style="font-size:17px;"/> / <span class="topage" style="font-size:17px;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <ul class="list-inline mb4">
+                                        <li style="font-size:20px; color: #0406b3;"><span>RELACIÓN DE RETENCIONES ISLR</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <table class="table table-borderless table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>F.Doc</th>
+                                        <th>Nro. Factura</th>
+                                        <th>ST</th>
+                                        <th>Rif</th>
+                                        <th>Proveedor</th>
+                                        <th>Descripción</th>
+                                        <th>Cod.</th>
+                                        <th>Abono Cta</th>
+                                        <th>Can.Obj.Ret</th>
+                                        <th>Porcentaje</th>
+                                        <th>Retención</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-if="o.resident_nat_people">
+                                        <t t-set="amount_total" t-value="0.0"/>
+                                        <t t-set="signed_total" t-value="0.0"/>
+                                        <t t-set="base_total" t-value="0.0"/>
+                                        <t t-set="co" t-value=""/>
+                                        <t t-foreach="o.get_resident_nat_people()" t-as="r">
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>PNRE Residente Persona Natural</td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>
+                                                        <strong><span>Código: <span t-esc="r['code']"/> <span t-esc="r['concept']"/></span></strong>
+                                                        <t t-set="am_name" t-value="r['concept']"/>
+                                                        <t t-if="co == am_name">
+                                                            <p/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-set="co" t-value="am_name"/>
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                            <t>
+                                                <tr>
+                                                    <td><span t-esc="r['isrl_date']"/></td>
+                                                    <td><span t-esc="r['move_date']"/></td>
+                                                    <td><span t-esc="r['invoice_number_next']"/></td>
+                                                    <td>AC</td>
+                                                    <td><span t-esc="r['doc_type']"/>-<span t-esc="r['vat']"/></td>
+                                                    <td><span t-esc="r['name']"/></td>
+                                                    <td>General</td>
+                                                    <td><span t-esc="r['code']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_signed']"/></td>
+                                                    <td class="text-left"><span t-esc="r['base']"/></td>
+                                                    <td class="text-left"><span t-esc="r['qty']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_retention']"/></td>
+                                                    <t t-set="amount_total" t-value="amount_total + r['amount_total_retention']"/>
+                                                    <t t-set="signed_total" t-value="signed_total + r['amount_total_signed']"/>
+                                                    <t t-set="base_total" t-value="base_total + r['base']"/>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr t-if="signed_total > 0.0 or base_total > 0.0 or amount_total > 0.0" style="color: #0406b3;">
+                                            <td class="text-center" colspan='8'><span>Total: <span t-esc="co"/></span></td>
+                                            <td class="text-left"><span t-esc="signed_total"/></td>
+                                            <td class="text-left"><span t-esc="base_total"/></td>
+                                            <td/>
+                                            <td class="text-left"><span t-esc="amount_total"/></td>
+                                        </tr>
+                                    </t>
+
+                                    <t t-if="o.non_resit_nat_people">
+                                        <t t-set="amount_total" t-value="0.0"/>
+                                        <t t-set="signed_total" t-value="0.0"/>
+                                        <t t-set="base_total" t-value="0.0"/>
+                                        <t t-set="co" t-value=""/>
+                                        <t t-foreach="o.get_non_resit_nat_people()" t-as="r">
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>PNNR Persona Natural No Residente</td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>
+                                                        <strong><span>Código: <span t-esc="r['code']"/> <span t-esc="r['concept']"/></span></strong>
+                                                        <t t-set="am_name" t-value="r['concept']"/>
+                                                        <t t-if="co == am_name">
+                                                            <p/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-set="co" t-value="am_name"/>
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                            <t>
+                                                <tr>
+                                                    <td><span t-esc="r['isrl_date']"/></td>
+                                                    <td><span t-esc="r['move_date']"/></td>
+                                                    <td><span t-esc="r['invoice_number_next']"/></td>
+                                                    <td>AC</td>
+                                                    <td><span t-esc="r['doc_type']"/>-<span t-esc="r['vat']"/></td>
+                                                    <td><span t-esc="r['name']"/></td>
+                                                    <td>General</td>
+                                                    <td><span t-esc="r['code']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_signed']"/></td>
+                                                    <td class="text-left"><span t-esc="r['base']"/></td>
+                                                    <td class="text-left"><span t-esc="r['qty']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_retention']"/></td>
+                                                    <t t-set="amount_total" t-value="amount_total + r['amount_total_retention']"/>
+                                                    <t t-set="signed_total" t-value="signed_total + r['amount_total_signed']"/>
+                                                    <t t-set="base_total" t-value="base_total + r['base']"/>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr t-if="signed_total > 0.0 or base_total > 0.0 or amount_total > 0.0" style="color: #0406b3;">
+                                            <td class="text-center" colspan='8'><span>Total: <span t-esc="co"/></span></td>
+                                            <td class="text-left"><span t-esc="signed_total"/></td>
+                                            <td class="text-left"><span t-esc="base_total"/></td>
+                                            <td/>
+                                            <td class="text-left"><span t-esc="amount_total"/></td>
+                                        </tr>
+                                    </t>
+
+                                    <t t-if="o.domi_ledal_entity">
+                                        <t t-set="amount_total" t-value="0.0"/>
+                                        <t t-set="signed_total" t-value="0.0"/>
+                                        <t t-set="base_total" t-value="0.0"/>
+                                        <t t-set="co" t-value=""/>
+                                        <t t-foreach="o.get_domi_ledal_entity()" t-as="r">
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>PJDO Persona Jurídica Domiciliada</td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>
+                                                        <strong><span>Código: <span t-esc="r['code']"/> <span t-esc="r['concept']"/></span></strong>
+                                                        <t t-set="am_name" t-value="r['concept']"/>
+                                                        <t t-if="co == am_name">
+                                                            <p/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-set="co" t-value="am_name"/>
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                            <t>
+                                                <tr>
+                                                    <td><span t-esc="r['isrl_date']"/></td>
+                                                    <td><span t-esc="r['move_date']"/></td>
+                                                    <td><span t-esc="r['invoice_number_next']"/></td>
+                                                    <td>AC</td>
+                                                    <td><span t-esc="r['doc_type']"/>-<span t-esc="r['vat']"/></td>
+                                                    <td><span t-esc="r['name']"/></td>
+                                                    <td>General</td>
+                                                    <td><span t-esc="r['code']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_signed']"/></td>
+                                                    <td class="text-left"><span t-esc="r['base']"/></td>
+                                                    <td class="text-left"><span t-esc="r['qty']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_retention']"/></td>
+                                                    <t t-set="amount_total" t-value="amount_total + r['amount_total_retention']"/>
+                                                    <t t-set="signed_total" t-value="signed_total + r['amount_total_signed']"/>
+                                                    <t t-set="base_total" t-value="base_total + r['base']"/>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr t-if="signed_total > 0.0 or base_total > 0.0 or amount_total > 0.0" style="color: #0406b3;">
+                                            <td class="text-center" colspan='8'><span>Total: <span t-esc="co"/></span></td>
+                                            <td class="text-left"><span t-esc="signed_total"/></td>
+                                            <td class="text-left"><span t-esc="base_total"/></td>
+                                            <td/>
+                                            <td class="text-left"><span t-esc="amount_total"/></td>
+                                        </tr>
+                                    </t>
+
+                                    <t t-if="o.legal_ent_not_domicilied">
+                                        <t t-set="amount_total" t-value="0.0"/>
+                                        <t t-set="signed_total" t-value="0.0"/>
+                                        <t t-set="base_total" t-value="0.0"/>
+                                        <t t-set="co" t-value=""/>
+                                        <t t-foreach="o.get_legal_ent_not_domicilied()" t-as="r">
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>PJDO Persona Jurídica No Domiciliada</td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>
+                                                        <strong><span>Código: <span t-esc="r['code']"/> <span t-esc="r['concept']"/></span></strong>
+                                                        <t t-set="am_name" t-value="r['concept']"/>
+                                                        <t t-if="co == am_name">
+                                                            <p/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-set="co" t-value="am_name"/>
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                            <t>
+                                                <tr>
+                                                    <td><span t-esc="r['isrl_date']"/></td>
+                                                    <td><span t-esc="r['move_date']"/></td>
+                                                    <td><span t-esc="r['invoice_number_next']"/></td>
+                                                    <td>AC</td>
+                                                    <td><span t-esc="r['doc_type']"/>-<span t-esc="r['vat']"/></td>
+                                                    <td><span t-esc="r['name']"/></td>
+                                                    <td>General</td>
+                                                    <td><span t-esc="r['code']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_signed']"/></td>
+                                                    <td class="text-left"><span t-esc="r['base']"/></td>
+                                                    <td class="text-left"><span t-esc="r['qty']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_retention']"/></td>
+                                                    <t t-set="amount_total" t-value="amount_total + r['amount_total_retention']"/>
+                                                    <t t-set="signed_total" t-value="signed_total + r['amount_total_signed']"/>
+                                                    <t t-set="base_total" t-value="base_total + r['base']"/>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr t-if="signed_total > 0.0 or base_total > 0.0 or amount_total > 0.0" style="color: #0406b3;">
+                                            <td class="text-center" colspan='8'><span>Total: <span t-esc="co"/></span></td>
+                                            <td class="text-left"><span t-esc="signed_total"/></td>
+                                            <td class="text-left"><span t-esc="base_total"/></td>
+                                            <td/>
+                                            <td class="text-left"><span t-esc="amount_total"/></td>
+                                        </tr>
+                                    </t>
+
+                                    <t t-if="o.legal_entity_not_incorporated">
+                                        <t t-set="amount_total" t-value="0.0"/>
+                                        <t t-set="signed_total" t-value="0.0"/>
+                                        <t t-set="base_total" t-value="0.0"/>
+                                        <t t-set="co" t-value=""/>
+                                        <t t-foreach="o.get_legal_entity_not_incorporated()" t-as="r">
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>
+                                                        <span t-esc="r['people_type']"/>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <t t-if="r_index == 0">
+                                                    <td colspan='12'>
+                                                        <strong><span>Código: <span t-esc="r['code']"/> <span t-esc="r['concept']"/></span></strong>
+                                                        <t t-set="am_name" t-value="r['concept']"/>
+                                                        <t t-if="co == am_name">
+                                                            <p/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-set="co" t-value="am_name"/>
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                            <t>
+                                                <tr>
+                                                    <td><span t-esc="r['isrl_date']"/></td>
+                                                    <td><span t-esc="r['move_date']"/></td>
+                                                    <td><span t-esc="r['invoice_number_next']"/></td>
+                                                    <td>AC</td>
+                                                    <td><span t-esc="r['doc_type']"/>-<span t-esc="r['vat']"/></td>
+                                                    <td><span t-esc="r['name']"/></td>
+                                                    <td>General</td>
+                                                    <td><span t-esc="r['code']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_signed']"/></td>
+                                                    <td class="text-left"><span t-esc="r['base']"/></td>
+                                                    <td class="text-left"><span t-esc="r['qty']"/></td>
+                                                    <td class="text-left"><span t-esc="r['amount_total_retention']"/></td>
+                                                    <t t-set="amount_total" t-value="amount_total + r['amount_total_retention']"/>
+                                                    <t t-set="signed_total" t-value="signed_total + r['amount_total_signed']"/>
+                                                    <t t-set="base_total" t-value="base_total + r['base']"/>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr t-if="signed_total > 0.0 or base_total > 0.0 or amount_total > 0.0" style="color: #0406b3;">
+                                            <td class="text-center" colspan='8'><span>Total: <span t-esc="co"/></span></td>
+                                            <td class="text-left"><span t-esc="signed_total"/></td>
+                                            <td class="text-left"><span t-esc="base_total"/></td>
+                                            <td/>
+                                            <td class="text-left"><span t-esc="amount_total"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

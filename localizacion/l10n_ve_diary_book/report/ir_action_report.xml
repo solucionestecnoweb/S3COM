@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_account_diary_book_report" model="ir.actions.report">
+            <field name="name">Report Diary Book</field>
+            <field name="model">account.diary.book</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_ve_diary_book.report_account_diary_book</field>
+            <field name="report_file">l10n_ve_diary_book.report_account_diary_book</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_account_diary_book_report" model="ir.actions.report">
+             <field name="paperformat_id" ref="l10n_ve_diary_book.paperformat_account_diary_nook"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<!--Account Journal -->
+		<record id="retention_islr_journal" model="account.journal">
+			<field name="name">RETENCIÓN ISLR</field>
+			<field name="code">islr</field>
+			<field name="type">islr</field>
+			<field name="sequence">99</field>
+			<field name="alias_name">retention_islr</field>
+			<field name="show_on_dashboard" eval="True"/>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            name="Libro Diario"
+            id="menu_account_book_diary"
+            action="action_account_book_diary_wizard"
+            parent="account.menu_finance_reports"
+        />
+    </data>
+</odoo>

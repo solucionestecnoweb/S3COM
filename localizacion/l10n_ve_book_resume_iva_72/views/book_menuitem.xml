@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="menu_account_book_resume_iva"
+            action="action_account_book_resume_iva_wizard"
+            parent="account.menu_finance_reports"
+        />
+    </data>
+</odoo>

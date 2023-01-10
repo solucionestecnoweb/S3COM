@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.retention.islr.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="l10n_ve_res_config_settings_retentions.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//div[@id='account_retention']" position='inside'>
+                  <div class="col-12 col-lg-6 o_setting_box" id="isrl">
+                     <div class="o_setting_left_pane">
+                         <field name="is_islr" widget="upgrade_boolean" string="Retencion ISLR"/>
+                     </div>
+                     <div class="o_setting_right_pane">
+                         <label for="is_islr"/>
+                         <div class="content-group" attrs="{'invisible': [('is_islr', '=', False)]}">
+                            <div class="row">
+                                <label class="o_light_label col-lg-3" for="retention_islr" string="ISLR"/>
+                                <field name="retention_islr" widget="selection_badge"/>
+                            </div>
+                         </div>
+                     </div>
+                  </div>
+             </xpath>
+        </field>
+    </record>
+</odoo>

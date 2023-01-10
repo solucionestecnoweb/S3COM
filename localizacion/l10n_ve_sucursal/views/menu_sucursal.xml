@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <menuitem
+                 id="menu_sucursal"
+                 name="Sucursales"
+                 groups="l10n_ve_sucursal.sucursal_user_write_group,sucursal_user_group,sucursal_manager_group"
+                 web_icon="l10n_ve_sucursal,static/description/odoo_icon.png"
+                 sequence="8"/>
+            <menuitem
+                    id="sucursal_menu1"
+                    name="Sucursales"
+                    parent="menu_sucursal"
+                    sequence="1"
+            />
+            <menuitem
+                    id="sucursal_menu2"
+                    name="Sucursal"
+                    parent="sucursal_menu1"
+                    action="action_res_sucursal"
+        />
+    </data>
+</odoo>

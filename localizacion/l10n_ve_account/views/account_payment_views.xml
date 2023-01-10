@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_payment_rate_form" model="ir.ui.view">
+            <field name="name">account.payment.rate.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_method_line_id']" position="after">
+                    <field name="custom_rate" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    <field name="os_currency_rate"
+                           attrs="{'readonly': ['|', ('state', '!=', 'draft'), ('custom_rate', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

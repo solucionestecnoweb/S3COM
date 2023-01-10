@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_journal_branch_office_form" model="ir.ui.view">
+            <field name="name">account.journal.branch.office.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="branch_office" string="Sucursal">
+                        <group>
+                            <group>
+                                <field name="inv_sequence_id"/>
+                                <field name="ctrl_sequence_id"/>
+                            </group>
+                            <group>
+                                <field name="branch_office_id" options="{'no_open': True, 'no_create': True}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

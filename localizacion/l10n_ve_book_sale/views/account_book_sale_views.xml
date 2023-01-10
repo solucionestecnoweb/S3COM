@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_book_sale_tree" model="ir.ui.view">
+            <field name="name">account.book.sale.tree</field>
+            <field name="model">account.book.sale</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="f_inicio"/>
+                    <field name="f_fin"/>
+                    <field name="no_grabadas_base"/>
+                    <field name="no_grabadas_cred"/>
+                    <field name="no_grabadas_ret"/>
+                    <field name="exp_alic_gen_base"/>
+                    <field name="exp_alic_gen_cred"/>
+                    <field name="exp_alic_gen_ret"/>
+                    <field name="exp_alic_gen_add_base"/>
+                    <field name="exp_alic_gen_add_cred"/>
+                    <field name="exp_alic_gen_add_ret"/>
+                    <field name="exp_alic_red_base"/>
+                    <field name="exp_alic_red_cred"/>
+                    <field name="exp_alic_red_ret"/>
+                    <field name="int_alic_gen_base"/>
+                    <field name="int_alic_gen_cred"/>
+                    <field name="int_alic_gen_ret"/>
+                    <field name="int_alic_gen_add_base"/>
+                    <field name="int_alic_gen_add_cred"/>
+                    <field name="int_alic_gen_add_ret"/>
+                    <field name="int_alic_red_base"/>
+                    <field name="int_alic_red_cred"/>
+                    <field name="int_alic_red_ret"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_book_sale_form" model="ir.ui.view">
+            <field name="name">account.book.sale.form</field>
+            <field name="model">account.book.sale</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="update_book_sale" string="Actualizar resumen" class="btn-primary" attrs="{'invisible': [('state', '=', 'file_generate')]}"/>
+                        <button type="object" name="generate_xlsx" string="Generar como XLSX" class="btn-primary" attrs="{'invisible': [('state', '=', 'file_generate')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h2>Selecciona el rango de fechas</h2>
+                        <group>
+                            <group>
+                                <field name="f_inicio"/>
+                            </group>
+                            <group>
+                                <field name="f_fin"/>
+                            </group>
+                            <group>
+                                <field name="attachment_ids" widget="many2many_binary" readonly="1"/>
+                            </group>
+                        </group>
+                        <h3>No Grabadas</h3>
+                        <group>
+                            <group>
+                                <field name="no_grabadas_base"/>
+                                <field name="no_grabadas_ret"/>
+                            </group>
+                            <group>
+                                <field name="no_grabadas_cred"/>
+                            </group>
+                        </group>
+                        <h3>Importación</h3>
+                        <group>
+                            <group>
+                                <p>Alicuota General</p>
+                                <field name="exp_alic_gen_base" string="Total base"/>
+                                <field name="exp_alic_gen_cred" string="Total crédito fiscal"/>
+                                <field name="exp_alic_gen_ret" string="Total I.V.A retenido"/>
+                                <p>Alicuota Reducida</p>
+                                <field name="exp_alic_red_base" string="Total base"/>
+                                <field name="exp_alic_red_cred" string="Total crédito fiscal"/>
+                                <field name="exp_alic_red_ret" string="Total I.V.A retenido"/>
+                            </group>
+                            <group>
+                                <p>Alicuota General+ Adicional</p>
+                                <field name="exp_alic_gen_add_base" string="Total base"/>
+                                <field name="exp_alic_gen_add_cred" string="Total crédito fiscal"/>
+                                <field name="exp_alic_gen_add_ret" string="Total I.V.A retenido"/>
+                            </group>
+                        </group>
+                        <h3>Internas</h3>
+                        <group>
+                            <group>
+                                <p>Alicuota General</p>
+                                <field name="int_alic_gen_base" string="Total base"/>
+                                <field name="int_alic_gen_cred" string="Total crédito fiscal"/>
+                                <field name="int_alic_gen_ret" string="Total I.V.A retenido"/>
+                                <p>Alicuota Reducida</p>
+                                <field name="int_alic_red_base" string="Total base"/>
+                                <field name="int_alic_red_cred" string="Total crédito fiscal"/>
+                                <field name="int_alic_red_ret" string="Total I.V.A retenido"/>
+                            </group>
+                            <group>
+                                <p>Alicuota General+ Adicional</p>
+                                <field name="int_alic_gen_add_base" string="Total base"/>
+                                <field name="int_alic_gen_add_cred" string="Total crédito fiscal"/>
+                                <field name="int_alic_gen_add_ret" string="Total I.V.A retenido"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Regístros seleccionados">
+                                <field name="line_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_book_sale" model="ir.actions.act_window">
+            <field name="name">Libro de Ventas</field>
+            <field name="res_model">account.book.sale</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record forcecreate="True" id="decimal_account_book_sale" model="decimal.precision">
+            <field name="name">Libro de Ventas</field>
+            <field name="digits">2</field>
+        </record>
+
+        <record id="view_account_book_line_sale_tree" model="ir.ui.view">
+            <field name="name">account.book.line.sale.tree</field>
+            <field name="model">account.book.sale.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="date"/>
+                    <field name="doc_type"/>
+                    <field name="numero_factura"/>
+                    <field name="numero_z"/>
+                    <field name="numero_mh"/>
+                    <field name="nota_deb"/>
+                    <field name="nota_cred"/>
+                    <field name="doc_afectado"/>
+                    <field name="nombre_social"/>
+                    <field name="rif"/>
+                    <field name="ventas_sin_credito"/>
+                    <field name="venta_exp_base"/>
+                    <field name="venta_exp_porcent"/>
+                    <field name="venta_exp_importe"/>
+                    <field name="venta_int_base"/>
+                    <field name="venta_int_porcent"/>
+                    <field name="venta_int_importe"/>
+<!--                    <field name="venta_int_base"/>-->
+<!--                    <field name="venta_int_porcent"/>-->
+<!--                    <field name="venta_int_importe"/>-->
+                    <field name="venta_int_base_r"/>
+                    <field name="venta_int_porcent_r"/>
+                    <field name="venta_int_importe_r"/>
+                    <field name="comprobante"/>
+                    <field name="periodos"/>
+                    <field name="total_ventas"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_book_line_sale_form" model="ir.ui.view">
+            <field name="name">account.book.line.sale.form</field>
+            <field name="model">account.book.sale.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="doc_type"/>
+                            <field name="numero_factura"/>
+                            <field name="numero_z"/>
+                            <field name="numero_mh"/>
+                            <field name="nota_deb"/>
+                            <field name="nota_cred"/>
+                            <field name="doc_afectado"/>
+                            <field name="nombre_social"/>
+                            <field name="rif"/>
+                            <field name="ventas_sin_credito"/>
+                            <field name="iva_retenido"/>
+                            <field name="comprobante"/>
+                            <field name="periodos"/>
+                        </group>
+                        <group>
+                            <p>Ventas de importación</p>
+                            <field name="venta_exp_base"/>
+                            <field name="venta_exp_porcent"/>
+                            <field name="venta_exp_importe"/>
+                            <p>Ventas internas</p>
+                            <field name="venta_int_base"/>
+                            <field name="venta_int_porcent"/>
+                            <field name="venta_int_importe"/>
+                            <p>Ventas internas alicuota reducida</p>
+                            <field name="venta_int_base_r"/>
+                            <field name="venta_int_porcent_r"/>
+                            <field name="venta_int_importe_r"/>
+                            <br/>
+                            <br/>
+                            <field name="total_ventas"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_book_line_sale" model="ir.actions.act_window">
+            <field name="name">Lineas de libro de ventas</field>
+            <field name="res_model">account.book.sale.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record forcecreate="True" id="decimal_account_book_line_sale" model="decimal.precision">
+            <field name="name">Lineas de libro de ventas</field>
+            <field name="digits">2</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_islr_retention" model="report.paperformat">
+            <field name="default" eval="True"/>
+            <field name="name">ISLR Retencion Report</field>
+            <field name="format">custom</field>
+            <field name="orientation">Landscape</field>
+            <field name="page_height">330</field>
+            <field name="page_width">219</field>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">5</field>
+            <field name="header_line" eval="False"/>
+        </record>
+
+        <record id="paperformat_islr_arc" model="report.paperformat">
+            <field name="default" eval="True"/>
+            <field name="name">ISLR ARC Report</field>
+            <field name="format">custom</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">44</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+        </record>
+
+        <record id="paperformat_resume_islr" model="report.paperformat">
+            <field name="default" eval="True"/>
+            <field name="name">A4 Landscape Account resumen ISLR</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">443</field>
+            <field name="page_width">270</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">40</field>
+            <field name="dpi">92</field>
+        </record>
+
+    </data>
+</odoo>

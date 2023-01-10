@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_retention_municipal_supplier" model="ir.sequence">
+            <field name="name">Retention Municipal - Supplier - VE</field>
+            <field name="code">retention.municipal.supplier</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">%(year)s%(month)s</field>
+            <field name="padding">8</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_retention_municipal_customer" model="ir.sequence">
+            <field name="name">Retention Municipal - Customer - VE</field>
+            <field name="code">retention.municipal.customer</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">%(year)s%(month)s</field>
+            <field name="padding">8</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_retention_municipal_entry" model="ir.sequence">
+            <field name="name">Retention Municipal Account</field>
+            <field name="code">retention.municipal.account</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">MUN/%(year)s%(month)s</field>
+            <field name="padding">8</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

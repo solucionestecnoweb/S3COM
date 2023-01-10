@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+                id="menu_isrl_out_invoice_retention"
+                name="Retención de ISLR Cliente"
+                action="action_isrl_out_invoice_retention"
+                parent="account.menu_finance_receivables"
+                sequence="10"
+        />
+        <menuitem
+                id="menu_isrl_in_invoice_retention"
+                name="Retención de ISLR Proveedores"
+                action="action_isrl_in_invoice_retention"
+                parent="account.menu_finance_payables"
+                sequence="10"
+        />
+        <menuitem
+                id="menu_retention_xml_sumary"
+                name="Declaracion ISLR"
+                parent="account.menu_finance_payables"
+                action="action_retention_xml_summary"
+                sequence="10"
+        />
+
+        <menuitem id="menu_isrl" name="ISLR/Conceptos" parent="account.menu_finance_configuration" sequence="30"/>
+            <menuitem
+                id="menu_isrl_concept"
+                name="Conceptos de Retencion ISLR"
+                action="action_islr_concept"
+                parent="menu_isrl"
+                sequence="5"
+            />
+            <menuitem
+                id="menu_isrl_rate"
+                name="Tasa de Retencion de Ingreso"
+                action="action_islr_rates"
+                parent="menu_isrl"
+                sequence="10"
+            />
+            <menuitem
+                 id="menu_tax_unit"
+                 action="action_tax_unit"
+                 name="Unidad Tributaria"
+                 parent="menu_isrl"
+                 sequence="15"
+            />
+    </data> 
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-name="PaymentScreenPaymentLines2" t-inherit="point_of_sale.PaymentScreenPaymentLines" t-inherit-mode="extension" owl="1">
+    <xpath expr="//t[@t-if='line.selected']//div[hasclass('payment-amount')]" position="before">
+        <div><input type="text" t-att-value="line.payment_refer || ''"  t-on-keyup="trigger('onKeydown-ref', { cid: line.cid })" style="width: 55px;" placeholder="Nro. Ref" class="payment_refer"/></div>
+    </xpath>
+    <xpath expr="//t[@t-else='']//div[hasclass('payment-amount')]" position="before">
+        <div><t t-esc="line.payment_refer"/></div>
+    </xpath>
+</t>
+</templates>

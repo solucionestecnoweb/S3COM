@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_property_isrl_form" model="ir.ui.view">
+            <field name="name">res.partner.property.isrl.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='accounting_entries']" position="after">
+                    <group string="IVA Retention" name="retention_iva">
+                        <field name="property_account_payable_vat_id"/>
+                        <field name="property_account_receivable_vat_id"/>
+                        <field name="retention_iva_rate"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

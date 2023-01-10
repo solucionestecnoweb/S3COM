@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_iva_retention_resume">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3 mb4">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
+                                    <br/>
+                                    <span style="font-size:17px;">RIF:
+                                        <span style="font-size:17px;" t-field="o.company_id.doc_type"/>-
+                                        <span style="font-size:17px;" t-field="o.company_id.vat"/></span>
+                                </div>
+                                <div class="col-9 mb4 text-right">
+                                    <span style="font-size:17px;"><strong>Fecha:</strong> <span t-esc="datetime.datetime.now().strftime('%Y-%m-%d')" t-options="{'widget': 'date'}"/></span>
+                                    <br/>
+                                    <span style="font-size:17px;">Página:</span> <span class="page" style="font-size:17px;"/> / <span class="topage" style="font-size:17px;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <ul class="list-inline mb4">
+                                        <li style="font-size:20px; color: #0406b3;"><span>RELACIÓN DE RETENCIONES IVA</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Opr.Nro</th>
+                                        <th>Fecha de la Factura</th>
+                                        <th>Rif</th>
+                                        <th>Nombre o Razón Social</th>
+                                        <th>Número de Documento</th>
+                                        <th>Número de Control</th>
+                                        <th>Tipo de Documento</th>
+                                        <th>Número de Factura Afectada</th>
+                                        <th>Total Compras incluyendo el IVA</th>
+                                        <th>Compras sin derecho a Credito Fiscal</th>
+                                        <th>Base Imponible</th>
+                                        <th>Alicuota Reducida</th>
+                                        <th>Impuesto IVA</th>
+                                        <th>Alicuota General</th>
+                                        <th>Base Imponible</th>
+                                        <th>Alicuota General<br/>+Adicional</th>
+                                        <th>Impuesto <br/>IVA</th>
+                                        <th>IVA Retenido</th>
+                                        <th>Número de <br/>Comprobante</th>
+                                        <th>Fecha del <br/>Comprobante</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="acum_purchase" t-value="0"/>
+                                    <t t-set="acum_exento" t-value="0"/>
+                                    <t t-set="acum_b_reducida" t-value="0"/>
+                                    <t t-set="acum_reducida" t-value="0"/>
+                                    <t t-set="acum_b_combinada" t-value="0"/>
+                                    <t t-set="acum_combinada" t-value="0"/>
+                                    <t t-set="acum_iva_ret" t-value="0"/>
+                                    <t t-foreach="o.get_resume_iva()" t-as="r">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="r_index"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="time.strftime('%d/%m/%Y', time.strptime(str(r['date_invoice']),'%Y-%m-%d'))"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="r['doc_type']"/>-<span t-esc="r['vat']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="r['partner_name']"/>
+                                            </td>
+                                            <t t-if="r['type_doc'] == '01' ">
+                                                <td>
+                                                    <t t-esc="r['invoice_number_next']"/>
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td/>
+                                            </t>
+                                            <td>
+                                                <span t-esc="r['invoice_number_control']"/>
+                                                <span t-esc="r['invoice_number_unique']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="r['type_doc']"/>
+                                            </td>
+                                            <t t-if="r['type_doc'] == '02' or r['type_doc'] == '03' ">
+                                                <td>
+                                                    <t t-esc="r['reason']"/>
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td/>
+                                            </t>
+                                            <td class="text-right">
+                                                <span t-esc="r['total_amount_iva']"/>
+                                                <t t-set="acum_purchase" t-value="acum_purchase + r['total_amount_iva']"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="r['total_exempt']"/>
+                                                <t t-set="acum_exento" t-value="acum_exento + r['total_exempt']"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="r['base_reduced']"/>
+                                                <t t-set="acum_b_reducida" t-value="acum_b_reducida + r['base_reduced']"/>
+                                            </td>
+                                            <td>
+                                                <t t-set="base_reduced" t-value="r['base_reduced']"/>
+                                                <t t-if="base_reduced > 0.0">
+                                                    <span>8%</span>
+                                                </t>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="r['ali_reduced']"/>
+                                                <t t-set="acum_reducida" t-value="acum_reducida + r['ali_reduced']"/>
+                                            </td>
+                                            <td>
+                                                <t t-set="base_general" t-value="r['base_general']"/>
+                                                <t t-if="base_general > 0.0">
+                                                    <span>16%</span>
+                                                </t>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="r['base_general'] + r['base_additional']"/>
+                                                <t t-set="acum_b_combinada" t-value="acum_b_combinada + (r['base_general'] + r['base_additional'])"/>
+                                            </td>
+                                            <td>
+                                                <t t-set="base_additional" t-value="r['base_additional']"/>
+                                                <t t-if="base_additional > 0.0">
+                                                    <span>31%</span>
+                                                </t>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="'%.2f'% (r['ali_general'] + r['ali_additional'])"/>
+                                                <t t-set="acum_combinada" t-value="acum_combinada + (r['ali_general'] + r['ali_additional'])"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="'%.2f'% r['total_ret_iva']"/>
+                                                <t t-set="acum_iva_ret" t-value="acum_iva_ret + r['total_ret_iva']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="r['retention_iva_name']"/>
+                                            </td>
+                                            <td>
+                                                <t t-set="retention_iva_state" t-value="r['retention_iva_state']"/>
+                                                <t t-if="retention_iva_state == 'done'">
+                                                    <span t-esc="r['date_voucher']"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr class="text-right">
+                                        <td colspan="8">Totales</td>
+                                        <td>
+                                          <span t-esc="acum_purchase" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>
+                                          <span t-esc="acum_exento" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>
+                                          <span t-esc="acum_b_reducida" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>----</td>
+                                        <td>
+                                            <span t-esc="acum_reducida" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>----</td>
+                                        <td>
+                                          <span t-esc="acum_b_combinada" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>----</td>
+                                        <td>
+                                            <span t-esc="acum_combinada" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="acum_iva_ret" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td colspan="2"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

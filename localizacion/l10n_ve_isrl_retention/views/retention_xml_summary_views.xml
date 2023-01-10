@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_retention_xml_summary_form" model="ir.ui.view">
+            <field name="name">retention.xml.summary.form</field>
+            <field name="model">retention.xml.summary</field>
+            <field name="arch" type="xml">
+                <form string="Resume xml" sample="1" create="false" edit="1">
+                    <header>
+                        <button name="action_post_xml" string="Generar XML" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', '=', 'xml_generado')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="generada"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                            </group>
+                            <group>
+                                 <field name="attachment_ids" widget="many2many_binary" readonly="1"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detalle" name="details">
+                               <field name="line_ids" widget="section_and_note_one2many" mode="tree">
+                                    <tree editable="bottom">
+                                        <field name="rif_retenido"/>
+                                        <field name="numero_factura"/>
+                                        <field name="numero_control"/>
+                                        <field name="fecha_operacion"/>
+                                        <field name="codigo_concepto"/>
+                                        <field name="monto_operacion"/>
+                                        <field name="porcentaje_retencion"/>
+                                        <field name="sumary_retention_id" invisible="1" />
+                                    </tree>
+                                   <form>
+                                       <sheet>
+                                           <group>
+                                               <field name="rif_retenido"/>
+                                               <field name="numero_factura"/>
+                                               <field name="numero_control"/>
+                                               <field name="fecha_operacion"/>
+                                           </group>
+                                           <group>
+                                                <field name="codigo_concepto"/>
+                                                <field name="monto_operacion"/>
+                                                <field name="porcentaje_retencion"/>
+                                                <field name="sumary_retention_id" invisible="1"/>
+                                           </group>
+                                       </sheet>
+                                   </form>
+                               </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_retention_xml_summary_tree" model="ir.ui.view">
+            <field name="name">retention.xml.summary.tree</field>
+            <field name="model">retention.xml.summary</field>
+            <field name="arch" type="xml">
+                <tree string="Resume xml" sample="1" create="false" edit="false">
+                    <field name="from_date" decoration-bf="1"/>
+                    <field name="to_date" decoration-bf="1"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_retention_xml_summary" model="ir.actions.act_window">
+            <field name="name">Declaracion ISLR</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">retention.xml.summary</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_retention_xml_summary_new" model="ir.actions.act_window">
+            <field name="name">Declaracion ISLR</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">retention.xml.summary</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="action_retention_xml_summary"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

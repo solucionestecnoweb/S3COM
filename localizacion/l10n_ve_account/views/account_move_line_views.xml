@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_move_line_rate_tree" model="ir.ui.view">
+            <field name="name">account.move.line.view.rate.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_currency']" position="after">
+                     <field name="currency_id2" invisible="1"/>
+                     <field name="currency_id3" invisible="1"/>
+                    <field name="debit_rate" string="Debito" sum="debit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+
+                    <field name="credit_rate" string="Credito" sum="credit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_grouped_rate_tree" model="ir.ui.view">
+            <field name="name">account.move.line.view.grouped.rate.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree_grouped_sales_purchases"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='credit']" position="after">
+                    <field name="currency_id2" invisible="1"/>
+                    <field name="currency_id3" invisible="1"/>
+                    <field name="debit_rate" string="Debito" sum="debit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+
+                    <field name="credit_rate" string="Credito" sum="credit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_bank_rate_tree" model="ir.ui.view">
+            <field name="name">account.move.line.view.bank.rate.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree_grouped_bank_cash"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='amount_currency']" position="after">
+                    <field name="debit_rate" string="Debito" sum="debit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+
+                    <field name="credit_rate" string="Credito" sum="credit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_general_rate_tree" model="ir.ui.view">
+            <field name="name">account.move.line.view.general.rate.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree_grouped_general"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='amount_currency']" position="after">
+                    <field name="currency_id2" invisible="1"/>
+                    <field name="currency_id3" invisible="1"/>
+                    <field name="debit_rate" string="Debito" sum="debit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+
+                    <field name="credit_rate" string="Credito" sum="credit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_partner_rate_tree" model="ir.ui.view">
+            <field name="name">account.move.line.view.partner.rate.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree_grouped_partner"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='amount_currency']" position="after">
+                    <field name="currency_id2" invisible="1"/>
+                    <field name="currency_id3" invisible="1"/>
+                    <field name="debit_rate" string="Debito" sum="debit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+
+                    <field name="credit_rate" string="Credito" sum="credit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_misc_rate_tree" model="ir.ui.view">
+            <field name="name">account.move.line.view.misc.rate.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree_grouped_misc"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='amount_currency']" position="after">
+                    <field name="currency_id2" invisible="1"/>
+                    <field name="currency_id3" invisible="1"/>
+                    <field name="debit_rate" string="Debito" sum="debit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+
+                    <field name="credit_rate" string="Credito" sum="credit_rate" widget="monetary"
+                           options="{'currency_field': 'currency_id3', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

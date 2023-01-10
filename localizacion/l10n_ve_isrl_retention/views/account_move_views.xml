@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_move_retention_islr_form" model="ir.ui.view">
+            <field name="name">account.invoice.retention.islr.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='invoice_line_ids']/tree/field[@name='tax_ids']" position="after">
+                    <field name="concept_isrl_id" string="islr" invisible="1"/>
+                    <field name="rate_ids" string="Rates" widget="many2many_tags" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//group[@id='header_right_group']" position="inside">
+                    <label for="retention_id" class="d-flex" attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+                    <div attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}">
+                        <field name="retention_id"/>
+                        <span class="oe_inline o_form_label oe_read_only"
+                              attrs="{'invisible': ['|', '|', ('retention_id', '=', False), ('state_email_islr', '=', 'send'), ('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+
+                        <button name="send_retention_islr" type="object" class="oe_inline oe_link" icon="fa-solid fa-envelope"
+                                help="Enviar retencion islr por Email"
+                                attrs="{'invisible': ['|', '|', ('retention_id', '=', False), ('state_email_islr', '=', 'send'), ('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+
+                        <span class="oe_inline o_form_label mx-3 oe_read_only"
+                              attrs="{'invisible': ['|', '|', ('retention_id', '=', False), ('state_email_islr', '!=', 'send'), ('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}">in </span>
+
+                        <span class="oe_inline o_form_label mr-3 ml-2 oe_edit_only"
+                              attrs="{'invisible': ['|', '|', ('retention_id', '=', False), ('state_email_islr', '!=', 'send'), ('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}">in </span>
+
+                        <field name="state_email_islr" class="oe_inline"
+                               attrs="{'invisible': [ '|', '|', ('retention_id', '=', False), ('state_email_islr', '!=', 'send'), ('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

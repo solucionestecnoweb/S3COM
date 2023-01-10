@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_account_move" model="ir.sequence">
+            <field name="name">Factura Cliente - VE</field>
+            <field name="code">account.out.invoice</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">FACT/</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_move_control" model="ir.sequence">
+            <field name="name">Factura Cliente - control - VE</field>
+            <field name="code">account.out.invoice.control</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">00-</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_credit_note" model="ir.sequence">
+            <field name="name">Notas de Credito - VE</field>
+            <field name="code">account.credit.note</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">NCC/</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_credit_note_control" model="ir.sequence">
+            <field name="name">Notas de Credito - control - VE</field>
+            <field name="code">account.credit.note.control</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">00-</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_debit_note" model="ir.sequence">
+            <field name="name">Notas de Debito - VE</field>
+            <field name="code">account.debit.note.cli</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">NDC/</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_debit_note_control" model="ir.sequence">
+            <field name="name">Notas de Debito - control - VE</field>
+            <field name="code">account.debit.note.control</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">00-</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_move_control_unico" model="ir.sequence">
+            <field name="name">Factura Cliente - control - unico - VE</field>
+            <field name="code">account.control.unique</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">00-</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_delivery_note" model="ir.sequence">
+            <field name="name">Nota de Entrega</field>
+            <field name="code">account.delivery.note.sequence</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">00-</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

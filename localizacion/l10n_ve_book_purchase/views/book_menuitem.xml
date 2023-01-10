@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            name="Compra"
+            id="menu_book_purchase"
+            parent="account.menu_finance_reports"
+            sequence="40"
+        />
+        <menuitem
+            name="Libro de Compras"
+            id="menu_account_book_purchase"
+            action="action_account_book_purchase"
+            parent="menu_book_purchase"
+        />
+
+    </data>
+</odoo>

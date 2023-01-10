@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_book_resume_iva_wizard_form" model="ir.ui.view">
+            <field name="name">account.book.resume.iva.wizard.form</field>
+            <field name="model">account.book.resume.iva</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="f_inicio"/>
+                            <field name="f_fin"/>
+                        </group>
+                        <group>
+                            <field name="company_id" readonly="1"/>
+                        </group>
+                    </group>
+                     <footer>
+                        <button name="generate_xls_report" string="Imprimir" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_book_resume_iva_wizard" model="ir.actions.act_window">
+            <field name="name">Resume iva libro compras y ventas</field>
+            <field name="res_model">account.book.resume.iva</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_resumen_download_wizard_form" model="ir.ui.view">
+            <field name="name">resume.download.wizard.form</field>
+            <field name="model">resume.download.wizard</field>
+            <field name="arch" type="xml">
+                <form string="XML de Proveedores" create="false" edit="false">
+                    <group>
+                        <field name="name" string="url" required="1" invisible="1"/>
+                        <field name="report" filename="name" colspan="4"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_resumen_download_wizard" model="ir.actions.act_window">
+            <field name="name">Resume 72 Download</field>
+            <field name="res_model">resume.download.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_l10n_ve_base_res_partner_form" model="ir.ui.view">
+            <field name="name">l10n_ve.base.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="vat" position="after">
+                    <label for="vat" string="Grupo Contribuyente"/>
+                    <div>
+                        <field name="doc_type" placeholder="Type" attrs="{'readonly': [('parent_id','!=',False)]}" class="oe_inline"/>
+                        <span class="oe_read_only"> - </span>
+                        <field name="vat" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                    </div>
+                </field>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="seniat_url"/>
+                    <field name="people_type"/>
+                    <field name="taxpayer"/>
+                    <field name="vendor"/>
+                </xpath>
+                 <xpath expr="//notebook" position="inside">
+                    <page name="social" string="Redes Sociales">
+                        <group>
+                            <group>
+                                <field name="facebook" widget="url"/>
+                                <field name="twitter" widget="url"/>
+                                <field name="skype" widget="url"/>
+                                <field name="linkedin" widget="url"/>
+                                <field name="mastodon" widget="url"/>
+                            </group>
+                            <group>
+                                <field name="forum" widget="url"/>
+                                <field name="reddit" widget="url"/>
+                                <field name="youtube" widget="url"/>
+                                <field name="discord" widget="url"/>
+                            </group>
+                        </group>
+                    </page>
+                 </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

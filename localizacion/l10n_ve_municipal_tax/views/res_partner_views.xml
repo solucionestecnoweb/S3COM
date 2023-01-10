@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_property_municipal_form" model="ir.ui.view">
+            <field name="name">res.partner.property.municipal.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='accounting_entries']" position="after">
+                    <group string="Retention Municipal" name="retention_municipal">
+                        <field name="property_account_payable_municipal_id"/>
+                        <field name="property_account_receivable_municipal_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

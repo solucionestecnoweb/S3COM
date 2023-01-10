@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="islr_concept_view_tree" model="ir.ui.view">
+            <field name="name">islr.concept.view.form</field>
+            <field name="model">islr.concept</field>
+            <field name="arch" type="xml">
+                <tree string="Islr Concept">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="property_account_payable_isrl_id"/>
+                    <field name="is_retention" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="islr_concept_view_form" model="ir.ui.view">
+            <field name="name">islr.concept.view.form</field>
+            <field name="model">islr.concept</field>
+            <field name="arch" type="xml">
+               <form string="ISLR Concepts">
+                   <sheet>
+                       <div class="oe_title">
+                            <span class="o_form_label">Concepto de Retención</span>
+                            <h1 class="mt0">
+                                <field name="name" placeholder="Concepto"/>
+                            </h1>
+                       </div>
+                       <group>
+                           <group>
+                               <field name="property_account_payable_isrl_id"/>
+                           </group>
+                           <group>
+                               <field name="is_retention"/>
+                           </group>
+                       </group>
+                       <notebook>
+                           <page name="rate" string="Rate" widget="section_and_note_one2many" mode="tree">
+                                <field name="rate_ids">
+                                   <tree editable="bottom" string="Rates">
+                                       <field name="name"/>
+                                       <field name="code"/>
+                                       <field name="subtotal"/>
+                                       <field name="min"/>
+                                       <field name="retention_percentage"/>
+                                       <field name="subtract"/>
+                                       <field name="rate2"/>
+                                       <field name="people_type"/>
+                                   </tree>
+                                </field>
+                           </page>
+                       </notebook>
+                   </sheet>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_islr_concept" model="ir.actions.act_window">
+            <field name="name">ISLR Concepts</field>
+            <field name="res_model">islr.concept</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

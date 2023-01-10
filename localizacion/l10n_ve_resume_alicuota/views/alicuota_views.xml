@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_alicuota_tree" model="ir.ui.view">
+        <field name="name">alicuota.view.tree</field>
+        <field name="model">alicuota</field>
+        <field name="arch" type="xml">
+            <tree string="Alicuotas">
+                <field name="type_doc" decoration-bf="1"/>
+                <field name="move_id" optional="show"/>
+                <field name="retention_iva_id" optional="show"/>
+                <field name="date_invoice" optional="show"/>
+                <field name="date_voucher" optional="show"/>
+                <field name="ali_general" optional="show"/>
+                <field name="ali_reduced" optional="show"/>
+                <field name="ali_additional" optional="show"/>
+                <field name="detained_general" optional="show"/>
+                <field name="detained_reduced" optional="show"/>
+                <field name="detained_additional" optional="show"/>
+                <field name="total_exempt" optional="show"/>
+                <field name="base_additional" optional="show"/>
+                <field name="base_general" optional="show"/>
+                <field name="base_reduced" optional="show"/>
+                <field name="total_amount_iva" optional="show"/>
+                <field name="total_ret_iva" optional="show"/>
+                <field name="percentage_ret" optional="hide"/>
+                <field name="tax_ids" optional="hide"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'posted'" optional="hide"/>
+                <field name="retention_iva_state" widget="badge" decoration-info="retention_iva_state == 'draft'" decoration-success="retention_iva_state == 'done'" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_alicuota_form" model="ir.ui.view">
+        <field name="name">alicuota.view.form</field>
+        <field name="model">alicuota</field>
+        <field name="arch" type="xml">
+            <form string="Alicuotas">
+                <sheet>
+                    <group>
+
+                        <group>
+                            <field name="move_id" readonly="1"/>
+                            <field name="move_type" readonly="1"/>
+                            <field name="state" readonly="1"/>
+                            <field name="date_invoice" readonly="1"/>
+                        </group>
+
+                        <group>
+                            <field name="type_doc" readonly="1"/>
+                            <field name="retention_iva_id" readonly="1"/>
+                            <field name="retention_iva_state" readonly="1"/>
+                            <field name="date_voucher" readonly="1"/>
+                        </group>
+
+                        <group name="ali" string="Montos Alicuotas">
+                             <field name="ali_general" readonly="1"/>
+                             <field name="ali_reduced" readonly="1"/>
+                             <field name="ali_additional" readonly="1"/>
+                        </group>
+
+                        <group name="ret" string="Montos Retenidos">
+                            <field name="detained_general" readonly="1"/>
+                            <field name="detained_reduced" readonly="1"/>
+                            <field name="detained_additional" readonly="1"/>
+                        </group>
+
+                        <group name="total" string="Montos Totales">
+                            <field name="total_exempt" readonly="1"/>
+                            <field name="base_additional" readonly="1"/>
+                            <field name="base_general" readonly="1"/>
+                            <field name="base_reduced" readonly="1"/>
+                            <field name="total_amount_iva" readonly="1"/>
+                            <field name="total_ret_iva" readonly="1"/>
+                            <field name="percentage_ret" readonly="1"/>
+                            <field name="tax_ids" widget="many2many_tags" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record  id="action_alicuota" model="ir.actions.act_window">
+        <field name="name">Alicuota</field>
+        <field name="res_model">alicuota</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
