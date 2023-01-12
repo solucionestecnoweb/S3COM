@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="journal_inherit_view_form_igtf" model="ir.ui.view">
+        <field name="name">journal.inherit.view.form3</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                <page string="Config. IGTF pago Provedores por banco" name="config_igtf_banco_prove" attrs="{'invisible': [('type', '!=','bank')]}">
+                  <group name="studio_group_G62ZZ">
+                    <group name="studio_group_G62ZZ_left">
+                        <field name="tipo_bank" string="Nacionalidad del Banco"  widget="radio"/>
+                        <field name="wh_porcentage" attrs="{'invisible': ['|',('tipo_bank', '!=','na'),('calculate_wh_itf','!=',True)], 'required':[('calculate_wh_itf','=',True)]}"/>
+                    </group>
+                    <group name="studio_group_G62ZZ_right">
+                        <field name="calculate_wh_itf" attrs="{'invisible': [('tipo_bank', '!=','na')]}"/>
+                        <field name="account_wh_itf_id" attrs="{'invisible':['|',('tipo_bank', '!=','na'),('calculate_wh_itf','!=',True)], 'required':[('calculate_wh_itf','=',True)]}"/>
+                        <field name="journal_igtf_id" string="Diario para consecutivo asiento IGTF" attrs="{'invisible':['|',('tipo_bank', '!=','na'),('calculate_wh_itf','!=',True)], 'required':[('calculate_wh_itf','=',True)]}"/>
+                    </group>
+                  </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

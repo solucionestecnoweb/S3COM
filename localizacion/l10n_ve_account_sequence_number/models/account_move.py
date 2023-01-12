@@ -41,7 +41,7 @@ class AccountMove(models.Model):
     def _compute_nota(self):
         for selff in self:
             if selff.move_type=='out_invoice':
-                selff.is_delivery_note=True
+                selff.is_delivery_note=False
             selff.is_delivery_note_aux='1'
 
 

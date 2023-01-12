@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_payment_igtf,account.payment.igtf,model_account_payment_igtf,account.group_account_user,1,1,1,1
+access_wizard_resumen_igtf,wizard.resumen.igtf,model_wizard_resumen_igtf,account.group_account_user,1,1,1,1
+access_resumen_igtf_wizard_pdf,resumen.igtf.wizard.pdf,model_resumen_igtf_wizard_pdf,account.group_account_user,1,1,1,1
+access_account_igtf_payment,account.igtf.payment,model_account_igtf_payment,account.group_account_user,1,1,1,1

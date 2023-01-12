@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data> 
+  <record id="paperformat_forma_libre" model="report.paperformat">
+
+      <field name="header_line" eval="False"/>
+            <field name="name">A4 Factura Forma Libre igtf</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">215</field>
+            <field name="page_width">142</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_spacing">35</field>
+            <field name="dpi">96</field>
+    </record>
+
+    <template id="report_invoice_with_payments_copy">
+            <t t-call="web.html_container">
+              <t t-call="web.basic_layout" >
+                <div class="page"> <!-- 1 -->
+                  
+                  <div class="container"> <!-- 2 -->
+                    <div class="row">
+                      <div class="col-12">
+                        <ul class="list-inline mb4" style="font-size:12px;">
+                          <li t-if="docs.invoice_date"><strong>Fecha de Emisión:</strong>
+                              <span t-field="docs.invoice_date"/>
+                          </li>
+                          <li t-if="docs.invoice_number_next"><strong>Factura:</strong>
+                              <span t-field="docs.invoice_number_next"/>
+                          </li>
+                          <li t-if="docs.partner_id.name">
+                              <strong>Razón Social:</strong> <span t-field="docs.partner_id.name"/>
+                          </li>
+                          <li t-if="docs.partner_id.street or docs.partner_id.street2">
+                              <strong>Dirección:</strong> <span t-field="docs.partner_id.street"/>,
+                                            <span t-field="docs.partner_id.street2"/>
+                          </li>
+                          <li t-if="docs.partner_id.vat">
+                              <strong>RIF:</strong> <span t-field="docs.partner_id.doc_type"/>-<span t-field="docs.partner_id.vat"/>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </div>
+
+                    <t t-set="acum_alicuota_general" t-value="0.0"/>
+                     <table class="table table-borderless table-sm" style="margin-top:10px;">
+                      <thead class="bordeAbajo bordeArriba">
+                        <tr class="text-center" style="font-size:12px;">
+                            <th>CANTIDAD</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>PRECIO UNITARIO</th>
+                            <th>MONTO DEL BIEN</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <t t-foreach="docs.invoice_line_ids" t-as="line">
+                              <tr class="text-center" style="font-size:10px;">
+                                <td t-esc="int(line.quantity)"/>
+                                <td t-esc="line.product_id.name"/>
+                                <td t-esc="line.price_unit" t-options='{"widget": "monetary", "precision": 2, "display_currency": docs.currency_id}'/>
+                                <td t-esc="line.price_subtotal" t-options='{"widget": "monetary", "precision": 2, "display_currency": docs.currency_id}'/>
+                              </tr>
+                              <t t-if="line.tax_ids.aliquot == 'general'">
+                                <t t-set="acum_alicuota_general" t-value="acum_alicuota_general + line.price_subtotal"/>
+                              </t>
+                          </t>
+                      </tbody>
+                     </table>
+
+                      <div class="clearfix" style="margin-top:20px;">
+                        <div class="row">
+                            <div class="col-2"/>
+                            <div class="col-7 text-left">
+                              <ul class="list-inline mb4" style="font-size:12px;">
+                                             <li>
+                                                <strong>Tasa de cambio oficial USD/bs:</strong>
+                                                <span t-field="docs.os_currency_rate"/>
+                                            </li>
+                                             <li>
+                                                <strong>BASE IMPONIBLE USD:</strong>
+                                                <span t-esc="acum_alicuota_general / docs.os_currency_rate" t-options='{"widget": "float", "precision": 2}'/>
+                                            </li>
+                                             <li>
+                                                <strong>IVA 16% USD:</strong>
+                                                <span t-field="docs.total_impuesto_eq" t-options='{"widget": "float", "precision": 2}'/>
+                                            </li>
+                                             <li>
+                                                <strong>TOTAL USD:</strong>
+                                                <span t-field="docs.sub_total_eq" t-options='{"widget": "float", "precision": 2}'/>
+                                            </li>
+                                             <li>
+                                                <strong>IGTF 3% USD:</strong>
+                                                <span t-field="docs.impuesto_igtf_eq" t-options='{"widget": "float", "precision": 2}'/>
+                                            </li>
+                                             <li>
+                                                <strong>TOTAL A PAGAR USD:</strong>
+                                                <span t-field="docs.total_pagar_eq" t-options='{"widget": "float", "precision": 2}'/>
+                                            </li>
+                              </ul>
+                            </div>
+                        </div>
+                      </div>
+
+                     
+
+                  </div> <!-- fin 2 -->
+                  
+                    <div class="container" style="margin-top:20px; page-break-inside: avoid;">
+                            <div class="bordeAbajo bordeArriba">
+                                <div class="row">
+                                    <div class="col-2"/>
+                                    <div class="col-4 text-right">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li><strong>MONTO TOTAL DEL EXENTO O EXONERADO:</strong></li>
+                                            <li><strong>MONTO DE LA BASE IMPONIBLE:</strong></li>
+                                            <li><strong>MONTO TOTAL DEL IMPUESTO AL VALOR AGREGADO 16%:</strong></li>
+                                            <li><strong>MONTO TOTAL DE LA VENTA:</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li> <span t-esc="docs.exemto_org" t-options='{"widget": "float", "precision": 2}'/></li>
+                                            <li> <span t-esc="acum_alicuota_general" t-options='{"widget": "float", "precision": 2}'/></li>
+                                            <li> <span t-esc="docs.base_imponible_org" t-options='{"widget": "float", "precision": 2}'/></li>
+                                            <li> <span t-esc="docs.total_impuesto_org" t-options='{"widget": "float", "precision": 2}'/></li>
+                                            <li> <span t-esc="docs.sub_total_org" t-options='{"widget": "float", "precision": 2}'/></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-set="espacio" t-value="0"/>
+                            <t t-set="acum_ret_igtf" t-value="0"/>
+
+                             <div class="bordeAbajo bordeArriba"><!-- arriba -->
+                                <div class="col-2"/>
+                                    <div class="col-4 text-right">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li><strong>FORMA DE PAGO Y RECEPCION IGTF:</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-14 text-right">
+                                      <t t-foreach="docs.igtf_ids" t-as="igtf">
+                                      <div style="font-size:12px;">
+                                              <t t-esc="igtf.metodo_pago.name"/>:    
+                                              <t t-esc="igtf.monto_base" t-options='{"widget": "float", "precision": 2}'/>   |   
+                                              IGTF 3%   |   
+                                              <t t-esc="igtf.monto_ret" t-options='{"widget": "float", "precision": 2}'/>
+                                              <t t-set="acum_ret_igtf" t-value="acum_ret_igtf+igtf.monto_ret"/>
+                                      </div>
+                                       </t>
+                                       <div style="font-size:12px;">TOTAL NETO A COBRAR : &amp;nbsp;&amp;nbsp;<t t-esc="acum_ret_igtf+docs.sub_total_org" t-options='{"widget": "float", "precision": 2}'/> </div>
+                                    </div>
+                             </div> <!-- fin arriba -->
+                             
+                        </div>
+
+                </div> <!-- fin 1 -->
+              </t>
+            </t>
+    </template>
+
+    <!--t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/-->
+
+    <report
+            id="account_facturas"
+            model="account.move"
+            string="Factura/NC/ND"
+            report_type="qweb-pdf"
+            name="l10n_ve_igtf_formato_libre.report_invoice_with_payments_copy"
+            file="l10n_ve_igtf_formato_libre.report_invoice_with_payments_copy"
+            paperformat="l10n_ve_igtf_formato_libre.paperformat_forma_libre"
+        />
+
+        
+  
+  </data>
+</odoo>

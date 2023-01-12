@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+	<data>
+		<record id="vista_from_igtf_pago" model="ir.ui.view">
+		<field name="name">vista.from.igtf.pago</field>
+		<field name="model">account.igtf.payment</field>
+		<field name="arch" type="xml">
+			<form string="Asignaciones de Pago de IGTF">
+				
+                <sheet>
+                	<group name="central">
+                		<group>						
+					        <field name="journal_id" required='1' string="Diario"></field>	
+					        <field name="importe_igtf_aux" invisible="1"></field>
+							<field name="importe_igtf" string="Importe IGTF" required='1'></field>
+							<field name="move_id"></field>
+				    	</group>
+
+				    	<group>
+				    		<field name="fecha" string="Fecha"></field>
+				    		<field name="currency_id" string="Moneda"></field>
+				    	</group>
+
+                	</group>
+                </sheet>
+                <footer>
+
+                	<button name="pagar" string="Pagar IGTF" type="object" class="oe_highlight"/>
+                	<!-- attrs="{'invisible': [('manual', '=',False)]}"-->
+                </footer>
+            </form>
+        </field>
+    </record>
+	</data>
+
+</odoo>
