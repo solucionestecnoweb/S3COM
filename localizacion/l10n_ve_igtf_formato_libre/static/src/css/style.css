@@ -1,0 +1,17 @@
+.bordeAbajo{
+    border-bottom: 1px solid black;
+}
+.bordeArriba{
+    border-top: 1px solid black;
+}
+.bordeIzquierda{
+    border-left: 1px solid black;
+
+}
+.borde-lef-right{
+    border-right: 1px solid black
+    border-left: 1px solid black;
+}
+h4{
+    font-size: 18px;
+}

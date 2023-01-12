@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="igtf_account_view_form" model="ir.ui.view">
+        <field name="name">igtf.account.view.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_reference']" position="after">
+                <field name="sub_total_pagado" invisible="1"/>
+                <field name="amount_residual" invisible="1"/>
+                <field name="amount_total" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[@id='account_invoice_payment_btn']" position="after">
+                         <button name="pago_igtf" string="Pagar Igtf" type="object" class="oe_highlight" attrs="{'invisible': ['|',('impuesto_igtf', '=',0),('total_adeudado_org','=',0)]}"/>
+                         <!--button name="button_draft" string="borrador 2" type="object" /-->
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed_signed_rate']" position="replace">
+                <field name="amount_untaxed_signed_rate" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_residual_signed_rate']" position="replace">
+                <field name="amount_residual_signed_rate" invisible="1"/>
+            </xpath>
+
+        	<xpath expr="//page[@name='other_info']" position="before">
+              <page string="Apuntes IGTF" attrs="{'invisible': [('move_type', '=','entry')]}">
+                <group string="Pagos IGTF">
+                    <field name="igtf_ids" nolabel="1" readonly="0" >
+                        <tree string="Igtf" editable="buttom">
+                            <field name="move_id" invisible="1"/>
+                            <field name="asiento_igtf" readonly="1"/>
+                            <field name="metodo_pago" readonly="1"/>
+                            <field name="monto_base_usd" string="Base USD"/>
+                            <field name="tasa" string="Tasa"/>
+                            <field name="monto_base" string="Base (Bs)"/>
+                            <field name="porcentaje" string="% Ret."/>
+                            <field name="monto_ret" string="Monto Retenido(Bs)" sum="monto_ret" readonly="1"/>
+                        </tree>
+                    </field>
+                </group>
+              </page>
+            </xpath>
+
+            
+
+            <xpath expr="//notebook/page[1]/group[1]/group[2]" position="replace">
+                <field name="espacio" string="  " readonly="1"/>
+                <group class="oe_subtotal_footer oe_right" >
+
+                    <field name="total_lineas_org" string="Total Lineas"/>
+                    <field name="total_impuesto_org" string="Impuestos"/>
+                    <field name="base_imponible_org" string="Base Imponible"/>
+                    <field name="exemto_org" string="Exento"/>
+                    <field name="sub_total_org" string="Subtotal:" class="oe_subtotal_footer_separator"/>
+                    <field name="pago_bs" string="Pagos en Bs"/>
+                    <field name="pago_divisa" string="Pagos en Divisas"/>
+                    <field name="impuesto_igtf" string="Impuesto IGTF"/>
+                    <field name="total_pagar" string="Total" class="oe_subtotal_footer_separator"/>
+                    <field name="espacio" string="  " readonly="1"/>
+                    <field name="total_adeudado_org" string="Total Adeudado" class="oe_subtotal_footer_separator" attrs="{'invisible': [('state', '=','draft')]}"/>
+                    <field name="invoice_payments_widget" colspan="2" nolabel="1" widget="payment"/>
+                     <field name="invoice_outstanding_credits_debits_widget" class="oe_invoice_outstanding_credits_debits" colspan="2" nolabel="1" widget="payment" attrs="{'invisible': ['|', ('state', '!=', 'posted'), ('move_type', 'in', ('out_receipt', 'in_receipt'))]}"/>
+                    
+                </group>
+
+            </xpath>
+
+            <xpath expr="//notebook/page[1]/group[1]/group[2]" position="after">
+                <group class="oe_subtotal_footer oe_left" >
+                    <field name="total_lineas_eq" string="Total Lineas"/>
+                    <field name="total_impuesto_eq" string="Impuestos"/>
+                    <field name="base_imponible_eq" string="Base Imponible"/>
+                    <field name="exemto_eq" string="Exento"/>
+                    <field name="sub_total_eq" string="Subtotal:" class="oe_subtotal_footer_separator"/>
+                    <field name="pago_bs_eq" string="Pagos en Bs"/>
+                    <field name="pago_usd_eq" string="Pagos en Divisas"/>
+                    <field name="impuesto_igtf_eq" string="Impuesto IGTF"/>
+                    <field name="total_pagar_eq" string="Total" class="oe_subtotal_footer_separator"/>
+                    <field name="espacio" string="  " readonly="1"/>
+                    <field name="total_adeudado_eq" string="Total Adeudado" class="oe_subtotal_footer_separator" attrs="{'invisible': [('state', '=','draft')]}"/>
+                </group>
+            </xpath>
+
+		</field>
+    </record>
+
+</odoo>

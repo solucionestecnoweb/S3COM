@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="anti_inherit_view_form" model="ir.ui.view">
+    <field name="name">anti.inherit.view.form</field>
+    <field name="model">account.payment.method</field>
+    <field name="inherit_id" ref="l10n_ve_payment_method.view_account_payment_method_form"/>
+    <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='name']" position="after">
+            <field name="calculate_wh_itf"/>
+            <field name="wh_porcentage" attrs="{'invisible': [('calculate_wh_itf', '=', False)]}"/>
+            <field name="account_wh_itf_id" attrs="{'invisible':[('calculate_wh_itf','=',False)]}" domain="[('user_type_id.internal_group', '=','liability')]"/>
+            <field name="journal_transi" string="Diario transitorio" domain="[('type', '=','general')]"/>
+        </xpath>
+    </field>
+</record>
+
+
+</odoo>
