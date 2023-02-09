@@ -31,11 +31,14 @@ class AccountMove(models.Model):
         return res
 
     def post_retention_iva(self):
-        for move in self:
-            if move.invoice_line_ids.tax_ids.filtered(lambda x: x.aliquot == 'na'):
+        concept = False
+        for move in self.invoice_line_ids:
+            if move.tax_ids.filtered(lambda x: x.aliquot == 'na'):
                 raise ValidationError('Configure el tipo de alicuota por cada impuesto para poder generar la retencion')
-            if move.iva_general > 0.0 or move.iva_reduced > 0.0 or move.iva_additional > 0.0:
-                self.action_retention()
+            if move.tax_ids.filtered(lambda x: x.aliquot != 'exempt'):
+                concept = True
+        if concept:
+            self.action_retention()
 
     def action_retention(self):
         if not self.retention_iva_id:
@@ -62,58 +65,58 @@ class AccountMove(models.Model):
         return self.retention_iva_id
 
     def tax_aliquot_general(self, ret):
-        if self.iva_general > 0.0:
-            base = 0.0
-            rate = self.partner_id.retention_iva_rate
-            for move in self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'general'):
-                base += move.price_subtotal
+        base = 0.0
+        amount_iva = 0.0
+        rate = self.partner_id.retention_iva_rate
+        for move in self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'general'):
+            base += move.price_subtotal
+            amount_iva += (move.price_total - move.price_subtotal)
             ret.write({
                 'line_ids': [(0, 0, {
                     'retention_iva_id': ret.id,
-                    'amount_tax': self.iva_general,
-                    'amount_retention': (self.iva_general * rate) / 100,
+                    'amount_tax': amount_iva,
+                    'amount_retention': (amount_iva * rate) / 100,
                     'retention_rate': rate,
                     'base': base,
-                    'tax_ids': self.env['account.tax'].search([('aliquot', '=', 'general'),
-                                                               ('type_tax_use', '=', 'sale')], limit=1).ids,
+                    'tax_ids': move.tax_ids.ids,
                     'amount_untaxed': base
                 })]
             })
 
     def tax_aliquot_reduced(self, ret):
-        if self.iva_reduced > 0.0:
-            base = 0.0
-            rate = self.partner_id.retention_iva_rate
-            for move in self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'reduced'):
-                base += move.price_subtotal
+        base = 0.0
+        amount_iva = 0.0
+        rate = self.partner_id.retention_iva_rate
+        for move in self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'reduced'):
+            base += move.price_subtotal
+            amount_iva += (move.price_total - move.price_subtotal)
             ret.write({
                 'line_ids': [(0, 0, {
                     'retention_iva_id': ret.id,
-                    'amount_tax': self.iva_reduced,
-                    'amount_retention': (self.iva_reduced * rate) / 100,
+                    'amount_tax': amount_iva,
+                    'amount_retention': (amount_iva * rate) / 100,
                     'retention_rate': rate,
                     'base': base,
-                    'tax_ids': self.env['account.tax'].search([('aliquot', '=', 'reduced'),
-                                                               ('type_tax_use', '=', 'sale')], limit=1).ids,
+                    'tax_ids': move.tax_ids.ids,
                     'amount_untaxed': base
                 })]
             })
 
     def tax_aliquot_additional(self, ret):
-        if self.iva_additional > 0.0:
-            base = 0.0
-            rate = self.partner_id.retention_iva_rate
-            for move in self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'additional'):
-                base += move.price_subtotal
+        base = 0.0
+        amount_iva = 0.0
+        rate = self.partner_id.retention_iva_rate
+        for move in self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'additional'):
+            base += move.price_subtotal
+            amount_iva += (move.price_total - move.price_subtotal)
             ret.write({
                 'line_ids': [(0, 0, {
                     'retention_iva_id': ret.id,
-                    'amount_tax': self.iva_additional,
-                    'amount_retention': (self.iva_additional * rate) / 100,
+                    'amount_tax': amount_iva,
+                    'amount_retention': (amount_iva * rate) / 100,
                     'retention_rate': rate,
                     'base': base,
-                    'tax_ids': self.env['account.tax'].search([('aliquot', '=', 'additional'),
-                                                               ('type_tax_use', '=', 'sale')], limit=1).ids,
+                    'tax_ids': move.tax_ids.ids,
                     'amount_untaxed': base
                 })]
             })

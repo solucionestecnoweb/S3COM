@@ -62,7 +62,7 @@ class AccountMove(models.Model):
                     for r in move.rate_ids:
                         base = (move.price_subtotal * r.subtotal) / 100
                         subtotal = (base * r.retention_percentage / 100)
-                        total = subtotal
+                        total = subtotal-r.subtract
                         if self.partner_id.people_type == r.people_type:
                             retention_line_obj.create({
                                 'islr_concept_id': move.concept_isrl_id.id,
