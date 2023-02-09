@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ************* COMPROBANTE DE RETENCIO IVA *******************************************-->
+    <template id="herencia_iva_retencion" inherit_id="l10n_ve_iva_retention.report_iva_retention">
+        <xpath expr="//div[@name='firma2']" position="replace">
+            <div class="col-5 text-center" name="firma2">
+                <div style="position: absolute; left: 220px; top: -55px; z-index: 1;">
+                    <t t-if="o.create_uid.firma">  
+                        <img t-attf-src="data:image/*;base64,{{o.create_uid.firma}}" style="width:auto; height:100px;"/>
+                    </t>
+                </div>
+                    _______________________________
+                    <br/>
+                    <span t-field="o.create_uid.partner_id.name"/>
+                    <br/>
+                    <span t-field="o.company_id.name"/>
+                    <br/>
+                    Firma y Sello
+            </div>
+           
+
+        </xpath>
+    </template>
+
+<!-- ************* COMPROBANTE DE RETENCIO ISLR *******************************************-->
+   
+    <template id="herencia_islr_retencion" inherit_id="l10n_ve_isrl_retention.report_islr_retention">
+            <xpath expr="//div[@name='firma2']" position="replace">
+                <div class="col-5 text-center" name="firma2">
+                    <div style="position: absolute; left: 220px; top: -55px; z-index: 1;">
+                        <t t-if="o.create_uid.firma">  
+                            <img t-attf-src="data:image/*;base64,{{o.create_uid.firma}}" style="width:auto; height:100px;"/>
+                        </t>
+                    </div>
+                        _______________________________
+                        <br/>
+                        <span t-field="o.create_uid.partner_id.name"/>
+                        <br/>
+                        <span t-field="o.company_id.name"/>
+                        <br/>
+                        Firma y Sello
+                </div>
+               
+
+            </xpath>
+        </template>
+
+</odoo>

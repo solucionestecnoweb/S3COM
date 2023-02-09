@@ -137,7 +137,7 @@
                                  <tbody>
                                      <tr>
                                          <td class="border-left-right-top-bottom">
-                                             <span t-esc="time.strftime('%d/%m/%Y', time.strptime(str(o.move_id.invoice_date),'%Y-%m-%d'))"/>
+                                             <span t-esc="time.strftime('%d/%m/%Y', time.strptime(str(o.move_id.date),'%Y-%m-%d'))"/>
                                          </td>
 
                                          <td class="border-left-right-top-bottom">
@@ -209,7 +209,7 @@
                               </div>
                          </div>
                          <div class="row" style="margin-top:35px;">
-                             <div class="col-5 text-center">
+                            <div class="col-5 text-center" name="firma2">
                                     _______________________________
                                     <br/>
                                     <span t-field="o.company_id.name"/>

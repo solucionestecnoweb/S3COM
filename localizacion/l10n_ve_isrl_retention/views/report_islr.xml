@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top:35px;">
-                                <div class="col-5 text-center">
+                                <div class="col-5 text-center" name="firma2">
                                     _______________________________
                                     <br/>
                                     <span t-field="o.company_id.name"/>
