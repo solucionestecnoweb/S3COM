@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data> 
+  <record id="paperformat_forma_libre" model="report.paperformat">
+
+      <field name="default" eval="True"/>
+        <field name="name">A4 Factura Forma Libre</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">279</field>
+        <field name="page_width">216</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">52</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">96</field>
+</record>
+
+    <template id="report_invoice_with_payments_copy">
+            <t t-call="web.html_container">
+              <t t-call="web.basic_layout" >
+                <div class="page">
+                  <table  width="100%" >
+                  
+                    <!-- modelo de factura  -->
+
+                <t t-if="docs.move_type== 'out_invoice' ">
+                      <tr style="font-size:10px;">
+
+                      <tr  width="15">
+                       <td colspan="4" align="right" style="font-size:20px" ><t t-esc="docs.invoice_number_control"/></td>
+                      </tr> 
+
+
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2" >FECHA DE EMISION:&amp;nbsp;<t t-esc="docs.formato_fecha(docs.invoice_date)"/></td>
+
+                      <t t-if="docs.move_type== 'out_invoice' ">
+                      <td colspan="3" align="right">FACTURA Nº:<t t-esc="docs.invoice_number_next"/></td>
+                      </t>
+                      </tr>
+
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2">CLIENTE:&amp;nbsp;<t t-esc="docs.partner_id.name"/></td>
+                      </tr> 
+
+                
+
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2">RIF:&amp;nbsp;<t t-esc="docs.doc_cedula(docs.partner_id.id)"/></td>
+                      <td colspan="2" align="left"  >CONDICION DE PAGO:&amp;nbsp;<t t-esc="docs.invoice_payment_term_id.name"/></td>
+                      </tr>
+                
+                      <tr style="font-size:13px;">
+                      <td>DOMICILIO FISCAL:</td>
+                       </tr>
+
+                       <tr style="font-size:13px;">
+                          <td colspan="4"><t t-esc="docs.partner_id.street"/>&amp;nbsp;<t t-esc="docs.partner_id.street2"/></td>
+                       </tr>
+  
+              </tr>
+
+               </t>
+
+
+         <!-- modelo de Nota de Credito -->
+
+           <t t-elif="docs.move_type== 'out_refund' ">
+
+                  <tr style="font-size:10px;">
+
+         
+                       <tr  width="15">
+                       <td colspan="4" align="right" style="font-size:20px" >NOTA DE CREDITO</td>
+                       </tr>
+                      <tr  width="15">
+                       <td colspan="4" align="right" style="font-size:20px" ><t t-esc="docs.invoice_number_next"/></td>
+                       </tr>
+
+
+
+                      
+                      <tr style="font-size:13px;">
+                      <td colspan="2" >FECHA DE EMISION:&amp;nbsp;<t t-esc="docs.formato_fecha(docs.invoice_date)"/></td>
+
+                      </tr>
+
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2">Nº FACTURA AFECTADA:&amp;nbsp;<t t-esc="docs.reason"/></td>
+                      </tr> 
+                      
+                      <tr style="font-size:13px;">
+                      <td colspan="2">CLIENTE:&amp;nbsp;<t t-esc="docs.partner_id.name"/></td>
+                      </tr> 
+
+                
+
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2">RIF:&amp;nbsp;<t t-esc="docs.doc_cedula(docs.partner_id.id)"/></td>
+                      <td colspan="2" align="left"  >CONDICIÔN DE PAGO:&amp;nbsp;<t t-esc="docs.invoice_payment_term_id.name"/></td>
+                      </tr>
+                
+                      <tr style="font-size:13px;">
+                      <td>DOMICILIO FISCAL:</td>
+                       </tr>
+
+                       <tr style="font-size:13px;">
+                          <td colspan="4"><t t-esc="docs.partner_id.street"/>&amp;nbsp;<t t-esc="docs.partner_id.street2"/></td>
+                       </tr>
+                  </tr>   
+              </t>
+
+              
+
+               <!-- modelo de debito -->
+               <t t-elif="docs.move_type== 'out_receipt' ">
+
+
+                <tr style="font-size:10px;">
+
+                       <tr  width="15">
+                       <td colspan="4" align="right" style="font-size:20px" >NOTA DE DEBITO</td>
+                       </tr>
+
+                       <tr  width="15">
+                       <td colspan="4" align="right" style="font-size:20px" ><t t-esc="docs.invoice_number_next"/></td>
+                       </tr>
+
+                     
+                      <tr style="font-size:13px;">
+                      <td colspan="2" >FECHA DE EMISIÔN:&amp;nbsp;<t t-esc="docs.formato_fecha(docs.invoice_date)"/></td>
+
+                      </tr>
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2">Nº FACTURA AFECTADA:&amp;nbsp;<t t-esc="docs.reason"/></td>
+                      </tr> 
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2">CLIENTE:&amp;nbsp;<t t-esc="docs.partner_id.name"/></td>
+                      </tr> 
+
+                
+
+
+                      <tr style="font-size:13px;">
+                      <td colspan="2">RIF:&amp;nbsp;<t t-esc="docs.doc_cedula(docs.partner_id.id)"/></td>
+                      <td colspan="2" align="left"  >CONDICION DE PAGO:&amp;nbsp;<t t-esc="docs.invoice_payment_term_id.name"/></td>
+                      </tr>
+                
+                      <tr style="font-size:13px;">
+                      <td>DOMICILIO FISCAL:</td>
+                       </tr>
+
+                       <tr style="font-size:13px;">
+                          <td colspan="4"><t t-esc="docs.partner_id.street"/>&amp;nbsp;<t t-esc="docs.partner_id.street2"/></td>
+                       </tr>
+               </tr>
+            </t>
+
+</table>
+
+      <table class="table">
+   
+                    <tbody class="table" style="font-size:13px; width=120%" >
+                      <tr align="center" style="font-size:13px;">
+                        <td>CANTIDAD</td>
+                        <td>DESCRIPCIÓN</td>
+                        <td>PRECIO UNITARIO</td>
+                        <td>MONTO</td>
+                      </tr>
+                    </tbody>
+
+ 
+
+                    <t t-set="acum_subtotal" t-value="0"/>
+                    <t t-set="acum_alicuota_general" t-value="0"/>
+                    <t t-set="acum_alicuota_reducida" t-value="0"/>
+                    <t t-set="acum_alicuota_adicional" t-value="0"/>
+                    <t t-set="total_factura" t-value="0"/>
+
+
+                    <tbody class="table ; width=100%">
+                    <t t-foreach="docs.invoice_line_ids" t-as="o">
+                    <tr style="font-size:13px;">
+
+                      <td><div align="center"><t t-esc="o.integer_format(o.quantity)"/></div></td>
+                      <td><div align="center"><t t-esc="o.product_id.name"/> </div></td>
+                      <td><div align="center"><t t-esc="o.float_format(o.fact_div_line(o.price_unit))"/></div></td>
+                      <td><div align="center"><t t-esc="o.float_format(o.fact_div_line(o.price_subtotal))"/>
+
+                          <t t-set="acum_subtotal" t-value="acum_subtotal+o.price_subtotal"/></div></td>
+                      <t t-if="o.tax_ids.aliquot== 'general' ">
+                        <t t-set="acum_alicuota_general" t-value="acum_alicuota_general+(o.price_total-o.price_subtotal)"/>
+                      </t>
+                      <t t-if="o.tax_ids.aliquot== 'reduced' ">
+                        <t t-set="acum_alicuota_reducida" t-value="acum_alicuota_reducida+(o.price_total-o.price_subtotal)"/>
+                      </t>
+                      <t t-if="o.tax_ids.aliquot== 'additional' ">
+                        <t t-set="acum_alicuota_adicional" t-value="acum_alicuota_adicional+(o.price_total-o.price_subtotal)"/>
+                      </t>
+
+                    </tr>
+                    </t>
+
+                    </tbody>
+
+
+             </table>
+
+
+<table width="100%" height="50">
+          <tr>
+                 <td width="400"></td>
+                 <td><div align="right" style="font-size:13px;">Total Lineas:</div></td>
+                 <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.total_lineas_eq)"/></div></td>
+
+                 <td width="10"></td>
+                 <td><div align="right" style="font-size:13px;" >Total Lineas:</div></td>
+                 <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.total_lineas_org)"/><t t-esc="docs.currency_id.symbol"/></div></td>
+         </tr>
+
+          <tr>
+                 <td width="400"></td>
+                 <td><div align="right" style="font-size:13px;">Impuesto:</div></td>
+                 <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.total_impuesto_eq)"/></div></td>
+
+
+                  <td width="10"></td>
+                  <td><div align="right" style="font-size:13px;">Impuesto:</div></td>
+                  <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.total_impuesto_org)"/><t t-esc="docs.currency_id.symbol"/></div></td> 
+          </tr>
+
+           <tr>
+
+                 <td width="400"></td>
+                 <td><div align="right" style="font-size:13px;">Base Imponible:</div></td>
+                 <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.base_imponible_eq)"/></div></td>
+
+
+                 <td width="10"></td>
+                 <td><div align="right" style="font-size:13px;">Base Imponible:</div></td>
+                 <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.base_imponible_org)"/><t t-esc="docs.currency_id.symbol"/></div></td>
+          </tr>
+
+
+           <tr>
+                 <td width="400"></td>
+                 <td><div align="right" style="font-size:13px;">Exento:</div></td>
+                 <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.exemto_eq)"/></div></td>
+
+    
+                 <td width="10"></td>
+                 <td><div align="right" style="font-size:13px;">Exento:</div></td>
+                <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.exemto_org)"/><t t-esc="docs.currency_id.symbol"/></div></td>
+
+          </tr>
+
+
+
+           <tr>
+                 <td width="400"></td>
+                 <td><div align="right" style="font-size:13px;">Subtotal:</div></td>
+                 <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.sub_total_eq)"/></div></td>
+
+                  <td width="10"></td>
+                  <td><div align="right" style="font-size:13px;">Subtotal:</div></td>
+                  <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.sub_total_org)"/><t t-esc="docs.currency_id.symbol"/></div></td>
+           </tr>
+
+
+          <tr>
+                <td width="400"></td>
+                <td><div align="right" style="font-size:13px;">Pagos en Bs:</div></td>
+                <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.pago_bs_eq)"/></div></td>
+
+
+                 <td width="10"></td>
+                 <td><div align="right" style="font-size:13px;">Pagos en Bs:</div></td>
+                 <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.pago_bs)"/><t t-esc="docs.currency_id.symbol"/></div></td> 
+          </tr>
+
+
+
+       <tr>
+                 <td width="400"></td>
+                 <td><div align="right" style="font-size:13px;">Pagos en Divisas:</div></td>
+                 <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.pago_usd_eq)"/></div></td>
+
+                 <td width="10"></td>
+                 <td><div align="right" style="font-size:13px;">Pagos en Divisas:</div></td>
+                 <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.pago_divisa)"/><t t-esc="docs.currency_id.symbol"/></div></td>
+       </tr>
+
+       <tr>
+               <td width="400"></td>
+               <td><div align="right" style="font-size:13px;">Impuesto Igtf:</div></td>
+              <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.impuesto_igtf_eq)"/></div></td>
+
+
+             <td width="10"></td>
+             <td><div align="right" style="font-size:13px;">Impuesto Igtf:</div></td>
+             <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.impuesto_igtf)"/><t t-esc="docs.currency_id.symbol"/></div></td>
+        </tr>
+
+
+        <tr>
+             <td width="400"></td>
+             <td><div align="right" style="font-size:13px;">Total:</div></td>
+             <td><div align="right" style="font-size:13px;">&amp;nbsp;<t t-esc="docs.float_format(docs.total_pagar_eq)"/>
+            </div></td>
+
+             <td width="10"></td>
+             <td><div align="right" style="font-size:13px;">Total:</div></td>
+             <td><div align="right" style="font-size:13px;"><t t-esc="docs.float_format(docs.total_pagar)"/><t t-esc="docs.currency_id.symbol"/></div></td>
+       </tr>
+
+ </table>         
+
+    
+                </div>
+              </t>
+            </t>
+    </template>
+
+
+
+
+
+
+
+  <!--  t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/-->
+
+    <report
+            id="account_facturas"
+            model="account.move"
+            string="Factura/NC/ND"
+            report_type="qweb-pdf"
+            name="l10n_ve_formato_factura_nd_nc.report_invoice_with_payments_copy"
+            file="l10n_ve_formato_factura_nd_nc.report_invoice_with_payments_copy"
+            paperformat="l10n_ve_formato_factura_nd_nc.paperformat_forma_libre"
+        />
+
+        <!--
+          attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+          -->
+  
+  </data>
+</odoo>
