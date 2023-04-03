@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data> 
+  <record id="paperformat_nota_entrega" model="report.paperformat">
+
+      <field name="default" eval="True"/>
+        <field name="name">A4 Nota de Entrega</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">265</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">45</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">96</field>
+    </record>
+
+ 
+    <template id="report_invoice_with_payments_copy3">
+            <t t-call="web.html_container">
+              <t t-call="web.basic_layout" >
+                <div class="page">
+              <div class="container">
+            <table width="100%">
+
+
+              <!--formato factura  -->
+            
+              <tr style="font-size:12px;">
+
+                  <tr style="font-size:12px;">
+                      <td align="left" >Razón Social :</td>
+                      <td  align="left" ><t t-esc="docs.partner_id.name"/></td>
+                      <td align="right">Nota de Entrega:</td>
+                      <td  align="right"><t t-esc="docs.correlativo_nota_entrega"/></td> 
+                  </tr> 
+
+                  <tr style="font-size:12px;">
+                      <td align="left" >R.I.F:</td>
+                      <td align="left" ><t t-esc="docs.doc_cedula(docs.partner_id.id)"/></td>
+
+                      <td  align="right">Fecha Emisión:</td>
+                      <td  align="right"><t t-esc="docs.formato_fecha(docs.invoice_date)"/></td>  
+                  </tr>
+
+                   <tr style="font-size:12px;">
+                        <td align="left" >Teléfono:</td>
+                        <td align="left" ><t t-esc="docs.partner_id.phone"/></td>
+
+                     
+                      <td  align="right">Cond.Pago:</td>
+                      <td  align="right"><t t-esc="docs.invoice_payment_term_id.name"/></td>
+                  </tr>
+
+                  <tr style="font-size:12px;">
+                       <td align="left">Dirección:</td>
+                       <td align="left" ><t t-esc="docs.partner_id.street"/>;<t t-esc="docs.partner_id.street2"/></td>
+                  </tr>
+            
+            </tr>
+         
+
+                    <t t-set="acum_alicuota_general" t-value="0"/>
+                    <t t-set="acum_alicuota_exento" t-value="0"/>
+
+              <table class="table table-borderless table-sm" style="margin-top:10px;">
+                      <thead class="bordeAbajo bordeArriba">
+                        <tr  style="font-size:12px;" >
+                    
+                            <th align="left" >Código</th>
+                            <th align="left" >Descripción</th>
+                            <th align="center">Cantidad</th>
+                            <th align="left">P. Unitario</th>
+                            <th align="left">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <t t-foreach="docs.invoice_line_ids" t-as="line">
+                              <tr  style="font-size:10px;">
+                                
+                                <td align="left" t-esc="line.product_id.default_code"/>
+                                <td align="left" t-esc="line.product_id.name"/>
+                                <td align="left" t-esc="int(line.quantity)" />
+                                <td align="left" t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                                <td align="left"  t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                              </tr>
+                              <t t-if="line.tax_ids.aliquot == 'general'">
+                                <t t-set="acum_alicuota_general" t-value="acum_alicuota_general + line.price_subtotal"/>
+                              </t>
+                               <t t-elif="line.tax_ids.aliquot == 'exento'">
+                                       <t t-set="acum_alicuota_exento" t-value="acum_alicuota_exento + line.price_subtotal"/>
+                              </t>
+
+                          </t>
+                      </tbody>
+                     </table>
+
+              </table>
+              </div> 
+
+                            <t t-set="acum_subtotal_retention" t-value="0"/>
+                             <t t-set="acum_retention_iva" t-value="0"/>
+                             <t t-set="acum_retention_islr" t-value="0"/>
+
+        <div class="footer"> 
+         <div class="container"  style="margin-top:20px; page-break-inside: avoid;">
+              <div class="bordeArriba">
+            
+
+                     <table width="100%" > 
+
+                          <tr>
+                            <td><div align="left" style="font-size:11px;">Equivalente BS/USD:</div></td>
+                            <td><div align="left" style="font-size:11px;">&amp;nbsp;</div></td>
+
+
+
+                              <td><div align="right" style="font-size:11px;">Sub-total</div></td>
+                              <td><div align="right" style="font-size:11px;"><t t-esc="docs.total_lineas_org" t-options='{"widget": "float", "precision": 2}' />&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+                          </tr>
+                          
+                              <tr>
+                                    
+                                     <td><div align="left" style="font-size:11px;">Tasa de cambio publicada(BCV):</div></td>
+                                     <td align="left" style="font-size:11px;"><t t-esc="docs.os_currency_rate" t-options='{"widget": "float", "precision": 2}' /></td>
+
+                              </tr>
+
+                               <br/>
+
+                               <tr>
+
+                                    
+                                     <td><div align="left" style="font-size:11px;">Base imponible USD:</div></td>
+                                     <td><div align="left" style="font-size:11px;"><t t-esc="acum_alicuota_general / docs.os_currency_rate"  t-options='{"widget": "float", "precision": 2}'/></div></td>
+
+
+                                  <td><div align="right" style="font-size:11px;">Base imponible</div></td>
+                                  <td><div align="right" style="font-size:11px;"><t t-esc="acum_alicuota_general"  t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+                              </tr>
+
+
+                             <tr>
+                                    
+                                     <td><div align="left" style="font-size:11px;">Monto no gravable USD</div></td>
+                                     <td><div align="left" style="font-size:11px;"><t t-esc="docs.exemto_eq"  t-options='{"widget": "float", "precision": 2}'/></div></td>
+
+                        
+                                
+                                    <td><div align="right" style="font-size:11px;">Monto no gravable</div></td>
+                                    <td><div align="right" style="font-size:11px;"><t t-esc="docs.exemto_org"  t-options='{"widget": "float", "precision": 2}' />&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+
+                              </tr>
+
+
+
+                               <tr>
+                               
+                                     <td><div align="left" style="font-size:11px;">I.V.A USD</div></td>
+                                     <td><div align="left" style="font-size:11px;"><t t-esc="docs.total_impuesto_eq" t-options='{"widget": "float", "precision": 2}'/></div></td>
+
+                                  
+                                      <td><div align="right" style="font-size:11px;">I.V.A 16%</div></td>
+                                      <td><div align="right" style="font-size:11px;"><t t-esc="docs.total_impuesto_org"  t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+                               </tr>
+
+
+                              <tr>
+                              
+                                    <td><div align="left" style="font-size:11px;">Total USD</div></td>
+                                    <td><div align="left" style="font-size:11px;"><t  t-esc="docs.total_pagar_eq" t-options='{"widget": "float", "precision": 2}'/></div></td>
+
+
+                                
+                                     <td><div align="right" style="font-size:11px;">Total a pagar</div></td>
+                                     <td><div align="right" style="font-size:11px;"><t  t-esc="docs.total_pagar" t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td> 
+                              </tr>
+                    </table>
+            </div>               
+        </div> 
+      </div>
+  
+                </div> 
+              </t>
+            </t>
+    </template>
+
+
+    <!--t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/-->
+
+    <report
+            id="account_nota_entrega"
+            model="account.move"
+            string="Nota de Entrega"
+            report_type="qweb-pdf"
+            name="l10n_ve_formato_factura_nd_nc.report_invoice_with_payments_copy3"
+            file="l10n_ve_formato_factura_nd_nc.report_invoice_with_payments_copy3"
+            paperformat="l10n_ve_formato_factura_nd_nc.paperformat_nota_entrega"
+        />
+
+        <!--
+          attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+          -->
+  
+  </data>
+</odoo>
