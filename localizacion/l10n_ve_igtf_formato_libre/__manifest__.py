@@ -26,7 +26,7 @@
     'report/reporte_view.xml',
     'report/reporte_2_view.xml',
     'security/ir.model.access.csv',
-    'formatos/factura_libre.xml',
+   # 'formatos/factura_libre.xml',
     ],
     'assets': {
         'web.report_assets_common': [
