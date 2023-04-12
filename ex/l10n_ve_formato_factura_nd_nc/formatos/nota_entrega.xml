@@ -36,7 +36,7 @@
                       <td align="left" >Razón Social :</td>
                       <td  align="left" ><t t-esc="docs.partner_id.name"/></td>
                       <td align="right">Nota de Entrega:</td>
-                      <td  align="right"><t t-esc="docs.correlativo_nota_entrega"/></td> 
+                      <td  align="right"><t t-esc="docs.delivery_note_next_number"/></td> 
                   </tr> 
 
                   <tr style="font-size:12px;">

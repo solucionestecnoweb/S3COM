@@ -20,7 +20,7 @@
     'data': [
         'formatos/factura_libre.xml',
         'formatos/nota_entrega.xml' ,
-        'formatos/account_move_view.xml' ,
+       # 'formatos/account_move_view.xml' ,
         'view/res_partner_inh.xml' ,
 
      
