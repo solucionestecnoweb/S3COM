@@ -8,7 +8,7 @@ _logger = logging.getLogger('__name__')
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    branch_office_id = fields.Many2one(related='journal_id.branch_office_id')
+    branch_office_id = fields.Many2one(related='journal_id.branch_office_id', domain="[('company_id', '=', company_id)]")
 
     @api.constrains('branch_office_id')
     @api.onchange('branch_office_id')
@@ -48,7 +48,7 @@ class AccountMove(models.Model):
         self.ensure_one()
         if not self.is_delivery_note and self.journal_id.inv_sequence_id:
             sequence_code = self.journal_id.inv_sequence_id.code
-            sequence_obj = self.env['ir.sequence'].with_context(force_company= self.company_id.id)
+            sequence_obj = self.env['ir.sequence'].with_context(force_company=self.company_id.id)
             name = sequence_obj.next_by_code(sequence_code)
             return name
         return ''
@@ -56,7 +56,7 @@ class AccountMove(models.Model):
     def get_refund_number_branch_office(self):
         if not self.is_delivery_note and self.journal_id.inv_sequence_id:
             sequence_code = self.journal_id.inv_sequence_id.code
-            sequence_obj = self.env['ir.sequence'].with_context(force_company= self.company_id.id)
+            sequence_obj = self.env['ir.sequence'].with_context(force_company=self.company_id.id)
             name = sequence_obj.next_by_code(sequence_code)
             return name
         return ''
@@ -64,7 +64,7 @@ class AccountMove(models.Model):
     def get_receipt_number_branch_office(self):
         if not self.is_delivery_note and self.journal_id.inv_sequence_id:
             sequence_code = self.journal_id.inv_sequence_id.code
-            sequence_obj = self.env['ir.sequence'].with_context(force_company= self.company_id.id)
+            sequence_obj = self.env['ir.sequence'].with_context(force_company=self.company_id.id)
             name = sequence_obj.next_by_code(sequence_code)
             return name
         return ''
@@ -72,7 +72,7 @@ class AccountMove(models.Model):
     def get_invoice_number_control_branch_office(self):
         if not self.is_delivery_note and self.journal_id.ctrl_sequence_id:
             sequence_code = self.journal_id.ctrl_sequence_id.code
-            sequence_obj = self.env['ir.sequence'].with_context(force_company= self.company_id.id)
+            sequence_obj = self.env['ir.sequence'].with_context(force_company=self.company_id.id)
             name = sequence_obj.next_by_code(sequence_code)
             return name
         return ''
@@ -80,7 +80,7 @@ class AccountMove(models.Model):
     def get_refund_number_branch_office(self):
         if not self.is_delivery_note and self.journal_id.ctrl_sequence_id:
             sequence_code = self.journal_id.ctrl_sequence_id.code
-            sequence_obj = self.env['ir.sequence'].with_context(force_company= self.company_id.id)
+            sequence_obj = self.env['ir.sequence'].with_context(force_company=self.company_id.id)
             name = sequence_obj.next_by_code(sequence_code)
             return name
         return ''
@@ -88,7 +88,7 @@ class AccountMove(models.Model):
     def get_refund_number_control_branch_office(self):
         if not self.is_delivery_note and self.journal_id.ctrl_sequence_id:
             sequence_code = self.journal_id.ctrl_sequence_id.code
-            sequence_obj = self.env['ir.sequence'].with_context(force_company= self.company_id.id)
+            sequence_obj = self.env['ir.sequence'].with_context(force_company=self.company_id.id)
             name = sequence_obj.next_by_code(sequence_code)
             return name
         return ''

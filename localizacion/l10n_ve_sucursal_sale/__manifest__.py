@@ -11,11 +11,15 @@
         'depends': [
                 'l10n_ve_sucursal',
                 'l10n_ve_sucursal_stock',
-                'l10n_ve_sucursal_account_analytic',
+                'l10n_ve_sucursal_account',
+                'l10n_ve_sucursal_product',
                 'sale_stock',
-                'sale'
+                'sale',
         ],
-        'data': ['views/sale_order_views.xml'],
+        'data': [
+            'security/security.xml',
+            'views/sale_order_views.xml',
+        ],
         'license': 'LGPL-3',
         'installable': True,
         'application': True,

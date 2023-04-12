@@ -55,7 +55,7 @@ class TAxMunicipal(models.Model):
     move_id = fields.Many2one('account.move', string='Invoice', copy=False, tracking=True)
     move_entry_id = fields.Many2one('account.move', string='Entry', copy=False, tracking=True, readonly=True,
                                     domain="[('move_type', '=', 'entry')]")
-    line_mun_ids = fields.One2many('tax.municipal.line', 'mun_tax_id', string='Municipal Line', tracking=True)
+    line_mun_ids = fields.One2many('tax.municipal.line', 'mun_tax_id', string='Municipal Line')
     move_type = fields.Selection(related='move_id.move_type', store=True, readonly=True, tracking=True)
     invoice_number_next = fields.Char(related='move_id.invoice_number_next', store=True, readonly=True, tracking=True)
     invoice_number_control = fields.Char(related='move_id.invoice_number_control', store=True, readonly=True,
@@ -353,14 +353,13 @@ class TaxMunicipalLine(models.Model):
     _name = 'tax.municipal.line'
     _description = 'Municipal Line'
 
-    concept_id = fields.Many2one('municipal.concept', string="Retention concept", copy=False, tracking=True)
-    code = fields.Char(string='Activity code', store=True, tracking=True)
-    aliquot = fields.Float(string='Aliquot', tracking=True)
-    base_tax = fields.Float(string='Base Tax', tracking=True)
-    wh_amount = fields.Float(compute="_compute_wh_amount", string='Withholding Amount', store=True, copy=False,
-                             tracking=True)
+    concept_id = fields.Many2one('municipal.concept', string="Retention concept", copy=False)
+    code = fields.Char(string='Activity code', store=True)
+    aliquot = fields.Float(string='Aliquot')
+    base_tax = fields.Float(string='Base Tax')
+    wh_amount = fields.Float(compute="_compute_wh_amount", string='Withholding Amount', store=True, copy=False)
     mun_tax_id = fields.Many2one('tax.municipal', string='Municipal', readonly=True, invisible=True)
-    state = fields.Selection(related='mun_tax_id.state', store=True, copy=False, invisible=True, tracking=True)
+    state = fields.Selection(related='mun_tax_id.state', store=True, copy=False, invisible=True)
 
     @api.depends('base_tax', 'aliquot')
     def _compute_wh_amount(self):

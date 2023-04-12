@@ -6,7 +6,7 @@ class Partner(models.Model):
     _inherit = 'res.partner'
 
     retention_iva_rate = fields.Float(string='Tasa de Retencion')
-    property_account_payable_vat_id = fields.Many2one('account.account', string="Account Payable",
+    property_account_payable_vat_id = fields.Many2one('account.account', string="Cuentas por pagar IVA",
                                                       company_dependent=True, domain="["
                                                       "('internal_type', '=', 'other')," "('deprecated', '=', False),"
                                                       "('company_id', '=', current_company_id)]",
@@ -14,7 +14,7 @@ class Partner(models.Model):
                                                            "the default one as the payable account"
                                                            "for the current partner")
     property_account_receivable_vat_id = fields.Many2one('account.account', company_dependent=True,
-                                                         string="Account Receivable",
+                                                         string="Cuentas por Cobrar Iva",
                                                          domain="[""('internal_type', '=', 'other'),"
                                                                 "('deprecated', '=', False),"
                                                                 "('company_id', '=', current_company_id)]",

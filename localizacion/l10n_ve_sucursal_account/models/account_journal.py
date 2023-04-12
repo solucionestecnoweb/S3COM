@@ -10,4 +10,4 @@ class AccountJournal(models.Model):
 
     inv_sequence_id = fields.Many2one('ir.sequence', string='Secuencia Nro Documento', copy=False)
     ctrl_sequence_id = fields.Many2one('ir.sequence', string='Secuencia Nro Control', copy=False)
-    branch_office_id = fields.Many2one('res.sucursal', string='Sucursal')
+    branch_office_id = fields.Many2one('res.sucursal', string='Sucursal', domain="[('company_id', '=', company_id)]")

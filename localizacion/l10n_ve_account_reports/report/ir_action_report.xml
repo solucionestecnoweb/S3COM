@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_l10n_account_reports" model="ir.actions.report">
+            <field name="name">Factura Regular Libre</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_ve_account_reports.report_account_invoice_free_with_payments</field>
+            <field name="report_file">l10n_ve_account_reports.report_account_invoice_free_with_payments</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_manager')), (4, ref('account.group_account_user'))]"/>
+        </record>
+
+        <record id="action_l10n_account_reports" model="ir.actions.report">
+             <field name="paperformat_id" ref="l10n_ve_account_reports.paperformat_account_invoice"/>
+        </record>
+<!--        -->
+<!--        <record id="action_l10n_account_credit_reports" model="ir.actions.report">-->
+<!--            <field name="name">Factura Credito Libre</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">l10n_ve_account_reports.report_account_invoice_credit_free_with_payments</field>-->
+<!--            <field name="report_file">l10n_ve_account_reports.report_account_invoice_credit_free_with_payments</field>-->
+<!--            <field name="binding_model_id" eval="False"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--            <field name="groups_id" eval="[(4, ref('account.group_account_manager')), (4, ref('account.group_account_user'))]"/>-->
+<!--        </record>-->
+
+<!--        <record id="action_l10n_account_credit_reports" model="ir.actions.report">-->
+<!--             <field name="paperformat_id" ref="l10n_ve_account_reports.paperformat_account_invoice"/>-->
+<!--        </record>-->
+<!--        -->
+<!--        <record id="action_l10n_account_debit_reports" model="ir.actions.report">-->
+<!--            <field name="name">Factura Debito Libre</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">l10n_ve_account_reports.report_account_invoice_debit_free_with_payments</field>-->
+<!--            <field name="report_file">l10n_ve_account_reports.report_account_invoice_debit_free_with_payments</field>-->
+<!--            <field name="binding_model_id" eval="False"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--            <field name="groups_id" eval="[(4, ref('account.group_account_manager')), (4, ref('account.group_account_user'))]"/>-->
+<!--        </record>-->
+
+<!--        <record id="action_l10n_account_debit_reports" model="ir.actions.report">-->
+<!--             <field name="paperformat_id" ref="l10n_ve_account_reports.paperformat_account_invoice"/>-->
+<!--        </record>-->
+
+
+        <record id="action_l10n_account_delivery_note_reports" model="ir.actions.report">
+            <field name="name">Nota de Entrega</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_ve_account_reports.report_account_invoice_delivery_note</field>
+            <field name="report_file">l10n_ve_account_reports.report_account_invoice_delivery_note</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="groups_id" eval="[(4, ref('account.group_account_manager')), (4, ref('account.group_account_user'))]"/>
+        </record>
+
+        <record id="action_l10n_account_delivery_note_reports" model="ir.actions.report">
+             <field name="paperformat_id" ref="l10n_ve_account_reports.paperformat_account_invoice_delivery_note"/>
+        </record>
+    </data>
+</odoo>

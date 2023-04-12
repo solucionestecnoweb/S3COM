@@ -40,8 +40,10 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button type="object" name="update_book_purchase" string="Actualizar resumen" class="btn-primary"/>
-                        <button type="object" name="generate_xlsx" string="Generar como XLSX" class="btn-primary"/>
+                        <button type="object" name="update_book_purchase" string="Actualizar resumen" class="btn-primary"
+                            attrs="{'invisible': [('state', '=', 'file_generate')]}"/>
+                        <button type="object" name="generate_xlsx" string="Generar como XLSX" class="btn-primary"
+                                attrs="{'invisible': [('state', '=', 'file_generate')]}"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>

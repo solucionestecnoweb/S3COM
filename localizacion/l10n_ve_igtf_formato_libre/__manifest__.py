@@ -13,7 +13,7 @@
     'website': 'http://soluciones-tecno.com/',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','account','l10n_ve_account'],
+    'depends': ['base','account','l10n_ve_account','l10n_ve_account_sequence_number'],
 
     # always loaded
     'data': [
@@ -26,7 +26,7 @@
     'report/reporte_view.xml',
     'report/reporte_2_view.xml',
     'security/ir.model.access.csv',
-   # 'formatos/factura_libre.xml',
+    #'formatos/factura_libre.xml',
     ],
     'assets': {
         'web.report_assets_common': [

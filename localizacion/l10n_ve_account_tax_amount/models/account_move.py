@@ -24,9 +24,9 @@ class AccountMove(models.Model):
             for line in item.invoice_line_ids:
                 for tax in line.tax_ids:
                     if tax.aliquot == 'no_tax_credit':
-                        iva_no_tax_credit += (line.price_subtotal * tax.amount) / 100
+                        iva_no_tax_credit += line.price_subtotal
                     if tax.aliquot == 'exempt':
-                        iva_exempt += (line.price_subtotal * tax.amount) / 100
+                        iva_exempt += line.price_subtotal
                     if tax.aliquot == 'general':
                         iva_general += (line.price_subtotal * tax.amount) / 100
                     if tax.aliquot == 'reduced':

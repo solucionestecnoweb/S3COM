@@ -37,9 +37,16 @@
                     </div>
                 </xpath>
 
+                
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='ref']" position="attributes">
+                  <attribute name="attrs">{}</attribute>
+                  <attribute name="invisible">1</attribute>
+                </xpath>
+
                 <xpath expr="//field[@name='ref'][2]" position="after">
                      <field name="reason" readonly="1" attrs="{'invisible':[('move_type', 'in', ('in_invoice', 'entry'))]}"/>
                 </xpath>
+
 
             </field>
         </record>

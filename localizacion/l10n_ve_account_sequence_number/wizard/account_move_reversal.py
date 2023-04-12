@@ -16,5 +16,6 @@ class AccountMoveReversal(models.TransientModel):
             if not move.is_delivery_note:
                 move.invoice_number_seq()
                 move.invoice_control()
-                move.invoice_number_control_unique()
+                move.name=move.invoice_number_next
+                #move.invoice_number_control_unique()
         return res

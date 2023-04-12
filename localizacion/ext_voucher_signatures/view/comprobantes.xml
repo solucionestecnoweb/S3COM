@@ -11,8 +11,8 @@
                     </t>
                 </div>
                     _______________________________
-                    <br/>
-                    <span t-field="o.create_uid.partner_id.name"/>
+                    <!--br/>
+                    <span t-field="o.create_uid.partner_id.name"/-->
                     <br/>
                     <span t-field="o.company_id.name"/>
                     <br/>
@@ -34,8 +34,8 @@
                         </t>
                     </div>
                         _______________________________
-                        <br/>
-                        <span t-field="o.create_uid.partner_id.name"/>
+                        <!--br/>
+                        <span t-field="o.create_uid.partner_id.name"/-->
                         <br/>
                         <span t-field="o.company_id.name"/>
                         <br/>

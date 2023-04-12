@@ -5,7 +5,12 @@
         <record model="ir.module.category" id="sucursal_security_category">
             <field name="name">Sucursal</field>
         </record>
-
+        
+        <record id="branch_office_restrict_group" model="res.groups">
+            <field name="name">Multi Sucursal</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        
 		<record id="sucursal_user_write_group" model="res.groups">
 		    <field name="name">Usuarios "Solo Lectura"</field>
 		    <field name="category_id" ref="sucursal_security_category"/>

@@ -55,10 +55,8 @@ class PurchaseOrder(models.Model):
 
         currency_id2 = fields.Many2one(related='order_id.currency_id2', depends=['order_id.currency_id2'], store=True,
                                        string='Moneda Secundaria')
-        price_subtotal_rate = fields.Float(string='Subtotal', currency_field='currency_id2',
-                                           compute='_compute_amount_rate_line', store=True)
-        price_unit_rate = fields.Float(string='Precio unidad', currency_field='currency_id2',
-                                       compute='_compute_amount_rate_line', store=True)
+        price_subtotal_rate = fields.Float(string='Subtotal', compute='_compute_amount_rate_line', store=True)
+        price_unit_rate = fields.Float(string='Precio unidad',  compute='_compute_amount_rate_line', store=True)
 
         @api.depends('order_id.rate', 'currency_id2', 'price_unit', 'price_subtotal')
         def _compute_amount_rate_line(self):

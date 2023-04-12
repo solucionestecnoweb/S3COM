@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_branch_office_form" model="ir.ui.view">
+        <field name="name">	res.users.branch_office.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']/group[1]" position="after">
+                <group string="Multi Sucursales" groups="l10n_ve_sucursal.branch_office_restrict_group">
+                    <field string="Sucursales Permitidas" name="branch_office_ids" widget="many2many_tags"
+                           options="{'no_create': True}"/>
+                    <field string="Sucursales count" name="branch_offices_count" invisible="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

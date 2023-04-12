@@ -15,6 +15,9 @@
                         <field name="doc_type" placeholder="Type" attrs="{'readonly': [('parent_id','!=',False)]}" class="oe_inline"/>
                         <span class="oe_read_only"> - </span>
                         <field name="vat" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                        <button name="get_record_partner_cne" type="object" class="oe_inline oe_link" icon="fa-id-card"
+                                help="Consultar Datos CNE"
+                                attrs="{'invisible': [('doc_type', 'not in', ('v'))]}"/>
                     </div>
                 </field>
                 <xpath expr="//field[@name='vat']" position="after">

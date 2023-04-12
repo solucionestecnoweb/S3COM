@@ -10,6 +10,7 @@
         'website': 'http://soluciones-tecno.com/',
         'depends': ['l10n_ve_sucursal', 'stock'],
         'data': [
+                'security/security.xml',
                 'views/stock_warehouse_views.xml',
                 'views/stock_location_views.xml',
                 'views/stock_picking_views.xml',

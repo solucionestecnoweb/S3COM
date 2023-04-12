@@ -196,13 +196,12 @@ class AccountBookSale(models.Model):
                     venta_exp_base += book['amount_untaxed']
                     venta_exp_porcent += '16'
                     venta_exp_importe += book['iva_general']
-                    if book['taxpayer']:
-                        venta_int_base += book['amount_untaxed']
-                        venta_int_porcent += '16'
-                        venta_int_importe += book['iva_general']
+                else:
+                    venta_int_base += book['amount_untaxed']
+                    venta_int_porcent += '16'
+                    venta_int_importe += book['iva_general']
                 if book['iva_exempt'] > 0.0:
                     venta_int_base += book['amount_untaxed']
-                    venta_int_porcent += 0.0
 
                 if book['iva_reduced'] > 0.0:
                     venta_int_base_r = book['amount_untaxed']

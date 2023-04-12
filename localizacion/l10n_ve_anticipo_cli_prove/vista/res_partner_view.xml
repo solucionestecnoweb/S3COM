@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="partner_anti15_inherit_view_form" model="ir.ui.view">
+    <field name="name">partner.anti15.inherit.view.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//page[@name='internal_notes']" position="before">
+            <page string="Cuentas Anticipos" name="page_eALy2">
+                <group name="anticipo" string="Cuentas de Anticipos (de tipo por cobrar o por pagar)">
+                    <group name="group_left">
+                        <field name="account_anti_receivable_id" domain="[('user_type_id.type', '=','receivable')]"/>
+                        
+                         
+                    </group>
+                    <group name="group_right">
+                         <field name="account_anti_payable_id" domain="[('user_type_id.type', '=','payable')]"/>
+                    </group>
+                </group>
+            </page>
+        </xpath>
+    </field>
+</record>
+
+
+</odoo>

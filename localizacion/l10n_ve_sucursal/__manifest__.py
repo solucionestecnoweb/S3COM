@@ -15,6 +15,7 @@
                 'data/ir_sequence.xml',
                 'data/ir_sequence.xml',
                 'views/sucursal_views.xml',
+                'views/res_users_views.xml',
                 'views/menu_sucursal.xml',
         ],
         'license': 'LGPL-3',

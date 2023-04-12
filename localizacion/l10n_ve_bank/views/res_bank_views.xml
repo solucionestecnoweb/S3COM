@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_res_bank_form" model="ir.ui.view">
+            <field name="name">l10n.res.bank.form</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='email']" position="after">
+                     <field name="url_bank"/>
+                     <label for="vat" string="Grupo Contribuyente"/>
+                     <div>
+                        <field name="doc_type" placeholder="Tipo" class="oe_inline"/>
+                        <span class="oe_read_only"> - </span>
+                        <field name="vat" placeholder="Number" class="oe_inline"/>
+                    </div>
+                 </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

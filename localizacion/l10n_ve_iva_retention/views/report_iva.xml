@@ -163,7 +163,7 @@
                                          </td>
 
                                          <td class="border-left-right-top-bottom">
-                                             <span t-esc="o.move_id.ref"/>
+                                             <span t-esc="o.move_id.reason"/>
                                          </td>
 
                                          <td class="border-left-right-top-bottom text-right">

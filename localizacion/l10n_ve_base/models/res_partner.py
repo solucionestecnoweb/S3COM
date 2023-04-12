@@ -2,6 +2,7 @@
 
 import logging
 from odoo import fields, models
+import PyCNE
 _logger = logging.getLogger('__name__')
 
 
@@ -32,5 +33,32 @@ class Partner(models.Model):
     forum = fields.Char(string='Forum')
     youtube = fields.Char(string='Youtube')
 
-    #_sql_constraints = [('unique_vat', 'unique(vat)', 'Ya existe este documento registrado')]
-    _sql_constraints = [('unique_vat', 'Check(1=1)', 'pasa')]
+    def get_record_partner_cne(self):
+        for partner in self:
+            try:
+                response = PyCNE.consulta('V', int(partner.vat))
+                res = response.info.get('cedula', False)
+                if res:
+                    partner.message_post(
+                        body=(
+                            'Datos Consultados CNE:<br/>'
+                            '<ul>'
+                            '<li> <strong>Nombre: </strong> <span>{0}</span></li>'
+                            '<li> <strong>Cedula :</strong> <span>{1}</span></li>'
+                            '<li> <strong>Estado: </strong> <span>{2}</span></li>'
+                            '<li> <strong>Municipio: </strong> <span>{3}</span></li>'
+                            '<li> <strong>Parroquia: </strong> <span>{4}</span></li>'
+                            '<li> <strong>Centro de Votacion: </strong> <span>{5}</span></li>'
+                            '</ul>.'.format(
+                                response.info.get('nombre'),
+                                response.info.get('cedula'),
+                                response.info.get('estado'),
+                                response.info.get('municipio'),
+                                response.info.get('parroquia'),
+                                response.info.get('centro'),
+                            )
+                        )
+                    )
+            except:
+                pass
+        return True

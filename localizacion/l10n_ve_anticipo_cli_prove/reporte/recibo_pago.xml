@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data> 
+ 
+
+    <template id="report_payments_copy3">
+            <t t-call="web.html_container">
+              <t t-call="web.external_layout">
+
+                <div class="page">
+                <t t-foreach="docs" t-as="o">
+                <h3><strong>Comprobante de Pago: <span t-field="o.name"/></strong></h3>
+                <div class="mb-4 mt-3">
+                    <div class="row">
+                        <div class="col-6" t-if="o.date">
+                            Fecha de Págo: <span t-field="o.date"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" t-if="o.partner_type">
+                            <t t-if="o.partner_type == 'customer'">
+                                Cliente:
+                            </t>
+                            <t t-if="o.partner_type == 'supplier'">
+                                Proveedor:
+                            </t><span t-field="o.partner_id"/>
+                        </div>
+                        <div class="col-6" t-if="o.payment_method_id">
+                            Métodos de Pago: <span t-field="o.payment_method_id.name"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" t-if="o.amount">
+                            Monto del Pago: <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                         </div>
+                        <div class="col-6" t-if="o.ref">
+                            Memo: <span t-field="o.ref"/>
+                         </div>
+                    </div>
+                </div>
+              </t>
+
+              <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th><span>Fecha del Documento</span></th>
+                            <th><span>Número del documento</span></th>
+                            <th><span>Referencia</span></th>
+                            <th class="text-right"><span>Monto</span></th>
+                        </tr>
+                    </thead>
+                    <t t-set="total_adeudado" t-value="0"/>
+                    <t t-foreach="o.line_account_move.sorted(key=lambda x: (x.id),reverse=True)" t-as="line">
+                      <tr>
+                        <td><t t-esc="line.move_id.date"/></td>
+                        <td><t t-esc="line.move_id.name"/></td>
+                        <td><t t-esc="line.move_id.ref"/></td>
+                        <td><span t-esc="line.float_format_anti(line.monto)"/> $<t t-set="total_adeudado" t-value="total_adeudado+line.monto"/></td>
+                      </tr>
+
+                    </t>
+                    <tr>
+                      <td></td>
+                      <td>Total Adeudado</td>
+                      <td></td>
+                      <td><t t-esc="o.float_format_anti(total_adeudado)"/> $</td>
+                    </tr>
+              </table>
+              </div> <!-- fin div page -->
+                
+              </t>
+            </t>
+    </template>
+
+    <!--t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/-->
+
+    <report
+            id="account_payment_nota"
+            model="account.payment"
+            string="Comprobante de Pago"
+            report_type="qweb-pdf"
+            name="l10n_ve_anticipo_cli_prove.report_payments_copy3"
+            file="l10n_ve_anticipo_cli_prove.report_payments_copy3"
+        />
+
+        <!--
+          attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+          -->
+  
+  </data>
+</odoo>

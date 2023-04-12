@@ -7,11 +7,13 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='date_order']" position="after">
                 <field name="branch_office_id" options="{'no_create': True}" required="1"/>
+                <field name="journal_id" options="{'no_create_edit':True, 'no_open': True}" required="1"
+                       attrs="{'invisible': [('branch_office_id', '=', False)]}"/>
             </xpath>
-            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_uom']" position="after">
-                    <field name="branch_office_id" string="Sucursal" options="{'no_create_edit':True, 'no_open': True}"
-                           context="{'branch_office_id':branch_office_id}"/>
-            </xpath>
+<!--            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_uom']" position="after">-->
+<!--                <field name="branch_office_id" string="Sucursal" options="{'no_create_edit':True, 'no_open': True}" -->
+<!--                       context="{'branch_office_id':branch_office_id}"/>-->
+<!--            </xpath>-->
         </field>
     </record>
 

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="res_bank_0001" model="res.bank">
+			<field name="name">Banco Central de Venezuela</field>
+			<field name="bic">0001</field>
+			<field name="vat">200001100</field>
+			<field name="doc_type">g</field>
+			<field name="url_bank">https://www.bcv.org.ve</field>
+			<field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0102" model="res.bank">
+			<field name="name">Banco de Venezuela, S.A. Banco Universal</field>
+			<field name="bic">0102</field>
+			<field name="vat">200099976</field>
+			<field name="doc_type">g</field>
+			<field name="url_bank">http://www.bancodevenezuela.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0104" model="res.bank">
+			<field name="name">Venezolano de Crédito, S.A. Banco Universal</field>
+			<field name="bic">0104</field>
+			<field name="vat">000029709</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.venezolano.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0105" model="res.bank">
+			<field name="name">Banco Mercantil, C.A. Banco Universal</field>
+			<field name="bic">0105</field>
+			<field name="vat">000029610</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">https://www.mercantilbanco.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0108" model="res.bank">
+			<field name="name">Banco Provincial, S.A. Banco Universal</field>
+			<field name="bic">0108</field>
+			<field name="vat">000029679</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">https://www.provincial.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0114" model="res.bank">
+			<field name="name">Banco del Caribe, C.A. Banco Universal</field>
+			<field name="bic">0114</field>
+			<field name="vat">000029490</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">https://www.bancaribe.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0115" model="res.bank">
+			<field name="name">Banco del Caribe, C.A. Banco Universal</field>
+			<field name="bic">0115</field>
+			<field name="vat">000029504</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bancoexterior.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0116" model="res.bank">
+			<field name="name">Banco Occidental de Descuento, Banco Universal C.A</field>
+			<field name="bic">0116</field>
+			<field name="vat">300619460</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bod.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0128" model="res.bank">
+			<field name="name">Banco Caroni, C.A. Banco Universal</field>
+			<field name="bic">0128</field>
+			<field name="vat">095048551</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bancocaroni.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0134" model="res.bank">
+			<field name="name">Banco Caroni, C.A. Banco Universal</field>
+			<field name="bic">0134</field>
+			<field name="vat">070133805</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.banesco.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0137" model="res.bank">
+			<field name="name">Banco Sofitasa Banco Universal, C. A</field>
+			<field name="bic">0137</field>
+			<field name="vat">090283846</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.banesco.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0138" model="res.bank">
+			<field name="name">Banco Plaza, C.A. Banco Universal</field>
+			<field name="bic">0138</field>
+			<field name="vat">002970553</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bancoplaza.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0146" model="res.bank">
+			<field name="name">Banco de la Gente Emprendedora (BANGENTE), C.A</field>
+			<field name="bic">0146</field>
+			<field name="vat">301442040</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bangente.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0151" model="res.bank">
+			<field name="name">BFC Banco Fondo Común C.A. Banco Universal</field>
+			<field name="bic">0151</field>
+			<field name="vat">000723060</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">https://www.bfc.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0156" model="res.bank">
+			<field name="name">100% Banco, Banco Universal C.A.</field>
+			<field name="bic">0156</field>
+			<field name="vat">085007768</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.100x100banco.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0157" model="res.bank">
+			<field name="name">DelSur Banco Universal, C.A.</field>
+			<field name="bic">0157</field>
+			<field name="vat">000797234</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.delsur.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0163" model="res.bank">
+			<field name="name">Banco del Tesoro, C.A. Banco Universal</field>
+			<field name="bic">0163</field>
+			<field name="vat">200051876</field>
+			<field name="doc_type">g</field>
+			<field name="url_bank">http://www.bt.gob.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0166" model="res.bank">
+			<field name="name">Banco Agrícola de Venezuela C.A. Banco Universal</field>
+			<field name="bic">0166</field>
+			<field name="vat">200057955</field>
+			<field name="doc_type">g</field>
+			<field name="url_bank">http://www.bav.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0168" model="res.bank">
+			<field name="name">Bancrecer S.A. Banco Microfinanciero</field>
+			<field name="bic">0168</field>
+			<field name="vat">316374173</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">https://www.bancrecer.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0169" model="res.bank">
+			<field name="name">Mi Banco, Banco Microfinanciero C.A.</field>
+			<field name="bic">0169</field>
+			<field name="vat">315941023</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.mibanco.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0171" model="res.bank">
+			<field name="name">Bancamiga Banco Universal, C.A.</field>
+			<field name="bic">0172</field>
+			<field name="vat">316287599</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bancamiga.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0173" model="res.bank">
+			<field name="name">Banco Internacional de Desarrollo, C.A. Banco Universal</field>
+			<field name="bic">0173</field>
+			<field name="vat">294640109</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bid.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0174" model="res.bank">
+			<field name="name">Banplus Banco Universal, C.A</field>
+			<field name="bic">0174</field>
+			<field name="vat">000423032</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.banplus.com/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0175" model="res.bank">
+			<field name="name">Banco Bicentenario del Pueblo de la Clase Obrera, Mujer y Comunas, Banco Universal.</field>
+			<field name="bic">0175</field>
+			<field name="vat">200091487</field>
+			<field name="doc_type">g</field>
+			<field name="url_bank">https://www.bicentenariobu.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0177" model="res.bank">
+			<field name="name">Banco de la Fuerza Armada Nacional Bolivariana Bco Universal</field>
+			<field name="bic">0177</field>
+			<field name="vat">200106573</field>
+			<field name="doc_type">g</field>
+			<field name="url_bank">http://www.banfanb.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0190" model="res.bank">
+			<field name="name">Citibank, N.A.</field>
+			<field name="bic">0190</field>
+			<field name="vat">000526621</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">https://www.citibank.com.ve</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0191" model="res.bank">
+			<field name="name">Banco Nacional de Crédito, C.A. Banco Universal</field>
+			<field name="bic">0191</field>
+			<field name="vat">309841327</field>
+			<field name="doc_type">j</field>
+			<field name="url_bank">http://www.bnc.com.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+        
+        <record id="res_bank_0601" model="res.bank">
+			<field name="name">Instituto Municipal de Crédito Popular</field>
+			<field name="bic">0601</field>
+			<field name="vat">200068973</field>
+			<field name="doc_type">g</field>
+			<field name="url_bank">http://www.imcp.gob.ve/</field>
+            <field name="country" ref="base.ve"/>
+		</record>
+    
+    </data>
+</odoo>

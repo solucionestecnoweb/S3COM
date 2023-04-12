@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_account_invoice_debit_free_with_payments">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="list-inline mb4" style="font-size:12px;">
+                                        <li t-if="o.invoice_date"><strong>Fecha de Emisión:</strong>
+                                            <span t-field="o.invoice_date"/>
+                                        </li>
+                                        <li t-if="o.invoice_number_next"><strong>Factura:</strong>
+                                            <span t-field="o.invoice_number_next"/>
+                                        </li>
+                                        <li t-if="o.partner_id.name">
+                                            <strong>Razón Social:</strong> <span t-field="o.partner_id.name"/>
+                                        </li>
+                                        <li t-if="o.partner_id.street or o.partner_id.street2">
+                                            <strong>Dirección:</strong> <span t-field="o.partner_id.street"/>,
+                                            <span t-field="o.partner_id.street2"/>
+                                        </li>
+                                        <li t-if="o.partner_id.vat">
+                                            <strong>RIF:</strong> <span t-field="o.partner_id.doc_type"/>-<span t-field="o.partner_id.vat"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <table class="table table-borderless table-sm" style="margin-top:10px;">
+                                <thead class="bordeAbajo bordeArriba">
+                                    <tr class="text-center" style="font-size:12px;">
+                                        <th>CANTIDAD</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>PRECIO</th>
+                                        <th>TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                        <tr class="text-center" style="font-size:10px;">
+                                            <td t-esc="line.quantity"/>
+                                            <td t-esc="line.product_id.name"/>
+                                            <td t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                                            <td t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <div class="clearfix" style="margin-top:20px;">
+                                 <div class="row">
+                                     <div class="col-2"/>
+                                     <div class="col-7 text-left">
+                                         <ul class="list-inline mb4" style="font-size:12px;">
+                                             <li>
+                                                <strong>Tasa de cambio oficial USD/bs:</strong>
+                                                <span t-field="o.os_currency_rate"/>
+                                            </li>
+                                             <li>
+                                                <strong>BASE IMPONIBLE USD:</strong>
+                                                <span t-field="o.amount_untaxed_signed_rate"/>
+                                            </li>
+                                             <li>
+                                                <strong>IVA 16% USD:</strong>
+                                                <span t-field="o.amount_tax_rate"/>
+                                            </li>
+                                             <li>
+                                                <strong>TOTAL USD:</strong>
+                                                <span t-field="o.amount_total_signed_aux_rate"/>
+                                            </li>
+                                             <li>
+                                                <strong>IGTF 3% USD:</strong>
+                                                <span t-field="o.tax_igtf_rate"/>
+                                            </li>
+                                             <li>
+                                                <strong>TOTAL A PAGAR USD:</strong>
+                                                <span t-field="o.amount_residual_signed_rate"/>
+                                            </li>
+                                         </ul>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="container" style="margin-top:20px; page-break-inside: avoid;">
+                            <div class="bordeAbajo bordeArriba">
+                                <div class="row">
+                                    <div class="col-4"/>
+                                    <div class="col-5 text-right">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li><strong>MONTO TOTAL DEL EXENTO O EXONERADO:</strong></li>
+                                            <li><strong>MONTO DE LA BASE IMPONIBLE:</strong></li>
+                                            <li><strong>MONTO TOTAL DEL IMPUESTO AL VALOR AGREGADO 16%:</strong></li>
+                                            <li><strong>MONTO TOTAL DE LA VENTA:</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li> <span t-esc="o.iva_exempt"/></li>
+                                            <li> <span t-esc="o.amount_untaxed"/></li>
+                                            <li> <span t-esc="o.iva_general"/></li>
+                                            <li> <span t-esc="o.amount_total"/></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

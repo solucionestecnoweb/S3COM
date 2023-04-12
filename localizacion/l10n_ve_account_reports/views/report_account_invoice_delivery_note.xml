@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_account_invoice_delivery_note">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li t-if="o.company_id.name"><h4 t-field="o.company_id.name"/></li>
+                                            <li t-if="o.company_id.vat"><strong>RIF:</strong> <span t-field="o.company_id.doc_type"/>-<span t-field="o.company_id.vat"/></li>
+                                            <li t-if="o.company_id.street or o.company_id.street2"><strong>Dirección:</strong> <span t-field="o.company_id.street"/>,<span t-field="o.company_id.street2"/></li>
+                                            <li t-if="o.company_id.street2"><span t-field="o.company_id.street2"/></li>
+                                            <li t-if="o.company_id.phone"><strong>Telefono: </strong><span class="o_force_ltr" t-field="o.company_id.phone"/></li>
+                                            <li t-if="o.company_id.email"><strong>Correo: </strong><span t-field="o.company_id.email"/></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-4 pull-right text-right" style="margin-top: 0px;">
+                                            <img t-attf-src="data:image/*;base64,{{o.company_id.logo}}"
+                                                 style="width:auto; height:150px;"/>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 pull-right text-right">
+                                        <h4>
+                                            <span>Nota de Entrega:
+                                                <br/>
+                                                <span t-field="o.delivery_note_next_number"/>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-7">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li t-if="o.partner_id.name">
+                                                <strong>Razón Social:</strong> <span t-field="o.partner_id.name"/>
+                                            </li>
+                                            <li t-if="o.partner_id.vat">
+                                                <strong>RIF:</strong> <span t-field="o.partner_id.doc_type"/>-<span t-field="o.partner_id.vat"/>
+                                            </li>
+                                            <li t-if="o.partner_id.street or o.partner_id.street2">
+                                                <strong>Dirección:</strong> <span t-field="o.partner_id.street"/>,
+                                                <span t-field="o.partner_id.street2"/>
+                                            </li>
+                                            <li t-if="o.partner_id.phone or o.partner_id.mobile">
+                                                <strong>Telefonos: </strong><span class="o_force_ltr" t-field="o.partner_id.phone"/>/
+                                                <span class="o_force_ltr" t-field="o.partner_id.mobile"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-5 pull-right text-right" style="font-size:12px;">
+                                        <ul class="list-inline mb4">
+                                            <li t-if="o.invoice_date"><strong>Fecha de Emisión:</strong>
+                                                <span t-field="o.invoice_date"/>
+                                            </li>
+                                            <li t-if="o.invoice_date_due"><strong>Fecha de Vencimiento:</strong>
+                                                <span t-field="o.invoice_date_due"/>
+                                            </li>
+                                            <li t-if="o.invoice_user_id.name"><strong>Vendedor:</strong>
+                                                <span t-field="o.invoice_user_id.name"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <table class="table table-borderless table-sm" style="margin-top:10px;">
+                                    <thead class="bordeAbajo bordeArriba">
+                                        <tr class="text-center" style="font-size:12px;">
+                                            <th>DESCRIPCIÓN</th>
+                                            <th>CANTIDAD</th>
+                                            <th>PRECIO</th>
+                                            <th>TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                                            <tr class="text-center" style="font-size:10px;">
+                                                <td t-esc="line.product_id.name"/>
+                                                <td t-esc="line.quantity"/>
+                                                <td t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                                                <td t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+
+                                <div class="clearfix" style="margin-top:20px;">
+                                     <div class="row">
+                                         <div class="col-7">
+                                             <p class="justify-content-end" style="font-size:12px;">
+                                                 <span><strong>Terminos y Condiciones:</strong>
+                                                     <span t-field="o.narration"/>
+                                                 </span>
+                                             </p>
+                                         </div>
+                                         <div id="total" class="col-5">
+                                             <table style="page-break-inside: avoid; font-size:12px; width: 100%;">
+                                                 <tr class="border-black o_subtotal">
+                                                    <td><strong>SUB-TOTAL</strong></td>
+                                                    <td class="text-right">
+                                                        <span t-field="o.amount_untaxed"/> / <span t-field="o.amount_untaxed_signed_rate"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="border-black">
+                                                    <td>Tasa</td>
+                                                    <td class="text-right">
+                                                        <span class="text-nowrap" t-field="o.os_currency_rate"/>
+                                                    </td>
+                                                </tr>
+
+                                                 <tr>
+                                                     <td><strong>TOTAL EXENTO</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-field="o.iva_exempt" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr>
+                                                    <td><strong>IMPUESTOS:</strong></td>
+                                                     <td/>
+                                                 </tr>
+                                                 <tr t-if="o.iva_general > 0.0">
+                                                     <td><strong>(16%)</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="o.iva_general" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr t-if="o.iva_reduced > 0.0">
+                                                     <td><strong>(8%)</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="o.iva_reduced" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr t-if="o.iva_additional > 0.0">
+                                                     <td><strong>(31%)</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="o.iva_additional" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr>
+                                                     <td><strong>TOTAL OPERACIÓN</strong></td>
+                                                     <td class="text-right">
+                                                         <span class="text-nowrap" t-field="o.amount_total"/> / <span t-field="o.amount_total_signed_aux_rate"/>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

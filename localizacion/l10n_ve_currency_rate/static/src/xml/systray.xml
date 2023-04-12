@@ -5,6 +5,7 @@
             <a class="dropdown-item">
                 <i class="fa" role="img" aria-label="Demo Days"/> <span class="o_exchange_rate badge badge-pill" style="color: white;"/>
                 <i class="fa" role="img" aria-label="Demo Days"/> <span class="o_exchange_rate_euro badge badge-pill" style="color: white;"/>
+                <i><span class="currency_rate_date" style="color: white;"/></i>
             </a>
         </li>
     </t>

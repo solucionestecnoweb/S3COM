@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import fields, models, api
 from datetime import datetime
 import base64
 import xlwt
@@ -11,10 +11,11 @@ _logger = logging.getLogger(__name__)
 class AccountBookPurchase(models.Model):
     _name = 'account.book.purchase'
     _description = 'Book Purchase'
-    _rec_name = 'id'
+    _rec_name = 'name'
 
     f_inicio = fields.Date("Fecha de inicio", required=True, copy=False)
     f_fin = fields.Date("Fecha final", required=True, copy=False)
+    name = fields.Char(string='Numeracion', copy=False)
 
     # No gravadas
     no_grabadas_base = fields.Float("Total base compras no gravadas", readonly=True, copy=False)
@@ -79,6 +80,12 @@ class AccountBookPurchase(models.Model):
     attachment_ids = fields.Many2many(string='Attachments', comodel_name='ir.attachment',
                                       relation='account_book_purchase_rel', column1='account_book_purchase_id',
                                       column2='attachment_id', copy=False)
+
+    @api.model
+    def create(self, vals):
+        res = super(AccountBookPurchase, self).create(vals)
+        res.name = self.env['ir.sequence'].next_by_code('book.purchase.sequence')
+        return res
 
     def update_book_purchase(self):
         line = []
@@ -500,7 +507,7 @@ class AccountBookPurchase(models.Model):
             total_periodos += item.periodos
 
         for item in self.line_ids.filtered(lambda x: x.doc_type == '2'):
-            total_compras -=  item.total_compras
+            total_compras -= item.total_compras
             total_sin_credito -= item.compras_sin_credito
             total_base_importacion -= item.compra_imp_base
             total_iva_importacion -= item.compra_imp_importe

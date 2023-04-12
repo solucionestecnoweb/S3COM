@@ -10,7 +10,7 @@ class Sucursal(models.Model):
     code = fields.Char('codigo')
     address = fields.Text('Direccion')
     active = fields.Boolean(string='Activo', default=True)
-    company_id = fields.Many2one('res.company')
+    company_id = fields.Many2one('res.company', required=True)
 
     def name_get(self):
         """ The _rec_name class attribute is replaced to concatenate several fields of the object

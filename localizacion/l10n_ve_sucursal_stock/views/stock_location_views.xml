@@ -10,4 +10,23 @@
             </xpath>
         </field>
     </record>
+    
+    <record id="view_location_branch_office_search" model="ir.ui.view">
+        <field name="name">stock.location.branch.office.search</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <group expand="0" string="Group By">
+                    <filter name="group_branch_office" string="Sucursal" domain="[]" context="{'group_by':'branch_office_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="stock.action_location_form" model="ir.actions.act_window">
+        <field name="search_view_id" ref="view_location_branch_office_search"/>
+        <field name="context">{'search_default_in_location':1, 'search_default_group_branch_office': 1}</field>
+    </record>
+    
 </odoo>

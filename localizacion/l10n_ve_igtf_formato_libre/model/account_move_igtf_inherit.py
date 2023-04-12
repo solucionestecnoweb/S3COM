@@ -392,76 +392,80 @@ class AccountMove(models.Model):
     def asocia_asiento_igtf_factura_clie(self):
         #raise UserError(_('Enra aqui 1'))
         for selff in self:
-            if selff.sub_total_pagado=='False':
-                #raise UserError(_('Enra aqui 2'))
-            ### CODIGO QUE LIMPIA INICIALMENTE EL CAMPO DONDE SE GUARDAS LOS ASIENTOS IGTF ASOCIADOS A LA FACT
-                for limpia_linea in selff.igtf_ids:
-                    limpia_linea.unlink()
-                     #raise UserError(_('Enra aqui 3'))
-                ### fin
-                cuenta_cli=selff.partner_id.property_account_receivable_id.id # cliente
-                cuenta_prov=selff.partner_id.property_account_payable_id.id # proveedor
-                if selff.move_type in ('out_invoice','out_refund'):
-                    cuenta_gene=cuenta_cli
-                if selff.move_type in ('in_invoice','in_refund'):
-                    cuenta_gene=cuenta_prov
-                # CLIENTES
-                if selff.move_type in ('out_invoice','out_refund','in_invoice','in_refund'):
-                    for rec in selff.line_ids:
-                        if rec.account_id.id==cuenta_gene:
-                            id_move=rec.id
-                    #raise UserError(_('cursor3=%s')%id_move)
-                    if selff.state=='posted':
-                        if selff.move_type in ('out_invoice','out_refund'):
-                            cursor=selff.env['account.partial.reconcile'].search([('debit_move_id','=',id_move)])
-                        if selff.move_type in ('in_invoice','in_refund'):
-                            cursor=selff.env['account.partial.reconcile'].search([('credit_move_id','=',id_move)])
-                    else:
-                        cursor=""##selff.env['account.partial.reconcile'].search([('debit_move_id','=',0)])
-                    if cursor:
-                        for rec in cursor:
+            if selff.is_delivery_note!=True:
+                if selff.sub_total_pagado=='False':
+                    #raise UserError(_('Enra aqui 2'))
+                ### CODIGO QUE LIMPIA INICIALMENTE EL CAMPO DONDE SE GUARDAS LOS ASIENTOS IGTF ASOCIADOS A LA FACT
+                    for limpia_linea in selff.igtf_ids:
+                        limpia_linea.unlink()
+                         #raise UserError(_('Enra aqui 3'))
+                    ### fin
+                    cuenta_cli=selff.partner_id.property_account_receivable_id.id # cliente
+                    cuenta_prov=selff.partner_id.property_account_payable_id.id # proveedor
+                    if selff.move_type in ('out_invoice','out_refund'):
+                        cuenta_gene=cuenta_cli
+                    if selff.move_type in ('in_invoice','in_refund'):
+                        cuenta_gene=cuenta_prov
+                    # CLIENTES
+                    if selff.move_type in ('out_invoice','out_refund','in_invoice','in_refund'):
+                        for rec in selff.line_ids:
+                            if rec.account_id.id==cuenta_gene:
+                                id_move=rec.id
+                        #raise UserError(_('cursor3=%s')%id_move)
+                        if selff.state=='posted':
                             if selff.move_type in ('out_invoice','out_refund'):
-                                pago_move_id=rec.credit_move_id.move_id.payment_id
+                                cursor=selff.env['account.partial.reconcile'].search([('debit_move_id','=',id_move)])
                             if selff.move_type in ('in_invoice','in_refund'):
-                                pago_move_id=rec.debit_move_id.move_id.payment_id
-                            monto=pago_move_id.amount
-                            if pago_move_id.payment_method_id.calculate_wh_itf==True:
-                                if pago_move_id.currency_id.id!=self.company_currency_id.id:
-                                    busca=selff.env['res.currency.rate'].search([('currency_id','=',2),('name','<=',pago_move_id.date)],order='name asc')
-                                    if busca:
-                                        for det in busca:
-                                            tasa=det.inverse_company_rate
-                                            if pago_move_id.currency_id.id!=self.env.company.currency_id.id:
-                                                monto_base=pago_move_id.amount*tasa
-                                                monto_base_usd=pago_move_id.amount
-                                            else:
-                                                monto_base=pago_move_id.amount
-                                                monto_base_usd=pago_move_id.amount/tasa
-                                retencion=monto_base*pago_move_id.payment_method_id.wh_porcentage/100
-                                vols={
-                                'move_id':selff.id,
-                                'asiento_igtf':pago_move_id.asiento_cobro_igtf.id,
-                                'metodo_pago':pago_move_id.payment_method_id.id,
-                                'monto_base_usd':monto_base_usd,
-                                'tasa':tasa,
-                                'monto_base':monto_base,
-                                'porcentaje':pago_move_id.payment_method_id.wh_porcentage,
-                                'monto_ret':retencion,
-                                }
-                                verifica_asiento_igtf_fact=self.env['account.payment.igtf'].search([('asiento_igtf','=',pago_move_id.asiento_cobro_igtf.id)])
-                                if not verifica_asiento_igtf_fact:
-                                    crear=selff.env['account.payment.igtf'].create(vols)
-                                    selff.igtf_ids=selff.env['account.payment.igtf'].search([('move_id','=',selff.id)])
-                                #raise UserError(_('credit=%s')%pago_move_id)
-            if selff.sub_total_pagado=='False':
-                selff.amount_residual=selff.amount_total-selff.valor_pagado()+selff.calculo_igtf()
-                if selff.currency_id.id==selff.env.company.currency_id.id:
-                    selff.amount_residual_signed=selff.amount_residual
-                else:
-                    selff.amount_residual_signed=selff.amount_residual*selff.tasa()
-                                    
-                if selff.amount_residual>0:
-                    selff.payment_state='partial'
+                                cursor=selff.env['account.partial.reconcile'].search([('credit_move_id','=',id_move)])
+                        else:
+                            cursor=""##selff.env['account.partial.reconcile'].search([('debit_move_id','=',0)])
+                        if cursor:
+                            for rec in cursor:
+                                if selff.move_type in ('out_invoice','out_refund'):
+                                    pago_move_id=rec.credit_move_id.move_id.payment_id
+                                if selff.move_type in ('in_invoice','in_refund'):
+                                    pago_move_id=rec.debit_move_id.move_id.payment_id
+                                monto=pago_move_id.amount
+                                #raise UserError(_('Entra 3=%s')%pago_move_id.id)
+                                if pago_move_id.payment_method_id.calculate_wh_itf==True:
+                                    #raise UserError(_('Entra 4'))
+                                    if pago_move_id.currency_id.id!=self.company_currency_id.id:
+                                        busca=selff.env['res.currency.rate'].search([('currency_id','=',2),('name','<=',pago_move_id.date)],order='name asc')
+                                        if busca:
+                                            for det in busca:
+                                                tasa=det.inverse_company_rate
+                                                if pago_move_id.currency_id.id!=self.env.company.currency_id.id:
+                                                    monto_base=pago_move_id.amount*tasa
+                                                    monto_base_usd=pago_move_id.amount
+                                                else:
+                                                    monto_base=pago_move_id.amount
+                                                    monto_base_usd=pago_move_id.amount/tasa
+                                    retencion=monto_base*pago_move_id.payment_method_id.wh_porcentage/100
+                                    vols={
+                                    'move_id':selff.id,
+                                    'asiento_igtf':pago_move_id.asiento_cobro_igtf.id,
+                                    'metodo_pago':pago_move_id.payment_method_id.id,
+                                    'monto_base_usd':monto_base_usd,
+                                    'tasa':tasa,
+                                    'monto_base':monto_base,
+                                    'porcentaje':pago_move_id.payment_method_id.wh_porcentage,
+                                    'monto_ret':retencion,
+                                    }
+                                    verifica_asiento_igtf_fact=self.env['account.payment.igtf'].search([('asiento_igtf','=',pago_move_id.asiento_cobro_igtf.id)])
+                                    #raise UserError(_('Entra 5'))
+                                    if not verifica_asiento_igtf_fact:
+                                        crear=selff.env['account.payment.igtf'].create(vols)
+                                        selff.igtf_ids=selff.env['account.payment.igtf'].search([('move_id','=',selff.id)])
+                                    #raise UserError(_('credit=%s')%pago_move_id)
+                if selff.sub_total_pagado=='False':
+                    selff.amount_residual=selff.amount_total-selff.valor_pagado()+selff.calculo_igtf()
+                    if selff.currency_id.id==selff.env.company.currency_id.id:
+                        selff.amount_residual_signed=selff.amount_residual
+                    else:
+                        selff.amount_residual_signed=selff.amount_residual*selff.tasa()
+                                        
+                    if selff.amount_residual>0:
+                        selff.payment_state='partial'
 
     @api.constrains('amount_residual')  #amount_total
     def varifica(self):
