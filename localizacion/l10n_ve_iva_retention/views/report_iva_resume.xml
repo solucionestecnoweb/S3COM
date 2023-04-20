@@ -97,7 +97,7 @@
                                             </td>
                                             <t t-if="r['type_doc'] == '02' or r['type_doc'] == '03' ">
                                                 <td>
-                                                    <t t-esc="r['reason']"/>
+                                                    <!--t t-esc="r['reason']"/-->
                                                 </td>
                                             </t>
                                             <t t-else="">
