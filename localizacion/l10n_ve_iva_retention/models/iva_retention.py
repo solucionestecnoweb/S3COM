@@ -393,6 +393,12 @@ class RetentionIva(models.Model):
                    '\ngo to the menu Accounting / Customer / Withholding Iva Customer.')
             raise UserError(msg)
 
+    def monto_exemto(self,move_id):
+        valor=0
+        for line in move_id.invoice_line_ids:
+            if line.tax_ids.aliquot=='exempt':
+                valor=valor+line.price_subtotal
+        return valor
 
 class RetentionIvaLine(models.Model):
     _description = "Retention Iva Line"

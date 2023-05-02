@@ -284,7 +284,8 @@ class libro_ventas(models.TransientModel):
             ('fecha_fact','>=',self.date_from),
             ('fecha_fact','<=',self.date_to),
             ('state','in',('posted','cancel' )),
-            ('type','in',('in_invoice','in_refund','in_receipt'))
+            ('type','in',('in_invoice','in_refund','in_receipt')),
+            ('invoice_id.is_delivery_note','!=',True)
             ])
         for det in cursor_resumen:
             alicuota_reducida=0

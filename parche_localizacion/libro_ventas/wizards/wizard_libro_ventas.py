@@ -229,7 +229,8 @@ class libro_ventas(models.TransientModel):
                 ('fecha_fact','>=',self.date_from),
                 ('fecha_fact','<=',self.date_to),
                 ('state','in',('posted','cancel' )),
-                ('type','in',('out_invoice','out_refund','out_receipt'))
+                ('type','in',('out_invoice','out_refund','out_receipt')),
+                ('invoice_id.is_delivery_note','!=',True)
                 ])
         if accion=="voucher":
             cursor_resumen = self.env['alicuota'].search([

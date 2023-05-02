@@ -177,8 +177,7 @@
                           <!-- FIN VARIABLES DE ENTORNOS -->
 
                           <tbody class="table table-bordered">
-                          <t t-foreach="o.line" t-as="line" >
-                          <!--t t-foreach="o.line.sorted(key=lambda x: (x.name,x.invoice_ctrl_number ),reverse=False)" t-as="line" -->
+                          <t t-foreach="o.line.sorted(key=lambda x: (x.name,x.invoice_ctrl_number ),reverse=False)" t-as="line" >
                             <!-- variables para los resumenes de totales-->
                             <t t-set="contador" t-value="contador+1"/>
 
