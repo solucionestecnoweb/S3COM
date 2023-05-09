@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='accounting_entries']" position="after">
                     <group string="RETENCION ISLR" name="retention_isrl">
-                        <field name="property_account_payable_isrl_id" string="xCuentas por Pagar ISLR"/>
-                        <field name="property_account_receivable_isrl_id" string="xCuentas por Cobrar ISLR"/>
+                        <field name="property_account_payable_isrl_id" string="Cuentas por Pagar ISLR"/>
+                        <field name="property_account_receivable_isrl_id" string="Cuentas por Cobrar ISLR"/>
                     </group>
                 </xpath>
             </field>
