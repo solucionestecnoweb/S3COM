@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="account.view_partner_property_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='accounting_entries']" position="after">
-                    <group string="ISLR Retention" name="retention_isrl">
+                    <group string="Retensión ISLR" name="retention_isrl">
                         <field name="property_account_payable_isrl_id" string="xCuentas por Pagar ISLR"/>
                         <field name="property_account_receivable_isrl_id" string="xCuentas por Cobrar ISLR"/>
                     </group>
