@@ -172,7 +172,7 @@
                       </thead>
                       <tbody>
                           <t t-foreach="docs.invoice_line_ids" t-as="line">
-                              <tr >
+                              <tr  style="font-size:12px;" >
                                 
                                 <td align="left" t-esc="line.product_id.default_code"/>
                                 <td align="left" t-esc="line.product_id.name"/>
@@ -206,19 +206,19 @@
                <table width="100%" > 
 
                           <tr>
-                            <td><div align="left" style="font-size:11px;">Equivalente BS/USD:</div></td>
-                            <td><div align="left" style="font-size:11px;">&amp;nbsp;</div></td>
+                            <td><div align="left" style="font-size:12px;">Equivalente BS/USD:</div></td>
+                            <td><div align="left" style="font-size:12px;">&amp;nbsp;</div></td>
 
 
 
-                              <td><div align="right" style="font-size:11px;">Sub-total</div></td>
-                              <td><div align="right" style="font-size:11px;"><t t-esc="docs.total_lineas_org" t-options='{"widget": "float", "precision": 2}' />&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+                              <td><div align="right" style="font-size:12px;">Sub-total</div></td>
+                              <td><div align="right" style="font-size:12px;"><t t-esc="docs.total_lineas_org" t-options='{"widget": "float", "precision": 2}' />&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
                           </tr>
                           
                               <tr>
                                     
-                                     <td><div align="left" style="font-size:11px;">Tasa de cambio publicada(BCV):</div></td>
-                                     <td align="left" style="font-size:11px;"><t t-esc="docs.os_currency_rate" t-options='{"widget": "float", "precision": 2}' /></td>
+                                     <td><div align="left" style="font-size:12px;">Tasa de cambio publicada(BCV):</div></td>
+                                     <td align="left" style="font-size:12px;"><t t-esc="docs.os_currency_rate" t-options='{"widget": "float", "precision": 2}' /></td>
 
                               </tr>
 
@@ -227,24 +227,24 @@
                                <tr>
 
                                     
-                                     <td><div align="left" style="font-size:11px;">Base imponible USD:</div></td>
-                                     <td><div align="left" style="font-size:11px;"><t t-esc="acum_alicuota_general / docs.os_currency_rate"  t-options='{"widget": "float", "precision": 2}'/></div></td>
+                                     <td><div align="left" style="font-size:12px;">Base imponible USD:</div></td>
+                                     <td><div align="left" style="font-size:12px;"><t t-esc="acum_alicuota_general / docs.os_currency_rate"  t-options='{"widget": "float", "precision": 2}'/></div></td>
 
 
-                                  <td><div align="right" style="font-size:11px;">Base imponible</div></td>
-                                  <td><div align="right" style="font-size:11px;"><t t-esc="acum_alicuota_general"  t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+                                  <td><div align="right" style="font-size:12px;">Base imponible</div></td>
+                                  <td><div align="right" style="font-size:12px;"><t t-esc="acum_alicuota_general"  t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
                               </tr>
 
 
                              <tr>
                                     
-                                     <td><div align="left" style="font-size:11px;">Monto no gravable USD</div></td>
-                                     <td><div align="left" style="font-size:11px;"><t t-esc="docs.exemto_eq"  t-options='{"widget": "float", "precision": 2}'/></div></td>
+                                     <td><div align="left" style="font-size:12px;">Monto no gravable USD</div></td>
+                                     <td><div align="left" style="font-size:12px;"><t t-esc="docs.exemto_eq"  t-options='{"widget": "float", "precision": 2}'/></div></td>
 
                         
                                 
-                                    <td><div align="right" style="font-size:11px;">Monto no gravable</div></td>
-                                    <td><div align="right" style="font-size:11px;"><t t-esc="docs.exemto_org"  t-options='{"widget": "float", "precision": 2}' />&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+                                    <td><div align="right" style="font-size:12px;">Monto no gravable</div></td>
+                                    <td><div align="right" style="font-size:12px;"><t t-esc="docs.exemto_org"  t-options='{"widget": "float", "precision": 2}' />&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
 
                               </tr>
 
@@ -252,24 +252,24 @@
 
                                <tr>
                                
-                                     <td><div align="left" style="font-size:11px;">I.V.A USD</div></td>
-                                     <td><div align="left" style="font-size:11px;"><t t-esc="docs.total_impuesto_eq" t-options='{"widget": "float", "precision": 2}'/></div></td>
+                                     <td><div align="left" style="font-size:12px;">I.V.A USD</div></td>
+                                     <td><div align="left" style="font-size:12px;"><t t-esc="docs.total_impuesto_eq" t-options='{"widget": "float", "precision": 2}'/></div></td>
 
                                   
-                                      <td><div align="right" style="font-size:11px;">I.V.A 16%</div></td>
-                                      <td><div align="right" style="font-size:11px;"><t t-esc="docs.total_impuesto_org"  t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
+                                      <td><div align="right" style="font-size:12px;">I.V.A 16%</div></td>
+                                      <td><div align="right" style="font-size:12px;"><t t-esc="docs.total_impuesto_org"  t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td>
                                </tr>
 
 
                               <tr>
                               
-                                    <td><div align="left" style="font-size:11px;">Total USD</div></td>
-                                    <td><div align="left" style="font-size:11px;"><t  t-esc="docs.total_pagar_eq" t-options='{"widget": "float", "precision": 2}'/></div></td>
+                                    <td><div align="left" style="font-size:12px;">Total USD</div></td>
+                                    <td><div align="left" style="font-size:12px;"><t  t-esc="docs.total_pagar_eq" t-options='{"widget": "float", "precision": 2}'/></div></td>
 
 
                                 
-                                     <td><div align="right" style="font-size:11px;">Total a pagar</div></td>
-                                     <td><div align="right" style="font-size:11px;"><t  t-esc="docs.total_pagar" t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td> 
+                                     <td><div align="right" style="font-size:12px;">Total a pagar</div></td>
+                                     <td><div align="right" style="font-size:12px;"><t  t-esc="docs.total_pagar" t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td> 
                               </tr>
                     </table>
             </div>               
