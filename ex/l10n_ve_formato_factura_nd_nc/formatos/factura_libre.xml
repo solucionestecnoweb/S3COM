@@ -191,8 +191,7 @@
                       </tbody>
                      </table>
 
-              </table>
-              </div> 
+    
 
                             <t t-set="acum_subtotal_retention" t-value="0"/>
                              <t t-set="acum_retention_iva" t-value="0"/>
@@ -222,7 +221,6 @@
 
                               </tr>
 
-                               <br/>
 
                                <tr>
 
@@ -275,6 +273,8 @@
             </div>               
         </div> 
       </div>
+       </table>
+              </div> 
   
                 </div> 
               </t>
