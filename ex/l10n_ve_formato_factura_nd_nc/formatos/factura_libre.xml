@@ -7,11 +7,11 @@
             <field name="name">A4 Factura Forma Libre igtf</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
-            <field name="page_height">265</field>
+            <field name="page_height">280</field>
             <field name="page_width">210</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">40</field>
-            <field name="margin_bottom">45</field>
+            <field name="margin_bottom">60</field>
             <field name="margin_left">5</field>
             <field name="margin_right">5</field>
             <field name="header_spacing">0</field>
@@ -199,7 +199,7 @@
                              <t t-set="acum_retention_islr" t-value="0"/>
 
          <div class="footer">  
-         <div class="container"  style="margin-top:20px; page-break-inside: avoid;">
+         <div class="container"  style="page-break-inside: avoid;">
               <div class="bordeArriba">
             
 
