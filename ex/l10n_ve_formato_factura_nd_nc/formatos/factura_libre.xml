@@ -7,14 +7,14 @@
             <field name="name">A4 Factura Forma Libre igtf</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
-            <field name="page_height">279</field>
-            <field name="page_width">216</field>
+            <field name="page_height">265</field>
+            <field name="page_width">210</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">40</field>
-            <field name="margin_bottom">60</field>
-            <field name="margin_left">0</field>
-            <field name="margin_right">0</field>
-            <field name="header_spacing">0</field>
+            <field name="margin_bottom">45</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_spacing">35</field>
             <field name="dpi">96</field>
     </record>
 
@@ -159,7 +159,7 @@
 
                     <t t-set="acum_alicuota_general" t-value="0"/>
                     <t t-set="acum_alicuota_exento" t-value="0"/>
-              <table class="table table-borderless table-sm" >
+              <table class="table table-borderless table-sm" style="margin-top:10px;">
                       <thead class="bordeAbajo bordeArriba">
                         <tr  style="font-size:12px;" >
                     
@@ -191,17 +191,19 @@
                       </tbody>
                      </table>
 
-    
+              </table>
+              </div> 
 
                             <t t-set="acum_subtotal_retention" t-value="0"/>
                              <t t-set="acum_retention_iva" t-value="0"/>
                              <t t-set="acum_retention_islr" t-value="0"/>
 
          <div class="footer">  
-         <div class="container">
+         <div class="container"  style="margin-top:20px; page-break-inside: avoid;">
               <div class="bordeArriba">
-          
-                     
+            
+
+                     <table width="100%" > 
 
                           <tr>
                             <td><div align="left" style="font-size:12px;">Equivalente BS/USD:</div></td>
@@ -220,6 +222,7 @@
 
                               </tr>
 
+                               <br/>
 
                                <tr>
 
@@ -268,11 +271,10 @@
                                      <td><div align="right" style="font-size:12px;">Total a pagar</div></td>
                                      <td><div align="right" style="font-size:12px;"><t  t-esc="docs.total_pagar" t-options='{"widget": "float", "precision": 2}'/>&amp;nbsp;<t t-esc="docs.currency_id.symbol"/></div></td> 
                               </tr>
+                    </table>
             </div>               
         </div> 
       </div>
-       </table>
-              </div> 
   
                 </div> 
               </t>
