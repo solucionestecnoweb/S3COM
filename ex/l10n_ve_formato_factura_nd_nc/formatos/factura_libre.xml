@@ -172,7 +172,7 @@
                       </thead>
                       <tbody>
                           <t t-foreach="docs.invoice_line_ids" t-as="line">
-                              <tr  style="font-size:10px;">
+                              <tr >
                                 
                                 <td align="left" t-esc="line.product_id.default_code"/>
                                 <td align="left" t-esc="line.product_id.name"/>
