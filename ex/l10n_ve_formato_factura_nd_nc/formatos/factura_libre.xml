@@ -167,7 +167,7 @@
                             <th align="left" >Descripción</th>
                             <th align="center">Cantidad</th>
                             <th align="left">P. Unitario</th>
-                            <th align="left">Total</th>
+                            <th align="right">Total</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -178,7 +178,7 @@
                                 <td align="left" t-esc="line.product_id.name"/>
                                 <td align="left" t-esc="int(line.quantity)" />
                                 <td align="left" t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
-                                <td align="left"  t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                <td align="right"  t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
                               </tr>
                               <t t-if="line.tax_ids.aliquot == 'general'">
                                 <t t-set="acum_alicuota_general" t-value="acum_alicuota_general + line.price_subtotal"/>
