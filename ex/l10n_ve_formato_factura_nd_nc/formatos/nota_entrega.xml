@@ -73,7 +73,7 @@
                     
                             <td align="left" >Código</td>
                             <td align="left" >Descripción</td>
-                            <td align="center">Cantidad</td>
+                            <td align="left">Cantidad</td>
                             <td align="left">P. Unitario</td>
                             <td align="right">Total</td>
                         </tr>
