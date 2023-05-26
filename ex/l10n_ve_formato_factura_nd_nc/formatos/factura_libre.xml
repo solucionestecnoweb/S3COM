@@ -163,11 +163,11 @@
                       <thead class="bordeAbajo bordeArriba">
                         <tr  style="font-size:13px;" >
                     
-                            <th align="left" >Código</th>
-                            <th align="left" >Descripción</th>
-                            <th align="left">Cantidad</th>
-                            <th align="left">P. Unitario</th>
-                            <th align="right">Total</th>
+                            <td align="left" >Código</td>
+                            <td align="left" >Descripción</td>
+                            <td align="left">Cantidad</td>
+                            <td align="left">P. Unitario</td>
+                            <td align="right">Total</td>
                         </tr>
                       </thead>
                       <tbody>
