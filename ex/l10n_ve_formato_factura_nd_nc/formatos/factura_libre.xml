@@ -165,7 +165,7 @@
                     
                             <th align="left" >Código</th>
                             <th align="left" >Descripción</th>
-                            <th align="center">Cantidad</th>
+                            <th align="left">Cantidad</th>
                             <th align="left">P. Unitario</th>
                             <th align="right">Total</th>
                         </tr>
