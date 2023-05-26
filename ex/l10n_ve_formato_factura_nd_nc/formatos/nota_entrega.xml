@@ -71,30 +71,37 @@
                       <thead class="bordeAbajo bordeArriba">
                         <tr  style="font-size:13px;" >
                     
-                            <th align="left" >Código</th>
-                            <th align="left" >Descripción</th>
-                            <th align="center">Cantidad</th>
-                            <th align="left">P. Unitario</th>
-                            <th align="left">Total</th>
+                            <td align="left" >Código</td>
+                            <td align="left" >Descripción</td>
+                            <td align="center">Cantidad</td>
+                            <td align="left">P. Unitario</td>
+                            <td align="right">Total</td>
                         </tr>
                       </thead>
                       <tbody>
                           <t t-foreach="docs.invoice_line_ids" t-as="line">
                               <tr  style="font-size:13px;">
                                 
-                                <td align="left" t-esc="line.product_id.default_code"/>
+                        <td><div align="left"><t t-esc="line.product_id.default_code"/></div></td>
+                        <td><div align="left"><t t-esc="line.product_id.name"/> </div></td>
+                        <td><div align="left"><t t-esc="int(line.quantity)"/></div></td>
+                        <td><div align="left"><t t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/></div></td>
+
+                        <td><div align="right"><t t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/></div></td>
+                               
+                              <!--  <td align="left" t-esc="line.product_id.default_code"/>
                                 <td align="left" t-esc="line.product_id.name"/>
                                 <td align="left" t-esc="int(line.quantity)" />
                                 <td align="left" t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
                                 <td align="left"  t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
-                              </tr>
+                              </tr> -->
                               <t t-if="line.tax_ids.aliquot == 'general'">
                                 <t t-set="acum_alicuota_general" t-value="acum_alicuota_general + line.price_subtotal"/>
                               </t>
                                <t t-elif="line.tax_ids.aliquot == 'exento'">
                                        <t t-set="acum_alicuota_exento" t-value="acum_alicuota_exento + line.price_subtotal"/>
                               </t>
-
+                          </tr>
                           </t>
                       </tbody>
                      </table>
