@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale invoices -->
+    <record id="sale_limit_item_form" model="ir.ui.view">
+        <field name="name">sale.limit.item.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="order_line" position="after">
+                <group>
+                    <group>
+                        <field name="invoice_line_count" class="oe_edit_only"/>
+                    </group>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>
