@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale invoices -->
+    <record id="account_limit_item_form" model="ir.ui.view">
+        <field name="name">account.limit.item.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="invoice_line_ids" position="after">
+                <group>
+                    <group>
+                        <field name="invoice_line_count" class="oe_edit_only" attrs="{'invisible': [('move_type', 'in',('in_invoice'))]}" />
+                    </group>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>
