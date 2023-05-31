@@ -40,6 +40,10 @@ class AccountMove(models.Model):
             self.pre_retention()
 
     def pre_retention(self):
+        if self.company_id.currency_id.id==self.currency_id.id:
+            factor=1
+        else:
+            factor=self.os_currency_rate
         if not self.retention_id:
             retention_obj = self.env['isrl.retention']
             retention_line_obj = self.env['isrl.retention.line']
@@ -60,7 +64,7 @@ class AccountMove(models.Model):
 
                 for move in self.invoice_line_ids:
                     for r in move.rate_ids:
-                        base = (move.price_subtotal * r.subtotal) / 100
+                        base = ((move.price_subtotal * r.subtotal) / 100)*factor
                         subtotal = (base * r.retention_percentage / 100)
                         total = subtotal-r.subtract
                         if self.partner_id.people_type == r.people_type:

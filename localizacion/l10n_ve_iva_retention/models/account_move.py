@@ -65,14 +65,18 @@ class AccountMove(models.Model):
         return self.retention_iva_id
 
     def tax_aliquot_general(self, ret):
+        if self.company_id.currency_id.id==self.currency_id.id:
+            factor=1
+        else:
+            factor=self.os_currency_rate
         base = 0.0
         amount_iva = 0.0
         rate = self.partner_id.retention_iva_rate
         busca_general=self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'general')
         if busca_general:
             for move in busca_general:
-                base = base + move.price_subtotal
-                amount_iva = amount_iva+(move.price_total - move.price_subtotal)
+                base = base + move.price_subtotal*factor
+                amount_iva = amount_iva+(move.price_total - move.price_subtotal)*factor
             ret.write({
                 'line_ids': [(0, 0, {
                     'retention_iva_id': ret.id,
@@ -86,14 +90,18 @@ class AccountMove(models.Model):
             })
 
     def tax_aliquot_reduced(self, ret):
+        if self.company_id.currency_id.id==self.currency_id.id:
+            factor=1
+        else:
+            factor=self.os_currency_rate
         base = 0.0
         amount_iva = 0.0
         rate = self.partner_id.retention_iva_rate
         busca_reduced=self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'reduced')
         if busca_reduced:
             for move in busca_reduced:
-                base += move.price_subtotal
-                amount_iva += (move.price_total - move.price_subtotal)
+                base += move.price_subtotal*factor
+                amount_iva += (move.price_total - move.price_subtotal)*factor
             ret.write({
                 'line_ids': [(0, 0, {
                     'retention_iva_id': ret.id,
@@ -107,14 +115,18 @@ class AccountMove(models.Model):
             })
 
     def tax_aliquot_additional(self, ret):
+        if self.company_id.currency_id.id==self.currency_id.id:
+            factor=1
+        else:
+            factor=self.os_currency_rate
         base = 0.0
         amount_iva = 0.0
         rate = self.partner_id.retention_iva_rate
         busca_additional=self.invoice_line_ids.filtered(lambda x: x.tax_ids.aliquot == 'additional')
         if busca_additional:
             for move in busca_additional:
-                base += move.price_subtotal
-                amount_iva += (move.price_total - move.price_subtotal)
+                base += move.price_subtotal*factor
+                amount_iva += (move.price_total - move.price_subtotal)*factor
             ret.write({
                 'line_ids': [(0, 0, {
                     'retention_iva_id': ret.id,
