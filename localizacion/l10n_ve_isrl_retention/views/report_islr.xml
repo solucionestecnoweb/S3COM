@@ -139,7 +139,7 @@
                                               <td class="border-left-right-top-bottom" t-esc="line.retention_id.move_id.invoice_number_next"/>
                                               <td class="border-left-right-top-bottom" t-esc="line.retention_id.move_id.invoice_number_control"/>
                                               <td class="border-left-right-top-bottom" t-esc="line.islr_concept_id.name"/>
-                                              <td class="border-left-right-top-bottom" t-esc="line.retention_id.move_id.amount_total" t-options='{"widget": "float", "precision": 2}'/>
+                                              <td class="border-left-right-top-bottom" t-esc="o.monto_bs(line.retention_id.move_id,line.retention_id.move_id.amount_total)" t-options='{"widget": "float", "precision": 2}'/>
                                               <td class="border-left-right-top-bottom" t-esc="line.base" t-options='{"widget": "float", "precision": 2}'/>
                                               <td class="border-left-right-top-bottom" t-esc="line.qty" t-options='{"widget": "float", "precision": 2}'/>
                                               <td class="border-left-right-top-bottom" t-esc="line.subtracting" t-options='{"widget": "float", "precision": 2}'/>
