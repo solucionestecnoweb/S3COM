@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- sale.order inherit form view -->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <!-- <xpath expr="//group[1]/group[1]" position="inside">
+                <field name="fillert" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                <field name="filler"/>
+                <field name="fillert" readonly="1"/>
+            </xpath> -->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <!-- <field name="situacion" readonly="1"/> -->
+                <field name="end_line" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="before">
+                <!-- <button string="Situación apartado" name="change_situacion_apartado" attrs="{'invisible': [('situacion', 'in', ('Apartado', 'Analisis'))]}" type="object" class="oe_highlight"/> -->
+                <!-- <button string="Situación análisis" name="change_situacion_analisis" type="object" class="oe_highlight"/>
+                <button string="Situación apartado" name="change_situacion_apartado" attrs="{'invisible': [('situacion', 'in', ('Apartado', False))]}" type="object" class="oe_highlight"/> -->
+            </xpath>
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ['sale', 'done', 'cancel'])]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- sale.order inherit tree view-->
+    <record id="sale_order_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.view.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <!-- <field name="fillert" optional="show"/> -->
+                <field name="situacion" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- sale.order inherit tree view -->
+    <record id="view_quotation_tree_with_onboarding" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <!-- <field name="fillert" optional="show"/> -->
+                <field name="situacion" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
