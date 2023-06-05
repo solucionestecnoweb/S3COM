@@ -7,7 +7,7 @@
     "maintainer": "OasisConsultora",
     "website": "oasisconsultora.com",
     "license": "AGPL-3",
-    "depends": ['base', 'purchase', 'sale', 'stock_landed_costs'],
+    "depends": ['base', 'purchase', 'supercauchos_stock', 'sale', 'stock_landed_costs'],
     "data": [
         "security/ir.model.access.csv",
         "views/purchase_order_imports.xml",
