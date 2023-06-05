@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--record id="config_modelo_producto_form" model="ir.ui.view">
+        <field name="name">config.modelo.producto.form</field>
+        <field name="model">stock.modelo</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de Modelos de Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+    <!--record id="config_tipo_producto_form" model="ir.ui.view">
+        <field name="name">config.tipo.producto.form</field>
+        <field name="model">stock.tipo</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de Tipos/Categoria de Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+    <!--record id="config_forma_producto_form" model="ir.ui.view">
+        <field name="name">config.forma.producto.form</field>
+        <field name="model">stock.forma</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de Formas de Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+    <!--record id="config_color_producto_form" model="ir.ui.view">
+        <field name="name">config.color.producto.form</field>
+        <field name="model">stock.color</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de Colores de Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+    <!--record id="config_formato_producto_form" model="ir.ui.view">
+        <field name="name">config.formato.producto.form</field>
+        <field name="model">stock.formato</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de Formatos del Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+    <!--record id="config_uso_producto_form" model="ir.ui.view">
+        <field name="name">config.uso.producto.form</field>
+        <field name="model">stock.uso</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de uso del Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+    <!--record id="config_material_producto_form" model="ir.ui.view">
+        <field name="name">config.material.producto.form</field>
+        <field name="model">stock.material</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de material del Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+    <record id="config_marca_producto_form" model="ir.ui.view">
+        <field name="name">config.marca.producto.form</field>
+        <field name="model">stock.marca</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de marca del Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record>
+
+    <!--record id="config_calidad_producto_form" model="ir.ui.view">
+        <field name="name">config.calidad.producto.form</field>
+        <field name="model">stock.calidad</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de calidad del Productos">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+
+
+    <!--record id="config_unidad_producto_form" model="ir.ui.view">
+        <field name="name">config.unidad.producto.form</field>
+        <field name="model">stock.unidad.negocio</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de Unidades de Negocios">
+                <sheet>
+                    <group>                     
+                        <field name="name"></field>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record-->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- For display the quotation cancel reason menu  -->
+    <!--record id="config_modelo_producto_tree" model="ir.ui.view">
+        <field name="name">config.modelo.producto.tree</field>
+        <field name="model">stock.modelo</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de Modelos de Productos" >
+                <field name="name" string="Nombre del Modelo"></field>      
+            </tree>
+        </field>
+    </record-->
+
+    <!--record id="config_tipo_producto_tree" model="ir.ui.view">
+        <field name="name">config.tipo.producto.tree</field>
+        <field name="model">stock.tipo</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de tipos de Productos" >
+                <field name="name" string="Nombre del Tipo del Producto"></field>       
+            </tree>
+        </field>
+    </record-->
+
+    <!--record id="config_forma_producto_tree" model="ir.ui.view">
+        <field name="name">config.forma.producto.tree</field>
+        <field name="model">stock.forma</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de forma de Productos" >
+                <field name="name" string="Nombre del Formas del Producto"></field>     
+            </tree>
+        </field>
+    </record-->
+
+    <!--record id="config_color_producto_tree" model="ir.ui.view">
+        <field name="name">config.color.producto.tree</field>
+        <field name="model">stock.color</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de Colores del Producto" >
+                <field name="name" string="Colores del Producto"></field>     
+            </tree>
+        </field>
+    </record-->
+
+    <!--record id="config_formato_producto_tree" model="ir.ui.view">
+        <field name="name">config.formato.producto.tree</field>
+        <field name="model">stock.formato</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de Formatos del Producto" >
+                <field name="name" string="Formatos del Producto"></field>     
+            </tree>
+        </field>
+    </record-->
+
+    <!--record id="config_uso_producto_tree" model="ir.ui.view">
+        <field name="name">config.uso.producto.tree</field>
+        <field name="model">stock.uso</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de uso del Producto" >
+                <field name="name" string="Uso del Producto"></field>     
+            </tree>
+        </field>
+    </record-->
+
+    <!--record id="config_material_producto_tree" model="ir.ui.view">
+        <field name="name">config.material.producto.tree</field>
+        <field name="model">stock.material</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de Material del Producto" >
+                <field name="name" string="Material del Producto"></field>     
+            </tree>
+        </field>
+    </record-->
+
+    <record id="config_marca_producto_tree" model="ir.ui.view">
+        <field name="name">config.marca.producto.tree</field>
+        <field name="model">stock.marca</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de Marca del Producto" >
+                <field name="name" string="Marca del Producto"></field>     
+            </tree>
+        </field>
+    </record>
+
+    <!--record id="config_calidad_producto_tree" model="ir.ui.view">
+        <field name="name">config.calidad.producto.tree</field>
+        <field name="model">stock.calidad</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de calidad del Producto" >
+                <field name="name" string="Calidad del Producto"></field>     
+            </tree>
+        </field>
+    </record-->
+
+    <!--record id="config_unidad_producto_tree" model="ir.ui.view">
+        <field name="name">config.unidad.producto.tree</field>
+        <field name="model">stock.unidad.negocio</field>
+        <field name="arch" type="xml">
+            <tree string="Configuracion de Uniadd de Negocios" >
+                <field name="name" string="Nombre de la Unidad de Negocios"></field>        
+            </tree>
+        </field>
+    </record-->
+<!-- ********************************************************************** -->
+    <!--record id="stock_modelo_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de  Modelos de Productos</field>
+        <field name="res_model">stock.modelo</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_modelo_producto_tree"></field>
+    </record>
+
+    <record id="stock_tipo_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de  Tipos de Productos</field>
+        <field name="res_model">stock.tipo</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_tipo_producto_tree"></field>
+    </record>
+
+    <record id="stock_forma_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de  Forma de Productos</field>
+        <field name="res_model">stock.forma</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_forma_producto_tree"></field>
+    </record>
+
+    <record id="stock_color_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de  Colores de Productos</field>
+        <field name="res_model">stock.color</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_color_producto_tree"></field>
+    </record>
+
+    <record id="stock_formato_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de  Formatos del Producto</field>
+        <field name="res_model">stock.formato</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_formato_producto_tree"></field>
+    </record>
+
+    <record id="stock_uso_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de  Uso del Producto</field>
+        <field name="res_model">stock.uso</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_uso_producto_tree"></field>
+    </record>
+
+    <record id="stock_material_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de Material del Producto</field>
+        <field name="res_model">stock.material</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_material_producto_tree"></field>
+    </record-->
+
+    <record id="stock_marca_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de marca del Producto</field>
+        <field name="res_model">stock.marca</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_marca_producto_tree"></field>
+    </record>
+
+    <!--record id="stock_calidad_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de calidad del Producto</field>
+        <field name="res_model">stock.calidad</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_calidad_producto_tree"></field>
+    </record>
+
+    <record id="stock_unidad_menu" model="ir.actions.act_window">
+        <field name="name">Configuracion de  Unidad de Negocios de Productos</field>
+        <field name="res_model">stock.unidad.negocio</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="config_unidad_producto_tree"></field>
+    </record-->
+
+    <!--menuitem
+        id="menu_stock_modelo"
+        name="Configuraciones de modelo de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_modelo_menu"
+        sequence="60"/>
+
+    <menuitem
+        id="menu_stock_tipo"
+        name="Configuraciones de Tipo/Categoria de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_tipo_menu"
+        sequence="61"/>
+
+    <menuitem
+        id="menu_stock_forma"
+        name="Configuraciones de Formas de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_forma_menu"
+        sequence="62"/>
+
+    <menuitem
+        id="menu_stock_color"
+        name="Configuraciones de Colores de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_color_menu"
+        sequence="63"/>
+
+    <menuitem
+        id="menu_stock_formato"
+        name="Configuraciones de Formatos de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_formato_menu"
+        sequence="64"/>
+
+    <menuitem
+        id="menu_stock_uso"
+        name="Configuraciones de uso de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_uso_menu"
+        sequence="65"/>
+
+    <menuitem
+        id="menu_stock_material"
+        name="Configuraciones de material del Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_material_menu"
+        sequence="66"/-->
+
+    <menuitem
+        id="menu_stock_marca"
+        name="Configuraciones de marca de Productos" 
+        parent="stock.menu_stock_config_settings"
+        action="stock_marca_menu"
+        sequence="60"/>
+
+    <!--menuitem
+        id="menu_stock_calidad"
+        name="Configuraciones de calidad de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_calidad_menu"
+        sequence="68"/>
+
+    <menuitem
+        id="menu_stock_unidad"
+        name="Configuraciones de Unidades de Negocios de Productos" 
+        parent="stock.menu_product_in_config_stock"
+        action="stock_unidad_menu"
+        sequence="69"/-->
+</odoo>

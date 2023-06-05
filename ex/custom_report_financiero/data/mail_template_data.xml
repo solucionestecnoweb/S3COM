@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="email_template_edi_pre" model="mail.template">
+            <field name="name">Formulario Pre</field>
+            <field name="model_id" ref="custom_report_financiero.model_purchase_order" />
+            <field name="subject">{{ object.company_id.name }} Pedido (Ref {{ object.name or 'n/a'}})</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;"> 
+                        Proveedor <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
+                       
+                        <br /><br />
+
+                        Se adjunta  el link    <a t-attf-href="/my/pre/{{object.id}}">formulario Pre</a> de acceso al sistema para su creación en el sistema, deberá registrarse y llenar el formato solicitado.
+                        <br />
+                        También se adjunta una solicitud de Cotización  <strong t-out="object.name or ''">P00015</strong>
+                        de <t t-out="object.company_id.name or ''">YourCompany</t>. <br /><br />
+                        Si tiene alguna pregunta no dude en contactarnos.
+                        <br />
+                        Saludos Cordiales.
+
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="purchase.action_report_purchase_order"/>
+            <field
+            name="report_name">PO_{{ (object.name or '').replace('/','_') }}</field>
+            <field
+            name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete"
+            eval="True"/>
+        </record>
+
+
+    </data>
+
+
+</odoo>

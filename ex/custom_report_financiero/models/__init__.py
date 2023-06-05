@@ -1,0 +1,1 @@
+from . import res_partner, stock_picking, pre_requistion, purchase_requistion, sale_order, crm_lead, crm_sale_team, reports
