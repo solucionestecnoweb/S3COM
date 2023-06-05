@@ -16,7 +16,7 @@
                          <div class="container">
                             <div class="row">
                                 <div class="col-3 mb4">
-                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 80px;" alt="Logo"/>
                                 </div>
                                 <div class="col-9">
                                     <ul class="list-inline mb4 text-center">
@@ -167,7 +167,7 @@
                                          </td>
 
                                          <td class="border-left-right-top-bottom text-right">
-                                             <span t-esc="o.move_id.amount_total" t-options='{"widget": "float", "precision": 2}'/>
+                                             <span t-esc="o.monto_bs(o.move_id,o.move_id.amount_total)" t-options='{"widget": "float", "precision": 2}'/>
                                          </td>
 
                                          <td class="border-left-right-top-bottom text-right">

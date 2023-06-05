@@ -11,6 +11,16 @@ class IsrlRetention(models.Model):
     _description = "Isrl Retention"
     _rec_name = 'name'
 
+
+    def monto_bs(self,move_id,valor):
+        if move_id.company_id.currency_id.id==move_id.currency_id.id:
+            factor=1
+        else:
+            factor=move_id.os_currency_rate
+        resultado=valor*factor
+        return resultado
+
+        
     @api.model
     def _search_default_journal(self, journal_types):
         company_id = self._context.get('default_company_id', self.env.company.id)

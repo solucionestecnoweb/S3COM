@@ -394,11 +394,24 @@ class RetentionIva(models.Model):
             raise UserError(msg)
 
     def monto_exemto(self,move_id):
+        if move_id.company_id.currency_id.id==move_id.currency_id.id:
+            factor=1
+        else:
+            factor=move_id.os_currency_rate
         valor=0
         for line in move_id.invoice_line_ids:
             if line.tax_ids.aliquot=='exempt':
-                valor=valor+line.price_subtotal
+                valor=valor+line.price_subtotal*factor
         return valor
+
+    def monto_bs(self,move_id,valor):
+        if move_id.company_id.currency_id.id==move_id.currency_id.id:
+            factor=1
+        else:
+            factor=move_id.os_currency_rate
+        resultado=valor*factor
+        return resultado
+
 
 class RetentionIvaLine(models.Model):
     _description = "Retention Iva Line"
