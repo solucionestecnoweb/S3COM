@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tmp_pre_form_data" name="Sale Details">
+        <t t-call="portal.portal_layout">
+            
+            <div class="oe_structure">
+                <div class="container"><br />
+                    <form id="kushki_contract_form"  action="/asociate_offen" method="post">
+                        <!-- <t t-if="offer_received">
+                                
+                            <div class="alert alert-success text-center" role="status">
+                                <p>No puede volver a enviar una oferta a <h6><b><span t-esc="name" /></b></h6> </p>
+                            </div>
+                        </t> -->
+
+                        <center>
+                            <h3>Detalles de Formulario PRE</h3>
+                        </center><br />
+                
+                            <div>
+                                <input type="hidden" name="id" id="purchaseId" t-att-value="id"/>
+                                <h4><b><span t-esc="name" /></b></h4>
+                            </div>
+                
+                            <div  class="container">
+
+                                <div class="row">
+                                    <div class="col-sm-12 text-left">
+                                        <b>Proveedor:</b> <span t-esc="partner_id" />
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="col-sm-12 text-right">
+                                        <span t-esc="partner_id" />
+                                    </div>
+                                </div> -->
+                            </div>
+                    
+                            <t t-call="portal.portal_table">
+
+                                <thead style="font-size: 14px;">
+                                    <tr>
+                                        <h6><b>
+                                                <th>Producto</th>
+                                                <th>Descripcion Solicitada</th>
+                                                <th><b>Descripcion Ofertada</b></th>
+                                                <th><b>Marca</b></th>
+                                                <th>Unidad de Medida</th>
+                                                <th>Cantidad</th>
+                                                <th><b>Precio Unitario ($)</b></th>
+                                               
+                                                <th>Garantia</th>
+                                                <th>Tiempo de Entrega</th>
+                                            </b></h6>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total" t-value="0.0" />
+    
+                                        <t t-foreach="records_lines" t-as="line">
+                                            
+                                            <tr>
+                                                <input type="hidden" t-att-value="line['product_id'] " t-att-name="'product' + str(line['id'])"/>
+                                                <td><span t-esc="line['product']" /></td>
+                                                <td><span t-esc="line['name']" /></td>
+                                                <td class="text-center form-group">
+                                                    <t>
+                                                        <div>
+                                                            
+                                                                <input type='text' class="form-control form-control-sm" required="required" id="name" t-att-name="'descripcion' + str(line['id'])" />
+                                                            
+                                                          
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center form-group">
+                                                    <t>
+                                                        <div>
+                                                            
+                                                            <input type='text' style="width:120px" class="form-control form-control-sm" id="brand"  t-att-name="'brand' + str(line['id'])" />
+                                                            
+                                                          
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                                <input type="hidden" name="product_uom_id" t-att-value="line['product_uom_id'] " t-att-name="'product_uom_id' + str(line['id'])"/>
+                                                <td><span t-esc="line['product_uom']" /></td>
+                                                <input type="hidden" name="product_qty" t-att-value="line['product_qty']"  t-att-name="'product_qty' + str(line['id'])"/>
+                                                <td><span t-esc="line['product_qty']" /></td>
+                                                <td class="text-center form-group">
+                                                    <t>
+                                                        <div>
+                                                            
+                                                            <input  step="any" type="number" required="required" style="width:120px" min="0" class="form-control form-control-sm" id="price_unit"  t-att-name="'price_unit' + str(line['id'])" />
+                                                            
+                                                          
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center form-group">
+                                                    <t>
+                                                        <div>
+                                                            
+                                                            <input type='text' style="width:110px" class="form-control form-control-sm" id="warranty" t-att-name="'warranty' + str(line['id'])"/>
+                                                            
+                                                          
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center form-group">
+                                                    <t>
+                                                        <div>
+                                                          
+                                                            <input type='date' style="width:120px" required="required" class="form-control form-control-sm" id="delivery_time" t-att-name="'delivery_time' + str(line['id'])" />
+                                                            
+                                                          
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        
+                                </tbody>
+                            </t>
+                        <br />
+                        <div style="font-size: 14px;">
+                            <div class="form-group field-name">
+                                <label for="offer_validity">Validez de la Oferta</label>                      
+                                <input type='text' required="required" class="form-control form-control-sm" id="offer_validity"  name="offer_validity" />
+                                
+                              
+                            </div>
+                            <div class="form-group field-name">
+                                <label for="payment_method">Modalidad de Pago</label>      
+                                <input type='text' required="required" class="form-control form-control-sm" id="payment_method"   name="payment_method" />
+                                
+                              
+                            </div>
+                            <div class="form-group field-name">
+                                <label for="place_delivery">Lugar de Entrega</label>      
+                    
+                                <input type='text' required="required" class="form-control form-control-sm" id="place_delivery" name="place_delivery"/>
+                                
+                              
+                            </div>
+                        </div>
+                           
+                      
+                        <br />
+                        <div >
+                            <button  type="submit" style="margin-bottom: 20px; width:100px" name="create_offen" class="btn btn-primary
+                                    btn-md pull-left">Enviar
+                            </button>
+                         
+                        </div>
+                      
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="tmp_pre_form_data_success" name="Sale Details">
+        <t t-call="portal.portal_layout">
+
+            <div class="oe_structure">
+                <div class="container"><br />
+                    <div class="alert alert-success text-center" role="status">
+                        <p>Registro Enviado con Exito</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

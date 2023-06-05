@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_xlsx_report" model="ir.ui.view">
+            <field name="name">sale.order.xlsx.report.name</field>
+            <field name="model">sale.order.xlsx.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Informe de Ventas">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <footer>
+                        <button name="generate_report_sale_xlsx" string="Imprimir Excel" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_sale_report_wizard_xlsx" model="ir.actions.act_window">
+            <field name="name">Informe de Ventas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.xlsx.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="custom_report_financiero.sale_order_xlsx_report"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="menu_sale_report_wizard_xlsx"
+            name="Reporte de ventas"
+            sequence="10"
+            action="action_sale_report_wizard_xlsx"
+            parent="sale.menu_sale_report"/>
+    </data>
+</odoo>

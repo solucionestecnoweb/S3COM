@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+
+        <record id="view_picking_form_inh" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+
+                    <field name="is_devolution" />
+                </xpath>
+                <xpath expr="//page[@name='note']" position="after">
+
+              
+                        <page string="Motivo de Devolucion" name="devolution"
+                            attrs="{'invisible': [('is_devolution', '=', False)]}">
+                            <group>
+                                <field name="flaw" />
+                                <field name="date_expiration" />
+                                <field name="other" />
+                            </group>
+                        </page>
+       
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

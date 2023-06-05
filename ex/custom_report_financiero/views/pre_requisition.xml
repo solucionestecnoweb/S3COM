@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="pre_purchase_line" model="ir.ui.view">
+        <field name="name">pre.line.view.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <!-- model.name form view -->
+            <xpath expr="//field[@name='state']" position="replace">
+                <!-- Add your fields here -->
+                <field name="state" widget="statusbar" statusbar_visible="draft,reprocura,sent,purchase" readonly="1"/>
+            </xpath>
+            <xpath expr="//button[@name='print_quotation']" position="replace">
+                <!-- Add your fields here -->
+                <button name="print_quotation" string="Imprimir SDP" type="object" states="draft,reprocura" class="oe_highlight" groups="base.group_user" data-hotkey="k"/>
+
+            </xpath>
+            <xpath expr="//button[@id='draft_confirm']" position="replace">
+                <!-- Add your fields here -->
+                <button name="button_confirm" type="object" states="draft,reprocura" string="Confirmar Pedido" id="draft_confirm"/>
+
+
+            </xpath>
+            <xpath expr="//button[@name='button_cancel']" position="replace">
+                <!-- Add your fields here -->
+                <button name="button_cancel" states="draft,reprocura,to approve,sent,purchase" string="Cancel" type="object" data-hotkey="x" />
+            
+
+
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <!-- Add your fields here -->
+                <field name="is_reprocura" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='products']" position="after">
+                <!-- Add your fields here -->
+
+       
+                    <page string="Oferta de Proveedor" name="lines">
+                        <field name="line_ids" widget="one2many" mode="tree" readonly="1">
+                            <tree string="Lineas" editable="bottom">
+                                <field name="purchase_id" invisible="1" />
+                                <field name="product_id" />
+                                <field name="name" />
+                                <field name="name_offer" />
+                                <field name="brand" string="Marca" />
+                                <field name="product_uom_id" />
+                                <field name="product_qty" />
+                                <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id'}" />
+
+                                <field name="taxes_id" widget="many2many_tags" />
+                                <field name="currency_id" invisible="1" />
+                                <field name="warranty" />
+                                <field name="delivery_time" />
+                                <field name="price_subtotal" widget="monetary" options="{'currency_field': 'currency_id'}" />
+                                <field name="price_total" invisible="1" />
+                                <field name="price_tax" invisible="1" />
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="tax_totals_json_line_ids" widget="account-tax-totals-field" nolabel="1" colspan="2"/>
+                        </group>
+                        <group class="">
+                            <field name="offer_received" invisible="1"/>
+                            <field name="offer_validity" readonly="1"/>
+                            <field name="payment_method" readonly="1"/>
+                            <field name="place_delivery" readonly="1"/>
+                        </group>
+
+                    </page>
+                  
+        
+            </xpath>
+            
+            <xpath expr="//form/sheet/notebook/page[@name='purchase_delivery_invoice']" position="after">
+                <!-- Add your fields here -->
+                <page string="Cronograma de Pagos de Importaciones">
+                    <field name="crog_payments_ids" widget="one2many" mode="tree">
+                        <tree editable="bottom">
+                            <field name="name" required="1"/>
+                            <field name="import_model" required="1"/>
+                            <field name="import_brand" required="1"/>
+                            <field name="invoice_number" required="1"/>
+                            <field name="import_qty" sum="Total Qty" required="1"/>
+                            <field name="percent_payed" required="1"/>
+                            <field name="import_amount" widget="monetary" sum="Total Amount" required="1"/>
+                            <field name="currency_id" required="1"/>
+                            <field name="payment_date" required="1"/>
+                            <field name="etd" required="1"/>
+                            <field name="eta" required="1"/>
+                            <field name="status" required="1"/>
+                            <field name="status_payment" required="1"/>
+                            <field name="alert_field" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Registros de Ciclos de Importación">
+                    <field name="ci_payments_ids" widget="one2many" mode="tree">
+                        <tree editable="bottom">
+                            <!-- Add your fields here -->
+                            <field name="name"/>
+                            <field name="importation_brand"/>
+                            <field name="prof"/>
+                            <field name="importation_type"/>
+                            <field name="f_prof"/>
+                            <field name="invoice_id"/>
+                            <field name="container" sum="Total Container"/>
+                            <field name="bl_date"/>
+                            <field name="transc"/>
+                            <field name="accumulated"/>
+                            <field name="eta"/>
+                            <field name="transit" sum="Total Transit"/>
+                            <field name="nac" sum="Total NAC"/>
+                            <field name="total" sum="Total"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+
+        </field>
+    </record>
+    <!-- purchase_order_imports_payment_view_tree inherit form view -->
+    <record id="purchase_order_imports_payment_view_tree_inh" model="ir.ui.view">
+        <field name="name">purchase_order_imports_payment_view_tree.inherit.view.form</field>
+        <field name="model">purchase.order.imports.payment</field>
+        <field name="inherit_id" ref="purchase_imports_extend.purchase_order_imports_payment_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <!-- Add your fields here -->
+                <field name="purchase_id" readonly="1"/>
+            </xpath>
+            <!-- Add your xpath here -->
+            
+        </field>
+    </record>
+    <record id="purchase_order_imports_importations_view_tree" model="ir.ui.view">
+        <field name="name">purchase_order_imports_importations_view_tree.inherit.view.form</field>
+        <field name="model">purchase.order.imports.importations</field>
+        <field name="inherit_id" ref="purchase_imports_extend.purchase_order_imports_importations_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <!-- Add your fields here -->
+                <field name="purchase_id" readonly="1"/>
+            </xpath>
+            <!-- Add your xpath here -->
+            
+        </field>
+    </record>
+
+
+</odoo>
