@@ -12,6 +12,41 @@ class RetentionIvaTxt(models.TransientModel):
     from_date = fields.Date(string='Date From', default=lambda *a: datetime.now().strftime('%Y-%m-%d'))
     to_date = fields.Date('Date To', default=lambda *a: (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d'))
 
+
+    def ajusta_type_doc(self,nro_doc):
+        #nro_doc=self.partner_id.vat
+        if nro_doc:
+            nro_doc=nro_doc.replace('v','V')
+            nro_doc=nro_doc.replace('e','E')
+            nro_doc=nro_doc.replace('g','G')
+            nro_doc=nro_doc.replace('j','J')
+            nro_doc=nro_doc.replace('p','P')
+            nro_doc=nro_doc.replace('c','C')
+        else:
+            nro_doc='V00000000'
+        #resultado=nro_doc
+        resultado=str(nro_doc)
+        return resultado
+
+    def ajusta_mes(self,mes):
+        if  mes < 10:
+          mess= '0'+str(mes)
+        else:
+          mess= str(mes)
+        return mess
+
+    def float_format2(self,valor):
+        if valor:
+            result = '{:,.2f}'.format(valor)
+            #result = result.replace(',','*')
+            #esult = result.replace('.',',')
+            #result = result.replace('*','.')
+            result = result.replace(',','')
+        else:
+            result="0.00"
+        return result
+
+
     def action_post_txt(self):
         lines = []
         start_time = datetime.now()
@@ -63,8 +98,8 @@ class RetentionIvaTxt(models.TransientModel):
             if line['aliquot'] == 'exempt':
                 accum_exempt += line['amount_untaxed']
             elif line['aliquot'] != 'exempt':
-                file.write(self.env.company.doc_type + '' + self.env.company.vat + "\t")
-                file.write(str(self.to_date.year) + '/' + str(self.to_date.month) + "\t")
+                file.write(self.ajusta_type_doc(self.env.company.doc_type) + '' + self.env.company.vat + "\t")
+                file.write(str(self.to_date.year) + self.ajusta_mes(self.to_date.month) + "\t")
                 file.write(str(line['move_date']) + "\t")
                 file.write("C" + "\t")
                 if line['move_type'] == 'in_invoice':
@@ -73,14 +108,14 @@ class RetentionIvaTxt(models.TransientModel):
                     file.write('03' + "\t")
                 elif line['move_type'] == 'in_invoice' and line['debit_origin_id']:
                     file.write('02' + "\t")
-                file.write(line['doc_type'] + '' + line['vat'] + "\t")
+                file.write(self.ajusta_type_doc(line['doc_type']) + '' + line['vat'] + "\t")
                 file.write(str(line['numero_factura']) + "\t")
                 file.write(str(line['numero_control']) if line['numero_control']
                            else str(line['numero_control_unico']) + "\t")
-                file.write('{:,.2f}'.format(line['amount_retention'] + line['amount_untaxed'] + accum_exempt)
+                file.write(self.float_format2(line['amount_retention'] + line['amount_untaxed'] + accum_exempt)
                            + "\t")
-                file.write('{:,.2f}'.format(line['amount_untaxed']) + "\t")
-                file.write('{:,.2f}'.format(line['amount_retention']) + "\t")
+                file.write(self.float_format2(line['amount_untaxed']) + "\t")
+                file.write(self.float_format2(line['amount_retention']) + "\t")
 
                 if not line['ref']:
                     file.write('0' + "\t")
@@ -88,8 +123,8 @@ class RetentionIvaTxt(models.TransientModel):
                     file.write(line['ref'] + "\t")
 
                 file.write(line['ret_name'] + "\t")
-                file.write('{:,.2f}'.format(accum_exempt) + "\t")
-                file.write(str(line['amount_tax']) + "\t")
+                file.write(self.float_format2(accum_exempt) + "\t")
+                file.write(self.float_format2(line['amount_tax']) + "\t")
                 file.write('0' + "\n")
 
                 if line['move_type'] == 'in_invoice':
