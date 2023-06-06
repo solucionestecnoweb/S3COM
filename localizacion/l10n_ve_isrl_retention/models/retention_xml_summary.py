@@ -42,7 +42,7 @@ class RetentionXmlSummary(models.Model):
             ET.SubElement(element_child_1, 'NumeroFactura').text = ret_line.numero_factura if ret_line.numero_factura \
             else '0'
 
-            ET.SubElement(element_child_1, 'NumeroControl').text = ret_line.numero_control if ret_line.numero_control \
+            ET.SubElement(element_child_1, 'NumeroControl').text = ret_line.numero_control.replace('-','') if ret_line.numero_control \
                 else ret_line.numero_control_unico
 
             ET.SubElement(element_child_1, 'FechaOperacion').text = str(self.formato_fecha(ret_line.fecha_operacion))
