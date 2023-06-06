@@ -35,6 +35,19 @@ class RetentionIvaTxt(models.TransientModel):
           mess= str(mes)
         return mess
 
+    def float_format2(valor):
+    #valor=self.base_tax
+    if valor:
+        result = '{:,.2f}'.format(valor)
+        #result = result.replace(',','*')
+        #esult = result.replace('.',',')
+        #result = result.replace('*','.')
+        result = result.replace(',','')
+    else:
+        result="0.00"
+    return result
+
+
     def action_post_txt(self):
         lines = []
         start_time = datetime.now()
@@ -100,7 +113,7 @@ class RetentionIvaTxt(models.TransientModel):
                 file.write(str(line['numero_factura']) + "\t")
                 file.write(str(line['numero_control']) if line['numero_control']
                            else str(line['numero_control_unico']) + "\t")
-                file.write('{:,.2f}'.format(line['amount_retention'] + line['amount_untaxed'] + accum_exempt)
+                file.write(self.float_format2(line['amount_retention'] + line['amount_untaxed'] + accum_exempt)
                            + "\t")
                 file.write('{:,.2f}'.format(line['amount_untaxed']) + "\t")
                 file.write('{:,.2f}'.format(line['amount_retention']) + "\t")
