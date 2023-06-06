@@ -35,7 +35,7 @@ class RetentionIvaTxt(models.TransientModel):
           mess= str(mes)
         return mess
 
-    def float_format2(valor):
+    def float_format2(self,valor):
         if valor:
             result = '{:,.2f}'.format(valor)
             #result = result.replace(',','*')
