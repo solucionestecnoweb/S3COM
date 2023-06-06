@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_comercial_designation,comercial.designation,model_comercial_designation,,1,1,1,1
+access_pre_req_line,pre.purchase.line,model_pre_purchase_line,,1,1,1,1
+access_pre_sale_line,pre.sale.line,model_pre_sale_line,,1,1,1,1
+access_categ_customer_type,categ.customer.type,model_categ_customer_type,,1,1,1,1
+access_req_line_sale,request.line.sale,model_sale_request_line,,1,1,1,1
+access_report_sale,report.order.xlsx.report,model_sale_order_xlsx_report,,1,1,1,1

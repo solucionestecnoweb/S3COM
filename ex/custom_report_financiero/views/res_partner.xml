@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_form_view_inh" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[@name='internal_notes']" position="after">
+                    <page name='guarantee' string='Garantías'>
+                        <group>
+                            <field name="days"/>
+                            <field name="weeks"/>
+                            <field name="months"/>
+                        </group>
+                    </page>
+                    <page name='references' string='Referencias'>
+                        <group>
+                            <group>
+                                <field name="commercial_references"/>
+                            </group>
+                            <group>
+                                <field name="bank_references"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="category_customer_ids" widget="many2many_tags"/>
+                    <field name="opening_date"/>
+                    <field name="comercial_designation"/>
+                    <field name="warehouse_address"/>
+                    <field name="commercial_registry"/>
+                    <field name="commercial_registry_date"/>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="supplier_code"/>
+                    <field name="responsible"/>
+                    <field name="document_number"/>
+                    <field name="description_product"/>
+                    <field name="process_certification"/>
+                    <field name="product_certification"/>
+                </xpath>
+              
+                <xpath expr="//span[@name='address_name']" position="replace">
+                    <!-- Add your fields here -->
+                    <span>
+                    <field name="type" attrs="{'invisible': [('is_company','=', True)], 'required': [('is_company','!=', True)], 'readonly': [('user_ids', '!=', [])]}" class="font-weight-bold"/>
+                        <b attrs="{'invisible': [('is_company', '=', False)]}">Región</b>
+                    </span>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="string">Categoria de proveedor</attribute>
+                </xpath>
+                <xpath expr="//field[@name='street']" position="before">
+                    <field name="registered_by"/>
+                </xpath>
+                <xpath expr="//sheet/notebook/page/group/group[@name='sale']/field[@name='user_id']" position="before">
+                    <field name="contact_person"/>
+                </xpath>
+                <xpath expr="//sheet/notebook/page/group/group[@name='purchase']" position="inside">
+                    <field name="search_channel"/>
+                </xpath>
+                <xpath expr="//sheet/group/group/field[@name='function']" position="before">
+                    <field name="president"/>
+                    <field name="attention_hours"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_property_form_inh" model="ir.ui.view">
+            <field name="name">view.partner.property.form.inh</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page/group/group[@name='banks']/field[@name='bank_ids']" position="after">
+                    <field name="bank_instruments"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.menu" id="contacts.menu_partner_category_form">
+            <field name="name">Categorias de Proveedor</field>
+        </record>
+
+       
+    </data>
+</odoo>

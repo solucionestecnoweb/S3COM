@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="crm_team_salesteams_view_form_inh" model="ir.ui.view">
+            <field name="name">crm.team.form</field>
+            <field name="model">crm.team</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form" />
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//group[@name='right']" position="inside">
+                    <field name="date_goal"/>
+                </xpath> -->
+                
+
+
+                <xpath expr="//field[@name='currency_id']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoiced_target']" position="attributes">
+                    <attribute name="string">Meta de Facturación $</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoiced_target']" position="replace">
+                    <field name="invoiced_target" widget="monetary" t-options='{"widget": "float", "precision": 2}'  options="{'currency_field': 'currency_id_usd'}"/>
+                    <field name='currency_id_usd' invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='invoiced_target']" position="after">
+                    <field name="invoiced_target_bs" widget="monetary" t-options='{"widget": "float", "precision": 2}' options="{'currency_field': 'currency_id_bs'}"/>
+                    <field name='currency_id_bs' invisible="1"/>
+                </xpath>
+            
+            </field>
+        </record>
+
+
+        <record id="crm_case_form_view_leads_inh" model="ir.ui.view">
+            <field name="name">crm.case.form.view.leads.inh</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_row')][1]" position="after">
+                    <label for="expected_income_dollars" class="oe_edit_only" />
+                    <div class="o_row">
+                        <field name="expected_income_dollars" widget="monetary" options="{'currency_field': 'currency_id_usd'}"/>
+                        <field name='currency_id_usd' invisible="1"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <!-- Add your fields here -->
+                    <field name="category_customer_ids" widget="many2many_tags"/>
+                    
+                </xpath>
+                <xpath expr="//div[hasclass('col')][4]" position="replace">
+                    <br/>
+                    <div class="col">
+                        <div class="oe_edit_only d-flex align-items-center">
+                            <label for="probability"/>
+                            <button class="btn btn-link" name="action_set_automated_probability" type="object"
+                                    attrs="{'invisible': [('is_automated_probability', '=', True)]}">
+                                <i class="fa fa-gear" role="img" title="Switch to automatic probability" aria-label="Switch to automatic probability"></i>
+                            </button>
+                            <small class="oe_grey h6 mb0" attrs="{'invisible': [('is_automated_probability', '=', True)]}">
+                                <field class="mb0" name="automated_probability" force_save="1"/> %%
+                            </small>
+                        </div>
+                        <div id="probability" class="o_row d-flex">
+                            <field name="is_automated_probability" invisible="1"/>
+                            <field name="probability" widget="float" class="oe_inline"/>
+                            <span class="oe_grey"> %%</span>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="quick_create_opportunity_form_inh" model="ir.ui.view">
+            <field name="name">quick_create_opportunity_form.inh</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.quick_create_opportunity_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_row')][1]" position="after">
+                    <label for="expected_income_dollars" class="oe_edit_only" />
+                    
+                    <div class="o_row">
+                        <field name="expected_income_dollars" class="oe_inline" widget="monetary" options="{'currency_field': 'currency_id_usd'}" t-options='{"widget": "float", "precision": 2}'/>
+                        <field name='currency_id_usd' invisible="1"/>
+                    </div>
+                  
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <!-- Add your fields here -->
+                    <label for="category_customer_ids" class="oe_edit_only" />
+                    <div>
+
+                        <field name="category_customer_ids" widget="many2many_tags"/>
+                    </div>
+                    
+                </xpath>     
+            </field>
+        </record>
+
+        <record id="crm_case_kanban_view_leads_inh2" model="ir.ui.view">
+            <field name="name">crm.case.kanban.view.leads.inh</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_kanban_record_subtitle')]" position="replace">
+                    <div class="o_kanban_record_subtitle">
+                        <t t-if="record.expected_income_dollars.raw_value">
+                            <field name="expected_income_dollars" widget="monetary" options="{'currency_field': 'currency_id_usd'}" t-options='{"widget": "float", "precision": 2}'/>
+                            <field name='currency_id_usd' invisible="1"/>
+                            <span t-if="record.recurring_revenue and record.recurring_revenue.raw_value"> + </span>
+                        </t>
+                        <t t-if="record.recurring_revenue and record.recurring_revenue.raw_value">
+                            <field name="recurring_revenue" widget="monetary" options="{'currency_field': 'company_currency'}" />
+                            <field name="recurring_plan" />
+                        </t>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

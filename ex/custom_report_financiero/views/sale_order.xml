@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- sale.order inherit form view -->
+    <record id="sale_order_rq_inh" model="ir.ui.view">
+        <field name="name">sale.order.req.inherit.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <!-- Add your fields here -->
+                <field name="state" widget="statusbar" statusbar_visible="draft,draft_req,done_req,sent,sale"/>
+                
+            </xpath>
+   
+            <xpath expr="//button[@name='action_view_invoice']" position="after">
+                <!-- Add your fields here -->
+                <button name="action_view_req" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('purchase_req_count', '=', 0)]}">
+                    <field name="purchase_req_count" widget="statinfo" string="Requisicion"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <!-- Add your fields here -->
+                <field name="resquest_id" readonly="1" invisible="1"/>
+                
+            </xpath>
+            <xpath expr="//field[@name='date_order']" position="after">
+                <!-- Add your fields here -->
+                <field name="date_ad"/>
+                <field name="purchase_id" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_quotation_send']" position="replace">
+                <!-- Add your fields here -->
+                <button name="action_quotation_send" string="Enviar por Correo" type="object" states="draft,draft_req,done_req" class="btn-primary" data-hotkey="g"/>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="replace">
+                <!-- Add your fields here -->
+                <button name="action_confirm" id="action_confirm" data-hotkey="v" string="Confirmar" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['sent', 'done_req'])]}"/>
+
+            </xpath>
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <!-- Add your fields here -->
+             
+       
+                    <page string="Lineas de requisicion" name="lines">
+                        <field name="line_request_ids" widget="one2many" mode="tree" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                            <tree string="Lineas de requisicion" editable="bottom">
+                                <field name="product_id" />
+                                <field name="name" />
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <field name="product_uom_id" />
+                                <field name="product_qty" />
+                                <field name="estimated_cost" />
+                                <field name="sale_id" invisible="1"/>
+                                
+                            
+                            </tree>
+                        </field>
+                        <button name="create_req" type="object" class="oe_highlight" string="Crear REQ" states="draft"/>
+                       
+
+                    </page>
+                    
+                    <page string="Oferta de Proveedor" name="lines">
+                        <field name="line_ids" widget="one2many" mode="tree" readonly="1">
+                            <tree string="Lineas" editable="bottom">
+                                <field name="sale_id" invisible="1" />
+                                <field name="product_id" />
+                                <field name="name" />
+                                <field name="name_offer" />
+                                <field name="brand" string="Marca" />
+                                <field name="product_uom_id" />
+                                <field name="product_qty" />
+                                <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id'}" />
+
+                                <field name="taxes_id" widget="many2many_tags" />
+                                <field name="currency_id" invisible="1" />
+                                <field name="warranty" />
+                                <field name="delivery_time" />
+                                <field name="price_subtotal" widget="monetary" options="{'currency_field': 'currency_id'}" />
+                                <field name="price_total" invisible="1" />
+                                <field name="price_tax" invisible="1" />
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="tax_totals_json_line_ids" widget="account-tax-totals-field" nolabel="1" colspan="2"/>
+                        </group>
+                        <group class="">
+                            <field name="offer_received" invisible="1"/>
+                            <field name="offer_validity" readonly="1"/>
+                            <field name="payment_method" readonly="1"/>
+                            <field name="place_delivery" readonly="1"/>
+                        </group>
+
+                        <button name="create_offer" type="object" class="oe_highlight" string="Oferta de proveedor"/>
+                    </page>
+        
+            </xpath>
+        
+            <xpath expr="//sheet/notebook/page/field[@name='order_line']/tree" position="inside">
+                <field name="guarantee"/>
+                <field name="delivery_time"/>
+                <field name="brand"/>
+            </xpath>
+            
+        </field>
+    </record>
+    <!-- purchase.request inherit form view -->
+    <record id="purchase_request_inh" model="ir.ui.view">
+        <field name="name">purchase.request.inherit.view.form.inh</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <xpath expr="//field[@name='origin']" position="after">
+                <!-- Add your fields here -->
+                <field name="sale_id" invisible="1"/>
+                
+            </xpath>
+            
+        </field>
+    </record>
+</odoo>
