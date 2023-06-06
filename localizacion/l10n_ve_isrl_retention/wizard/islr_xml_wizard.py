@@ -54,7 +54,7 @@ class IslrXmlWizard(models.TransientModel):
                 'fecha_operacion': str(line['fehca_retencion']),
                 'codigo_concepto': line['code'],
                 'monto_operacion': str(line['base']),
-                'porcentaje_retencion': str(line['qty_retention']),
+                'porcentaje_retencion': str(line['qty']),
             }))
 
         res.write({'line_ids': lines})
