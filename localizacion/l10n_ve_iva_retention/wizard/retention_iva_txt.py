@@ -96,7 +96,7 @@ class RetentionIvaTxt(models.TransientModel):
                     file.write('03' + "\t")
                 elif line['move_type'] == 'in_invoice' and line['debit_origin_id']:
                     file.write('02' + "\t")
-                file.write(line['doc_type'] + '' + line['vat'] + "\t")
+                file.write(self.ajusta_type_doc(line['doc_type']) + '' + line['vat'] + "\t")
                 file.write(str(line['numero_factura']) + "\t")
                 file.write(str(line['numero_control']) if line['numero_control']
                            else str(line['numero_control_unico']) + "\t")
