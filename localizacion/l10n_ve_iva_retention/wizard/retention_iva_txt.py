@@ -36,16 +36,15 @@ class RetentionIvaTxt(models.TransientModel):
         return mess
 
     def float_format2(valor):
-    #valor=self.base_tax
-    if valor:
-        result = '{:,.2f}'.format(valor)
-        #result = result.replace(',','*')
-        #esult = result.replace('.',',')
-        #result = result.replace('*','.')
-        result = result.replace(',','')
-    else:
-        result="0.00"
-    return result
+        if valor:
+            result = '{:,.2f}'.format(valor)
+            #result = result.replace(',','*')
+            #esult = result.replace('.',',')
+            #result = result.replace('*','.')
+            result = result.replace(',','')
+        else:
+            result="0.00"
+        return result
 
 
     def action_post_txt(self):
