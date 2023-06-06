@@ -124,7 +124,7 @@ class RetentionIvaTxt(models.TransientModel):
 
                 file.write(line['ret_name'] + "\t")
                 file.write(self.float_format2(accum_exempt) + "\t")
-                file.write(str(line['amount_tax']) + "\t")
+                file.write(self.float_format2(line['amount_tax']) + "\t")
                 file.write('0' + "\n")
 
                 if line['move_type'] == 'in_invoice':
