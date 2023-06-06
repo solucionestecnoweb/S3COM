@@ -12,6 +12,22 @@ class RetentionIvaTxt(models.TransientModel):
     from_date = fields.Date(string='Date From', default=lambda *a: datetime.now().strftime('%Y-%m-%d'))
     to_date = fields.Date('Date To', default=lambda *a: (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d'))
 
+
+    def ajusta_type_doc(self,nro_doc):
+        #nro_doc=self.partner_id.vat
+        if nro_doc:
+            nro_doc=nro_doc.replace('v','V')
+            nro_doc=nro_doc.replace('e','E')
+            nro_doc=nro_doc.replace('g','G')
+            nro_doc=nro_doc.replace('j','J')
+            nro_doc=nro_doc.replace('p','P')
+            nro_doc=nro_doc.replace('c','C')
+        else:
+            nro_doc='V00000000'
+        #resultado=nro_doc
+        resultado=str(nro_doc)
+        return resultado
+
     def action_post_txt(self):
         lines = []
         start_time = datetime.now()
@@ -63,7 +79,7 @@ class RetentionIvaTxt(models.TransientModel):
             if line['aliquot'] == 'exempt':
                 accum_exempt += line['amount_untaxed']
             elif line['aliquot'] != 'exempt':
-                file.write(self.env.company.doc_type + '' + self.env.company.vat + "\t")
+                file.write(self.ajusta_type_doc(self.env.company.doc_type) + '' + self.env.company.vat + "\t")
                 file.write(str(self.to_date.year) + '/' + str(self.to_date.month) + "\t")
                 file.write(str(line['move_date']) + "\t")
                 file.write("C" + "\t")
