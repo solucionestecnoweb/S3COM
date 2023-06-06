@@ -28,7 +28,7 @@ class IslrXmlWizard(models.TransientModel):
                     ret.isrl_date AS fehca_retencion,
                     ret_line.code AS code,
                     ret_line.base AS base,
-                    ret_line.qty_retention AS qty_retention 
+                    ret_line.qty AS qty_retention 
                 FROM isrl_retention AS ret
                 INNER JOIN isrl_retention_line AS ret_line
                 ON ret.id = ret_line.retention_id
@@ -85,7 +85,7 @@ class IslrXmlWizard(models.TransientModel):
                     ret.isrl_date AS fehca_retencion,
                     ret_line.code AS code,
                     ret_line.base AS base,
-                    ret_line.qty_retention AS qty_retention 
+                    ret_line.qty AS qty_retention 
                 FROM isrl_retention AS ret
                 INNER JOIN isrl_retention_line AS ret_line
                 ON ret.id = ret_line.retention_id

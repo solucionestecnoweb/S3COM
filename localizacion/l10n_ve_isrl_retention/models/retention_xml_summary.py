@@ -1,6 +1,8 @@
-from odoo import fields, models
+from odoo import models, fields, api, _, tools
 from datetime import datetime, timedelta
 import xml.etree.ElementTree as ET
+import openerp.addons.decimal_precision as dp
+from odoo.exceptions import UserError
 import logging
 import base64
 
@@ -26,25 +28,29 @@ class RetentionXmlSummary(models.Model):
                                copy=False)
 
     def action_post_xml(self):
-        element = ET.Element('RelacionRetencionesISLR', RifAgente=self.env.company.doc_type + '' + self.env.company.vat,
-                             Periodo=str(self.from_date.year))
+        if  10 > int(self.from_date.month):
+          mes= '0'+str(self.from_date.month)
+        else:
+          mes= str(self.from_date.month)
+        element = ET.Element('RelacionRetencionesISLR', RifAgente=self.ajusta_type_doc(self.env.company.doc_type) + '' + self.env.company.vat,
+                             Periodo=str(self.from_date.year)+mes)
         for ret_line in self.line_ids:
             element_child_1 = ET.SubElement(element, 'DetalleRetencion')
 
-            ET.SubElement(element_child_1, 'RifRetenido').text = ret_line.rif_retenido
+            ET.SubElement(element_child_1, 'RifRetenido').text = self.ajusta_type_doc(ret_line.rif_retenido)
 
             ET.SubElement(element_child_1, 'NumeroFactura').text = ret_line.numero_factura if ret_line.numero_factura \
             else '0'
 
-            ET.SubElement(element_child_1, 'NumeroControl').text = ret_line.numero_control if ret_line.numero_control \
+            ET.SubElement(element_child_1, 'NumeroControl').text = ret_line.numero_control.replace('-','') if ret_line.numero_control \
                 else ret_line.numero_control_unico
 
-            ET.SubElement(element_child_1, 'FechaOperacion').text = str(ret_line.fecha_operacion)
+            ET.SubElement(element_child_1, 'FechaOperacion').text = str(self.formato_fecha(ret_line.fecha_operacion))
             ET.SubElement(element_child_1, 'CodigoConcepto').text = ret_line.codigo_concepto
 
             ET.SubElement(element_child_1, 'MontoOperacion').text = ret_line.monto_operacion
-
-            ET.SubElement(element_child_1, 'PorcentajeRetencion').text = ret_line.porcentaje_retencion
+            #raise UserError(_('valor: %s')%self.redondeo(ret_line.porcentaje_retencion))
+            ET.SubElement(element_child_1, 'PorcentajeRetencion').text = self.redondeo(ret_line.porcentaje_retencion)
         tree = ET.ElementTree(element)
         tree.write('islr.xml', encoding='utf-8', xml_declaration=True)
 
@@ -68,6 +74,39 @@ class RetentionXmlSummary(models.Model):
         action['res_id'] = ids.id
         return action
 
+    def redondeo(self,valor):
+        result=valor
+        #result = result.replace('.',',')
+        result = float(result)
+        result = round(result,2)
+        result = str(result)
+        return result
+
+
+
+    def ajusta_type_doc(self,nro_doc):
+        #nro_doc=self.partner_id.vat
+        if nro_doc:
+            nro_doc=nro_doc.replace('v','V')
+            nro_doc=nro_doc.replace('e','E')
+            nro_doc=nro_doc.replace('g','G')
+            nro_doc=nro_doc.replace('j','J')
+            nro_doc=nro_doc.replace('p','P')
+            nro_doc=nro_doc.replace('c','C')
+        else:
+            nro_doc='V00000000'
+        #resultado=nro_doc
+        resultado=str(nro_doc)
+        return resultado
+
+    def formato_fecha(self,date):
+        fecha = str(date)
+        fecha_aux=fecha
+        ano=fecha_aux[0:4]
+        mes=fecha[5:7]
+        dia=fecha[8:10]  
+        resultado=dia+"/"+mes+"/"+ano
+        return resultado
 
 class RetentionXmlSummaryLine(models.Model):
     _name = "retention.xml.summary.line"
