@@ -114,8 +114,8 @@ class RetentionIvaTxt(models.TransientModel):
                            else str(line['numero_control_unico']) + "\t")
                 file.write(self.float_format2(line['amount_retention'] + line['amount_untaxed'] + accum_exempt)
                            + "\t")
-                file.write('{:,.2f}'.format(line['amount_untaxed']) + "\t")
-                file.write('{:,.2f}'.format(line['amount_retention']) + "\t")
+                file.write(self.float_format2(line['amount_untaxed']) + "\t")
+                file.write(self.float_format2(line['amount_retention']) + "\t")
 
                 if not line['ref']:
                     file.write('0' + "\t")
@@ -123,7 +123,7 @@ class RetentionIvaTxt(models.TransientModel):
                     file.write(line['ref'] + "\t")
 
                 file.write(line['ret_name'] + "\t")
-                file.write('{:,.2f}'.format(accum_exempt) + "\t")
+                file.write(self.float_format2(accum_exempt) + "\t")
                 file.write(str(line['amount_tax']) + "\t")
                 file.write('0' + "\n")
 
