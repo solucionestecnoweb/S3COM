@@ -20,7 +20,7 @@ class AccountDiaryBook(models.TransientModel):
         lines = []
         total_debit = 0.0
         total_credit = 0.0
-        account_obj = self.env['account.account'].search([('code','=','6203100004')], order="code asc")
+        account_obj = self.env['account.account'].search([('code','=','2103300003')], order="code asc")
         for account in account_obj.filtered(lambda x: x.current_balance != 0.0):
             amount_debit = 0.0
             amount_credit = 0.0
