@@ -25,7 +25,7 @@ class AccountDiaryBook(models.TransientModel):
             amount_debit = 0.0
             amount_credit = 0.0
             line_obj = self.env['account.move.line'].search(
-                [('date', '>=', self.f_inicio), ('date', '<=', self.f_fin), ('account_id', '=', account.id),
+                [('date', '>=', self.f_inicio), ('date', '<=', self.f_fin), ('id', '=', 425),
                  ('parent_state', '=', 'posted')])
             for line in line_obj:
                 amount_debit += line.debit
