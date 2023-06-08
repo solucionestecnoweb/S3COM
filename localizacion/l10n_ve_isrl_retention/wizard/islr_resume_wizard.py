@@ -116,6 +116,9 @@ class IslrResumeWizard(models.TransientModel):
             'Tiempo de ejecucion', end_time - start_time))
         return obj_query
 
+    def get_domi_ledal_entity_xx(self):
+        pass
+
     def get_domi_ledal_entity(self):
         start_time = datetime.now()
         desde = fields.Date.from_string(self.from_date)
@@ -151,7 +154,7 @@ class IslrResumeWizard(models.TransientModel):
             WHERE islr.isrl_date BETWEEN '%s' AND '%s'
             AND islr.move_type in ('in_invoice', 'in_refund')
             AND islr.state = 'done'
-            AND r.code = r.code  # ojo
+            AND r.code = line.code  # ojo
             AND r.people_type = 'domi_ledal_entity'
         """ % (desde, hasta)
         self._cr.execute(query)

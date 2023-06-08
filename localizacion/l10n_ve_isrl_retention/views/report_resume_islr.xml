@@ -167,7 +167,7 @@
                                         <t t-foreach="o.get_domi_ledal_entity()" t-as="r">
                                             <tr>
                                                 <t t-if="r_index == 0">
-                                                    <td colspan='12'>PJDO Persona Jurídica Domiciliada</td>
+                                                    <td colspan='12'>PJDO Persona Jurídica Domiciliada/<span t-esc="o.domi_ledal_entity"/></td>
                                                 </t>
                                             </tr>
                                             <tr>
