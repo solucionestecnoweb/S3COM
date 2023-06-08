@@ -61,7 +61,7 @@ class AccountMove(models.Model):
                     'islr_type': 'out_islr' if self.move_type in ['out_refund', 'out_invoice']
                     else 'in_islr'
                 })
-
+                raise ValidationError(_('lineas=%s')%self.invoice_line_ids)
                 for move in self.invoice_line_ids:
                     for r in move.rate_ids:
                         base = ((move.price_subtotal * r.subtotal) / 100)*factor
