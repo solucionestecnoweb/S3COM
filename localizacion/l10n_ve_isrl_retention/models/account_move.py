@@ -62,7 +62,7 @@ class AccountMove(models.Model):
                     'islr_type': 'out_islr' if self.move_type in ['out_refund', 'out_invoice']
                     else 'in_islr'
                 })
-                self.env['isrl.retention.line'].search([('retention_id','=',self.retention_id.id)]).unlink()
+                #self.env['isrl.retention.line'].search([('retention_id','=',self.retention_id.id)]).unlink()
                 #raise UserError(_('lineas=%s')%self.invoice_line_ids)
                 for move in self.invoice_line_ids:
                     for r in move.rate_ids:
@@ -72,6 +72,7 @@ class AccountMove(models.Model):
                         if self.partner_id.people_type == r.people_type:
                             ban=self.valida_rep_islr(move.concept_isrl_id,self.retention_id)
                             if ban==0: 
+                                raise UserError(_('entra 1'))
                                 retention_line_obj.create({
                                     'islr_concept_id': move.concept_isrl_id.id,
                                     'code': r.code,
@@ -83,6 +84,7 @@ class AccountMove(models.Model):
                                     'total': total #
                                 })
                             else:
+                                raise UserError(_('entra 2'))
                                 retention_line_obj2=self.env['isrl.retention.line'].search([('islr_concept_id','=',move.concept_isrl_id.id),('retention_id','=',self.retention_id.id)])
                                 retention_line_obj2.write({
                                     'base': base+retention_line_obj2.base, #
