@@ -65,6 +65,7 @@ class AccountMove(models.Model):
                 #self.env['isrl.retention.line'].search([('retention_id','=',self.retention_id.id)]).unlink()
                 #raise UserError(_('lineas=%s')%self.invoice_line_ids)
                 for move in self.invoice_line_ids:
+                    raise UserError(_('rate=%s')%move.rate_ids)
                     for r in move.rate_ids:
                         base = ((move.price_subtotal * r.subtotal) / 100)*factor
                         subtotal = (base * r.retention_percentage / 100)
@@ -84,7 +85,7 @@ class AccountMove(models.Model):
                                     'total': total #
                                 })
                             else:
-                                raise UserError(_('entra 2'))
+                                #raise UserError(_('entra 2'))
                                 retention_line_obj2=self.env['isrl.retention.line'].search([('islr_concept_id','=',move.concept_isrl_id.id),('retention_id','=',self.retention_id.id)])
                                 retention_line_obj2.write({
                                     'base': base+retention_line_obj2.base, #
