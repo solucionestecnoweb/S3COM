@@ -72,7 +72,7 @@ class AccountMove(models.Model):
                         if self.partner_id.people_type == r.people_type:
                             ban=self.valida_rep_islr(move.concept_isrl_id,self.retention_id)
                             if ban==0: 
-                                raise UserError(_('entra 1'))
+                                #raise UserError(_('entra 1'))
                                 retention_line_obj.create({
                                     'islr_concept_id': move.concept_isrl_id.id,
                                     'code': r.code,
