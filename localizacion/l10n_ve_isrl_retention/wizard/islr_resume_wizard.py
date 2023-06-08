@@ -200,7 +200,7 @@ class IslrResumeWizard(models.TransientModel):
             WHERE islr.isrl_date BETWEEN '%s' AND '%s'
             AND islr.move_type in ('in_invoice', 'in_refund')
             AND islr.state = 'done'
-            AND r.code = line.code
+            AND r.code = '002'
             AND r.people_type = 'legal_ent_not_domicilied'
         """ % (desde, hasta)
         self._cr.execute(query)
