@@ -65,7 +65,8 @@ class AccountMove(models.Model):
                 #self.env['isrl.retention.line'].search([('retention_id','=',self.retention_id.id)]).unlink()
                 #raise UserError(_('lineas=%s')%self.invoice_line_ids)
                 for move in self.invoice_line_ids:
-                    raise UserError(_('rate=%s')%move.rate_ids)
+                    move.rate_ids.unlink()
+                    #raise UserError(_('rate=%s')%move.rate_ids)
                     for r in move.rate_ids:
                         base = ((move.price_subtotal * r.subtotal) / 100)*factor
                         subtotal = (base * r.retention_percentage / 100)
