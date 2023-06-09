@@ -111,7 +111,7 @@ class RetentionIvaTxt(models.TransientModel):
                 file.write(self.ajusta_type_doc(line['doc_type']) + '' + line['vat'] + "\t")
                 file.write(str(line['numero_factura']) + "\t")
                 file.write(str(line['numero_control']) + "\t")
-                file.write(self.float_format2(line['amount_retention'] + line['amount_untaxed'] + accum_exempt)
+                file.write(self.float_format2(line['amount_tax'] + line['amount_untaxed'])
                            + "\t")
                 file.write(self.float_format2(line['amount_untaxed']) + "\t")
                 file.write(self.float_format2(line['amount_retention']) + "\t")
