@@ -23,6 +23,9 @@
         #'views/exchange_rate.xml',
     ],
     'license': 'LGPL-3',
+    'qweb': [
+        'static/src/xml/systray.xml',
+    ],
     
     "installable": True,
 
