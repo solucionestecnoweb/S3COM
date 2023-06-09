@@ -27,7 +27,9 @@
         'static/src/xml/systray.xml',
     ],
     'assets':{
-        'web.assets_qweb': [
+        'web.assets_backend': [
+            'l10n_ve_currency_rate/static/src/js/systray_theme_menu.js'
+        ],'web.assets_qweb': [
             'l10n_ve_currency_rate/static/src/xml/**/*',
         ],
     },
