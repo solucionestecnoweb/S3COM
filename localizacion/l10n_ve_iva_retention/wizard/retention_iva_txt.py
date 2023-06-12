@@ -115,7 +115,7 @@ class RetentionIvaTxt(models.TransientModel):
                 file.write(self.float_format2(line['base'] + line['importe'])
                            + "\t")
                 file.write(self.float_format2(line['base']) + "\t")
-                file.write(self.float_format2(line['importe']) + "\t")
+                file.write(self.float_format2(line['amount_retention']) + "\t")
 
                 if not line['ref']:
                     file.write('0' + "\t")
