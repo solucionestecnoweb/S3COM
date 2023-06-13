@@ -76,7 +76,8 @@ class AccountMove(models.Model):
         #raise UserError(_('xxx = %s')%self.vat_ret_id)
         if self.move_type=='in_invoice' or self.move_type=='in_refund' or self.move_type=='in_receipt':
             type_tax_use='purchase'
-            porcentaje_ret=self.company_id.partner_id.retention_iva_rate
+            #porcentaje_ret=self.company_id.partner_id.retention_iva_rate
+            porcentaje_ret=self.partner_id.retention_iva_rate
         if self.move_type=='out_invoice' or self.move_type=='out_refund' or self.move_type=='out_receipt':
             type_tax_use='sale'
             porcentaje_ret=self.partner_id.retention_iva_rate
