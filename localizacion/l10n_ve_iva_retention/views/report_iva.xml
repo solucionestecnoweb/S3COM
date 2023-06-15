@@ -137,7 +137,7 @@
                                  <tbody>
                                      <tr>
                                          <td class="border-left-right-top-bottom">
-                                             <span t-esc="time.strftime('%d/%m/%Y', time.strptime(str(o.move_id.date),'%Y-%m-%d'))"/>
+                                             <span t-esc="time.strftime('%d/%m/%Y', time.strptime(str(o.move_id.invoice_date),'%Y-%m-%d'))"/>
                                          </td>
 
                                          <td class="border-left-right-top-bottom">
