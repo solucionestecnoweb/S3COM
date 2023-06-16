@@ -1,0 +1,36 @@
+#. module: account_reports
+#: code:addons/account_reports/models/account_aged_partner_balance.py:0
+#: model:ir.actions.client,name:account_reports.action_account_report_ap
+#: model:ir.model,name:account_reports.model_account_aged_payable
+#: model:ir.ui.menu,name:account_reports.menu_action_account_report_aged_payable
+#, python-format
+msgid "Aged Payable"
+msgstr "Cuentas por pagar"
+
+#. module: account_reports
+#: model_terms:ir.ui.view,arch_db:account_reports.account_reports_journal_dashboard_kanban_view
+msgid "Aged Payables"
+msgstr "Cuentas por pagar"
+
+#. module: account_reports
+#: code:addons/account_reports/models/account_aged_partner_balance.py:0
+#: model:ir.actions.client,name:account_reports.action_account_report_ar
+#: model:ir.model,name:account_reports.model_account_aged_receivable
+#: model:ir.ui.menu,name:account_reports.menu_action_account_report_aged_receivable
+#, python-format
+msgid "Aged Receivable"
+msgstr "Cuentas por cobrar"
+
+#. module: account_reports
+#: model_terms:ir.ui.view,arch_db:account_reports.account_reports_journal_dashboard_kanban_view
+msgid "Aged Receivables"
+msgstr "Cuentas por cobrar"
+
+
+#. module: account_reports
+#: code:addons/account_reports/models/account_report_coa.py:0
+#: model:ir.actions.client,name:account_reports.action_account_report_coa
+#: model:ir.ui.menu,name:account_reports.menu_action_account_report_coa
+#, python-format
+msgid "Trial Balance"
+msgstr "Balance de Comprobación"
