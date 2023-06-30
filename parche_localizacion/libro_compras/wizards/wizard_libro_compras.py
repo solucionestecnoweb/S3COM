@@ -64,6 +64,8 @@ class LibroVentasModelo(models.Model):
         mes=fecha[5:7]
         dia=fecha[8:10]  
         resultado=dia+"/"+mes+"/"+ano
+        if not date:
+            resultado=''
         return resultado
     
     def float_format(self,valor):
