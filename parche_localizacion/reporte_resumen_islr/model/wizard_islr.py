@@ -239,7 +239,7 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
         d=t.search([])
         d.unlink()
         cursor_resumen = self.env['isrl.retention'].search([
-            ('date_isrl','>=',self.date_from),
+            ('isrl_date','>=',self.date_from),
             ('isrl_date','<=',self.date_to),
             ('state','=','done'),
             ])
