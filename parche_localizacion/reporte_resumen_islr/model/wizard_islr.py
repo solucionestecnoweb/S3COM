@@ -319,5 +319,5 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
         self.get_invoice()
         self.arma_tabla_code()
         self.arma_tabla_type_people()
-        #self.line_people = self.env['resumen.islr.wizard.type.people'].search([])
-        #return {'type': 'ir.actions.report','report_name': 'l10n_ve_resumen_retenciones.libro_resumen_islr','report_type':"qweb-pdf"}
+        self.line_people = self.env['resumen.islr.wizard.type.people'].search([])
+        return {'type': 'ir.actions.report','report_name': 'reporte_resumen_islr.libro_resumen_islr','report_type':"qweb-pdf"}

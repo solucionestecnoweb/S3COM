@@ -22,7 +22,7 @@
     # always loaded
     'data': [
         'view/wizard.xml',
-        #'view/reporte_view.xml',
+        'view/reporte_view.xml',
         'security/ir.model.access.csv',
     ],
     'application': True,
