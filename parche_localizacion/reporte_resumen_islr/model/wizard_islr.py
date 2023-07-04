@@ -271,7 +271,7 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
         for det_res in tabla_resumen:
             if aux_code!=det_res.code:
                 aux_code=det_res.code
-                cursor=self.env['islr.rates'].search([('code','=',det_res.code)])
+                cursor=self.env['islr.rate'].search([('code','=',det_res.code)])
                 for det in cursor:
                     values={
                     'code':det.code,
