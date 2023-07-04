@@ -43,7 +43,7 @@
                   <strong>
                     <h2 style="font-size:20px;"> <small><t t-esc="o.company_id.name"/>
                     <br/> RIF:<t t-esc="o.rif(o.company_id.partner_id.id)"/>
-                    <br/> N.I.T: <t t-esc="o.company_id.nit"/>
+                    <br/> N.I.T: <!--t t-esc="o.company_id.nit"/-->
                     </small></h2>
                   </strong>
                 </td>
