@@ -255,7 +255,7 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
 	                'code':det_line.code,
 	                'abono_cta':abs(det.move_id.amount_total_signed),
 	                'cant_retencion':det_line.base,
-	                'porcentaje':det_line.cantidad,
+	                'porcentaje':det_line.qty,
 	                'total':det_line.total,
 	                #'id_code':id_code.id,
 	                }
