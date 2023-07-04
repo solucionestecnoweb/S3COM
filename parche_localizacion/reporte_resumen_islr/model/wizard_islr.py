@@ -240,20 +240,20 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
         d.unlink()
         cursor_resumen = self.env['isrl.retention'].search([
             ('date_isrl','>=',self.date_from),
-            ('date_isrl','<=',self.date_to),
+            ('isrl_date','<=',self.date_to),
             ('state','=','done'),
             ])
         for det in cursor_resumen:
             #det2=det.lines_id.search([('code','=',id_code.code)])
             #if det.invoice_id.type=="in_invoice" or det.invoice_id.type=="in_refund" or det.invoice_id.type=="in_recept":
-            if det.invoice_id.type=="in_invoice" or det.invoice_id.type=="in_refund":
-	            for det_line in det.lines_id:
+            if det.move_id.move_type=="in_invoice" or det.move_id.move_type=="in_refund":
+	            for det_line in det.line_ids:
 	                values={
-	                'fecha_comprobante':det.date_isrl,
-	                'invoice_id':det.invoice_id.id,
+	                'fecha_comprobante':det.isrl_date,
+	                'invoice_id':det.move_id.id,
 	                'retention_id':det_line.retention_id.id,
 	                'code':det_line.code,
-	                'abono_cta':abs(det.invoice_id.amount_total_signed),
+	                'abono_cta':abs(det.move_id.amount_total_signed),
 	                'cant_retencion':det_line.base,
 	                'porcentaje':det_line.cantidad,
 	                'total':det_line.total,
@@ -317,7 +317,7 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
         w=self.env['wizard.resumen.islr'].search([('id','!=',self.id)])
         w.unlink()
         self.get_invoice()
-        self.arma_tabla_code()
-        self.arma_tabla_type_people()
-        self.line_people = self.env['resumen.islr.wizard.type.people'].search([])
-        return {'type': 'ir.actions.report','report_name': 'l10n_ve_resumen_retenciones.libro_resumen_islr','report_type':"qweb-pdf"}
+        #self.arma_tabla_code()
+        #self.arma_tabla_type_people()
+        #self.line_people = self.env['resumen.islr.wizard.type.people'].search([])
+        #return {'type': 'ir.actions.report','report_name': 'l10n_ve_resumen_retenciones.libro_resumen_islr','report_type':"qweb-pdf"}

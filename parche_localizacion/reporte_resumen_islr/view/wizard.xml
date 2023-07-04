@@ -17,7 +17,7 @@
                      </group>                   
                      
 	                <footer>
-	                   <!--button name="print_resumen_islr" string="Resumen Retenciones ISLR" type="object" class="oe_highlight" /-->                  
+	                   <button name="print_resumen_islr" string="Resumen Retenciones ISLR" type="object" class="oe_highlight" />                  
 	                   <button special="cancel" string="Cancel" class="oe_highlight" />
 	                </footer>
                 </form>
