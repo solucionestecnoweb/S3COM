@@ -290,7 +290,7 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
         tabla_code=self.env['resumen.islr.wizard.code'].search([])
         for det_cod in tabla_code:
             #det_cod.islr_concept_id.id.name
-            cursor2=self.env['islr.rates'].search([('islr_concept_id','=',det_cod.islr_concept_id.id),('code','=',det_cod.code)],order='people_type ASC')
+            cursor2=self.env['islr.rate'].search([('concept_id','=',det_cod.islr_concept_id.id),('code','=',det_cod.code)],order='people_type ASC')
             for det in cursor2:
                 if aux!=det.people_type:
                     aux=det.people_type
@@ -318,6 +318,6 @@ class WizardReport_2(models.TransientModel): # aqui declaro las variables del wi
         w.unlink()
         self.get_invoice()
         self.arma_tabla_code()
-        #self.arma_tabla_type_people()
+        self.arma_tabla_type_people()
         #self.line_people = self.env['resumen.islr.wizard.type.people'].search([])
         #return {'type': 'ir.actions.report','report_name': 'l10n_ve_resumen_retenciones.libro_resumen_islr','report_type':"qweb-pdf"}
