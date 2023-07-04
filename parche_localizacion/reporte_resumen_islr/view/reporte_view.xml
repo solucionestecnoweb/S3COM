@@ -21,11 +21,11 @@
 
     <report id="libr_resumen_islr"
         model="wizard.resumen.islr"
-        name="l10n_ve_resumen_retenciones.libro_resumen_islr"
-        file="l10n_ve_resumen_retenciones.libro_resumen_islr"
+        name="reporte_resumen_islr.libro_resumen_islr"
+        file="reporte_resumen_islr.libro_resumen_islr"
         string="Reporte Resumen Impuesto ISLR"
         report_type="qweb-html"
-        paperformat="l10n_ve_resumen_retenciones.paperformat_resumen_islr"
+        paperformat="reporte_resumen_islr.paperformat_resumen_islr"
         /><!-- paperformat="l10n_ve_resumen_retenciones.paperformat_resumen_iva"-->
 
     <template id="libro_resumen_islr">
