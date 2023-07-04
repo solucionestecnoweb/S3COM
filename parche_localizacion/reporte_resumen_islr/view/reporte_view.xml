@@ -148,7 +148,7 @@
                                 <t t-esc="line_resumen.formato_fecha2(line_resumen.invoice_id.invoice_date)"/>
                             </td>
                             <td align="left" width='130'>
-                                <t t-esc="line_resumen.invoice_id.invoice_number"/>
+                                <t t-esc="line_resumen.invoice_id.invoice_number_next"/>
                             </td>
                             <td align="left" width='30'>
                                 AC
