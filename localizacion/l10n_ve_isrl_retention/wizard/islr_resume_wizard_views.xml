@@ -36,12 +36,12 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem
+        <!--menuitem
             id="menu_retention_resume"
             name="Reporte Resumen Impuesto ISLR"
             parent="l10n_ve_res_config_settings_retentions.menu_retention_islr_xml"
             action="action_islr_resume_wizard"
-        />
+        /-->
 
     </data>
 </odoo>
