@@ -43,7 +43,7 @@
       <menuitem
         id="menu_resumen_iva2"
         parent="l10n_ve_res_config_settings_retentions.menu_iva_txt"
-        name="Resumen Retenciones IVA dar"
+        name="Resumen Retenciones IVA."
 		    sequence="13"
         action="action_report_wizards_2"/>
 
