@@ -43,7 +43,7 @@
 
       <menuitem
           id="menu_retention_resume_dar"
-          name="Reporte Resumen Impuesto ISLR dar"
+          name="Reporte Resumen Impuesto ISLR."
           parent="l10n_ve_res_config_settings_retentions.menu_retention_islr_xml"
           action="action_report_wizards_3"
       />
