@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acces_resumen_iva_wizard_pdf,resumen.iva.wizard.pdf,model_resumen_iva_wizard_pdf,base.group_user,1,1,1,1
+acces_wizard_resumen_iva,wizard.resumen.iva,model_wizard_resumen_iva,,1,1,1,1

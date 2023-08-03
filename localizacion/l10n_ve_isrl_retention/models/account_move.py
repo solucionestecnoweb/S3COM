@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models,_
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.exceptions import UserError
 import base64
 import logging
 _logger = logging.getLogger('__name__')
@@ -62,11 +61,8 @@ class AccountMove(models.Model):
                     'islr_type': 'out_islr' if self.move_type in ['out_refund', 'out_invoice']
                     else 'in_islr'
                 })
-                #self.env['isrl.retention.line'].search([('retention_id','=',self.retention_id.id)]).unlink()
-                #raise UserError(_('lineas=%s')%self.invoice_line_ids)
+
                 for move in self.invoice_line_ids:
-                    #move.rate_ids.unlink()
-                    #raise UserError(_('rate=%s')%move.rate_ids)
                     for r in move.rate_ids:
                         base = ((move.price_subtotal * r.subtotal) / 100)*factor
                         subtotal = (base * r.retention_percentage / 100)
@@ -74,7 +70,6 @@ class AccountMove(models.Model):
                         if self.partner_id.people_type == r.people_type:
                             ban=self.valida_rep_islr(move.concept_isrl_id,self.retention_id)
                             if ban==0: 
-                                #raise UserError(_('entra 1'))
                                 retention_line_obj.create({
                                     'islr_concept_id': move.concept_isrl_id.id,
                                     'code': r.code,
@@ -86,7 +81,6 @@ class AccountMove(models.Model):
                                     'total': total #
                                 })
                             else:
-                                #raise UserError(_('entra 2'))
                                 retention_line_obj2=self.env['isrl.retention.line'].search([('islr_concept_id','=',move.concept_isrl_id.id),('retention_id','=',self.retention_id.id)])
                                 retention_line_obj2.write({
                                     'base': base+retention_line_obj2.base, #
