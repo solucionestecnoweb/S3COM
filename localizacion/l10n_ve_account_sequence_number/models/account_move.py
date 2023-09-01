@@ -80,7 +80,10 @@ class AccountMove(models.Model):
             else:
                 self.invoice_number_seq()
                 self.invoice_control()
-                self.name= self.invoice_number_next
+                if self.move_type in ('out_invoice','out_refund','out_receipt'): # cliente
+                    self.name= self.invoice_number_next
+                else:
+                    self.name="Fact Nro: "+str(self.invoice_number_next)+"-"+str(self.invoice_date)+str(self.partner_id.vat)
                 #self.name= self.journal_id.code + "/" +self.invoice_number_next
                 #self.payment_reference=self.invoice_number_next
             for det_line_asiento in self.line_ids:
