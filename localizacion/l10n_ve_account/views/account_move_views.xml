@@ -102,12 +102,12 @@
                         <field name="amount_untaxed_signed_rate" string="Base Imponible"
                                widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
 
-                        <field name="amount_tax_rate" string="Impuesto" attrs="{'invisible': [('amount_tax', '=', 0)]}"
+                        <!--field name="amount_tax_rate" string="Impuesto" attrs="{'invisible': [('amount_tax', '=', 0)]}"
                                widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
 
                         <field name="amount_total_signed_aux_rate" string="Total"
                                class="oe_subtotal_footer_separator" attrs="{'invisible': [('amount_tax', '=', 0)]}"
-                               widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
+                               widget="monetary" options="{'currency_field': 'currency_id2', 'field_digits': True}"/-->
 
                         <field name="amount_residual_signed_rate" string="Importe Adeudado"
                                class="oe_subtotal_footer_separator" attrs="{'invisible': [('state', '=', 'draft')]}"
@@ -139,6 +139,13 @@
                     <field name="price_subtotal_rate" widget="monetary" readonly="1"
                            options="{'currency_field': 'currency_id2', 'field_digits': True}"/>
                 </xpath>
+
+                <!--xpath expr="//button[@id='account_invoice_payment_btn']" position="after">
+                    <button name="pago_fact" string="Realizar Pago." type="object" class="oe_highlight" attrs="{'invisible': ['|','|',('state', '=','draft'),('payment_state','=','paid'),('amount_residual','=',0)]}"/>
+                </xpath-->
+                 <!--xpath expr="//button[@id='account_invoice_payment_btn']" position="replace">
+                    <button name="action_register_payment" id="account_invoice_payment_btn" invisible="1"/>
+                </xpath-->
             </field>
         </record>
 
