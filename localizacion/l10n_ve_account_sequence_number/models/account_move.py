@@ -84,7 +84,7 @@ class AccountMove(models.Model):
                     self.name= self.invoice_number_next
                 # proveedor
                 else:
-                    self.name=str(self.partner_id.vat)+" Fact Nro: "+str(self.invoice_number_next)
+                    self.name=" Fact Nro x: "+str(self.invoice_number_next)
                 #self.name= self.journal_id.code + "/" +self.invoice_number_next
                 #self.payment_reference=self.invoice_number_next
             for det_line_asiento in self.line_ids:
