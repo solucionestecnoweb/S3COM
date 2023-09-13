@@ -220,6 +220,7 @@ class WizardReport_1(models.TransientModel): # aqui declaro las variables del wi
             ('type','in',('in_invoice','in_refund','in_receipt')),
             ('invoice_id.is_delivery_note','!=',True)
             ])
+        #raise UserError(_('ver: %s')%cursor_resumen)
         for det in cursor_resumen:
             alicuota_reducida=0
             alicuota_general=0
@@ -272,7 +273,8 @@ class WizardReport_1(models.TransientModel): # aqui declaro las variables del wi
             }
             pdf_id = t.create(values)
         #   temp = self.env['account.wizard.pdf.ventas'].search([])
-        self.line = self.env['resumen.iva.wizard.pdf'].search([])
+        self.line = self.env['resumen.iva.wizard.pdf'].search([],order='invoice_id asc')
+        #raise UserError(_('ver: %s')%self.line)
 
     def print_resumen_iva(self):
         self.get_invoice()
