@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="parch_account_invoice_inherit_view_tree" model="ir.ui.view">
+            <field name="name">parch.account.move.inherit.view.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                  <xpath expr="//field[@name='amount_total_signed_aux_rate']" position="replace">
+                        <field name="total_bs" decoration-bf="1" string="Total al Cambio (Bs)" sum="total_bs"/>
+                  </xpath>
+                  <xpath expr="//field[@name='amount_total_in_currency_signed']" position="replace">
+                        <field name="total_divisas" decoration-bf="1" string="Total en divisas ($)" sum="total_divisas"/>
+                  </xpath>
+            </field >
+            </record>
+	</data>	
+</odoo>

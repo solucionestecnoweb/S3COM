@@ -389,6 +389,65 @@ class AccountMove(models.Model):
             sums = [res[1] for res in query_res]
             #raise UserError(_("Cannot create unbalanced journal entry. Ids: %s\nDifferences debit - credit: %s") % (ids, sums))
 
+
+    def _compute_payments_widget_to_reconcile_info(self):
+        self.asocia_asiento_igtf_factura_clie()
+        super()._compute_payments_widget_to_reconcile_info()
+
+
+    def asocia_asiento_igtf_factura_clie(self):
+        #raise UserError(_('Enra aqui 1'))
+        for selff in self:
+            selff.igtf_ids.unlink()
+        ### fin
+            cuenta_cli=selff.partner_id.property_account_receivable_id.id # cliente
+            cuenta_prov=selff.partner_id.property_account_payable_id.id # proveedor
+            if selff.move_type in ('out_invoice','out_refund'):
+                cuenta_gene=cuenta_cli
+            if selff.move_type in ('in_invoice','in_refund'):
+                cuenta_gene=cuenta_prov
+            if selff.move_type in ('out_invoice','out_refund','in_invoice','in_refund'):
+                for rec in selff.line_ids:
+                    if rec.account_id.id==cuenta_gene:
+                        id_move=rec.id
+                #raise UserError(_('cursor3=%s')%id_move)
+                if selff.state=='posted' and selff.move_type!='entry':
+                    if selff.move_type in ('out_invoice','out_refund'):
+                        cursor=selff.env['account.partial.reconcile'].search([('debit_move_id','=',id_move)])
+                    if selff.move_type in ('in_invoice','in_refund'):
+                        cursor=selff.env['account.partial.reconcile'].search([('credit_move_id','=',id_move)])
+                    if cursor:
+                        for rec in cursor:
+                            if selff.move_type in ('out_invoice','out_refund'):
+                                pago_move_id=rec.credit_move_id.move_id.payment_id
+                            if selff.move_type in ('in_invoice','in_refund'):
+                                pago_move_id=rec.debit_move_id.move_id.payment_id
+                            monto=pago_move_id.amount
+                            #raise UserError(_('Entra 3=%s')%pago_move_id.id)
+                            if pago_move_id.payment_method_id.calculate_wh_itf==True:
+                                tasa=pago_move_id.os_currency_rate
+                                if pago_move_id.currency_id.id!=self.env.company.currency_id.id:
+                                    monto_base=pago_move_id.amount*tasa
+                                    monto_base_usd=pago_move_id.amount
+                                else:
+                                    monto_base=pago_move_id.amount
+                                    monto_base_usd=pago_move_id.amount/tasa
+                                retencion=monto_base*pago_move_id.payment_method_id.wh_porcentage/100
+                                vols={
+                                'move_id':selff.id,
+                                'asiento_igtf':pago_move_id.asiento_cobro_igtf.id,
+                                'metodo_pago':pago_move_id.payment_method_id.id,
+                                'monto_base_usd':monto_base_usd,
+                                'tasa':tasa,
+                                'monto_base':monto_base,
+                                'porcentaje':pago_move_id.payment_method_id.wh_porcentage,
+                                'monto_ret':retencion,
+                                }
+                                verifica_asiento_igtf_fact=selff.env['account.payment.igtf'].search([('asiento_igtf','=',pago_move_id.asiento_cobro_igtf.id)])
+                                if not verifica_asiento_igtf_fact and pago_move_id:
+                                    crear=selff.env['account.payment.igtf'].create(vols)
+
+                                    
     def button_draft(self):
         super().button_draft()
         if self.move_type!='entry':

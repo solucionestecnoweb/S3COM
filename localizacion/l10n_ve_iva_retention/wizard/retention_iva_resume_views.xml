@@ -31,7 +31,8 @@
                 id="menu_iva_resume"
                 name="Resumen Retenciones IVA"
                 parent="l10n_ve_res_config_settings_retentions.menu_iva_txt"
-                action="action_retention_iva_resume_wizard"/-->
+                action="action_retention_iva_resume_wizard"
+        /-->
 
     </data>
 </odoo>

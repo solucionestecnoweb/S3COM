@@ -15,9 +15,9 @@ class AccountPaymentRegister(models.TransientModel):
 
 
 
-    def action_create_payments(self):
-        super().action_create_payments()
-        self.registar_asiento_igtf()
+    #def action_create_payments(self):
+        #super().action_create_payments()
+        #self.registar_asiento_igtf()
 
     def registar_asiento_igtf(self):
         busca_factura=self.env['account.move'].search([('name','=',self.communication)],limit=1)
