@@ -50,6 +50,15 @@ class SaleOrder(models.Model):
                         'amount_total_signed_rate': (sale.amount_total / sale.rate)
                     })
 
+    @api.onchange('date_order')
+    def actualiza_tasa(self):
+        if self.custom_rate==False:
+            valor=1
+            busca=self.env['res.currency.rate'].search([('name', '<=', self.date_order), ('currency_id', '=', 2)], limit=1)
+            if busca:
+                valor=busca.inverse_company_rate
+            self.rate=valor
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'

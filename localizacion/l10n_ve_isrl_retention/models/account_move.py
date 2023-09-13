@@ -28,7 +28,8 @@ class AccountMove(models.Model):
             self.retention_id.move_entry_id.with_context(force_delete=True).unlink()
         for ret in self.retention_id.line_ids:
             ret.unlink()
-        self.retention_id.unlink()
+        self.retention_id.state='draft'
+        ##self.retention_id.unlink()
         return res
 
     def post_retention(self):
@@ -58,6 +59,8 @@ class AccountMove(models.Model):
                     'move_date': self.date,
                     'isrl_date': self.date,
                     'move_type': self.move_type,
+                    'is_currency_rate':self.custom_rate,
+                    'os_currency_rate':self.os_currency_rate,
                     'islr_type': 'out_islr' if self.move_type in ['out_refund', 'out_invoice']
                     else 'in_islr'
                 })
@@ -89,6 +92,38 @@ class AccountMove(models.Model):
                                     })
                 if self.move_type in ['in_invoice', 'in_refund']:
                     self.retention_id.action_post()
+        else:
+            self.retention_id.write({'is_currency_rate':self.custom_rate,'os_currency_rate':self.os_currency_rate,})
+            retention_line_obj = self.env['isrl.retention.line']
+            for move in self.invoice_line_ids:
+                for r in move.rate_ids:
+                    base = ((move.price_subtotal * r.subtotal) / 100)*factor
+                    subtotal = (base * r.retention_percentage / 100)
+                    total = subtotal-r.subtract
+                    if self.partner_id.people_type == r.people_type:
+                        ban=self.valida_rep_islr(move.concept_isrl_id,self.retention_id)
+                        if ban==0:
+                            retention_line_obj.create({
+                                'islr_concept_id': move.concept_isrl_id.id,
+                                'code': r.code,
+                                'retention_id': self.retention_id.id,
+                                'qty': r.retention_percentage,
+                                'base': base, #
+                                'qty_retention': subtotal, #
+                                'subtracting': r.subtract,
+                                'total': total #
+                                })
+                        else:
+                            retention_line_obj2=self.env['isrl.retention.line'].search([('islr_concept_id','=',move.concept_isrl_id.id),('retention_id','=',self.retention_id.id)])
+                            retention_line_obj2.write({
+                                'base': base+retention_line_obj2.base, #
+                                'qty_retention': subtotal+retention_line_obj2.qty_retention, #
+                                'total': (subtotal+retention_line_obj2.qty_retention)-r.subtract,#total+retention_line_obj2.total, #
+                            })
+            if self.move_type in ['in_invoice', 'in_refund']:
+                    self.retention_id.action_post()
+
+
 
     def valida_rep_islr(self,islr_concept_id,retention_id):
         ban=0

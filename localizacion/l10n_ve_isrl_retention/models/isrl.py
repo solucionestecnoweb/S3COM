@@ -134,6 +134,7 @@ class IsrlRetention(models.Model):
             'move_type': "entry",
         }
         m = move_obj.create(value)
+        m.write({'os_currency_rate':self.os_currency_rate,'custom_rate':self.is_currency_rate,})
         if self.move_type in ['out_invoice', 'out_refund']:
             line.append((0, 0, {
                 'name': move,
@@ -242,9 +243,11 @@ class IsrlRetention(models.Model):
                 }))
 
         m.write({'line_ids': line})
+        m.line_ids._compute_accounting_rate()
         self.write({'move_entry_id': m.id, 'state': 'done'})
         self.move_entry_id._post()
-        self.action_partial_reconcile(m)
+        #self.action_partial_reconcile(m)
+        self.create_conciliacion_ret_islr()
         return m
 
     def action_cancel(self):
@@ -253,6 +256,7 @@ class IsrlRetention(models.Model):
         else:
             raise ValidationError("Disculpe!!! Cancele primero la factura")
 
+    #### codigo brayan 
     def action_partial_reconcile(self, move):
         vals = {}
         amount_debit = 0.0
@@ -315,6 +319,34 @@ class IsrlRetention(models.Model):
             else total,
             'max_date': self.move_date,
         })
+
+    #  codigo darrell
+    def create_conciliacion_ret_islr(self):
+        factor=1
+        if self.company_id.currency_id.id!=self.move_id.currency_id.id:
+            factor=self.os_currency_rate
+        ### para proveedores
+        if self.move_type in ('in_invoice','out_refund','in_receipt'):
+            cuenta_ref=self.partner_id.property_account_payable_id.id
+            id_move_credit=self.env['account.move.line'].search([('move_id','=',self.move_id.id),('account_id','=',cuenta_ref)],limit=1)
+            id_move_debit=self.env['account.move.line'].search([('move_id','=',self.move_entry_id.id),('account_id','=',cuenta_ref)],limit=1)
+        ### para clientes
+        if self.move_type in ('out_invoice','in_refund','out_receipt'):
+            cuenta_ref=self.partner_id.property_account_receivable_id.id
+            id_move_credit=self.env['account.move.line'].search([('move_id','=',self.move_entry_id.id),('account_id','=',cuenta_ref)],limit=1)
+            id_move_debit=self.env['account.move.line'].search([('move_id','=',self.move_id.id),('account_id','=',cuenta_ref)],limit=1)
+        monto=self.amount_total_retention #self.vat_retentioned
+        value=({
+            'debit_move_id':id_move_debit.id,
+            'credit_move_id':id_move_credit.id,
+            'amount':monto, # siempre va en bs
+            'debit_amount_currency':monto/factor,
+            'credit_amount_currency':monto/factor,
+            'max_date':self.isrl_date,
+            'credit_currency_id':3,
+            'debit_currency_id':3,
+            })
+        self.env['account.partial.reconcile'].create(value)
 
     def amount_rate_retention_islr(self, amount):
         move_date = self.move_id.date

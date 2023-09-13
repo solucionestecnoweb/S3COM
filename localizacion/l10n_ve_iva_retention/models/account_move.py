@@ -27,7 +27,8 @@ class AccountMove(models.Model):
             self.retention_iva_id.move_entry_id.with_context(force_delete=True).unlink()
         for ret in self.retention_iva_id.line_ids:
             ret.unlink()
-        self.retention_iva_id.unlink()
+        self.retention_iva_id.state='draft'
+        #self.retention_iva_id.unlink()
         return res
 
     def post_retention_iva(self):
@@ -53,6 +54,8 @@ class AccountMove(models.Model):
                     'move_date': self.date,
                     'iva_date': self.date,
                     'journal_id': journal.id,
+                    'is_currency_rate':self.custom_rate,
+                    'os_currency_rate':self.os_currency_rate,
                     'iva_type': 'out_iva' if self.move_type in ['out_refund', 'out_invoice']
                     else 'in_iva'
                 })
@@ -61,6 +64,16 @@ class AccountMove(models.Model):
                 self.tax_aliquot_reduced(ret)
                 self.tax_aliquot_additional(ret)
                 if self.move_type in ['in_invoice', 'in_refund']:
+                     self.retention_iva_id.action_post()
+        else:
+            self.retention_iva_id.write({'is_currency_rate':self.custom_rate,'os_currency_rate':self.os_currency_rate,})
+            for item in self.retention_iva_id.line_ids:
+                item.unlink()
+            ret=self.retention_iva_id
+            self.tax_aliquot_general(ret)
+            self.tax_aliquot_reduced(ret)
+            self.tax_aliquot_additional(ret)
+            if self.move_type in ['in_invoice', 'in_refund']:
                      self.retention_iva_id.action_post()
         return self.retention_iva_id
 

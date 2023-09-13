@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="vista_from_pago_partner" model="ir.ui.view">
+		<field name="name">vista.from.pago_partner</field>
+		<field name="model">account.invoice.payment</field>
+		<field name="arch" type="xml">
+			<form string="Registro de Pagos">
+                <sheet>
+                	<group name="central">
+					    <group>	
+					    	<field name="company_id" string="Compañia" readonly="1"/>
+					    	<field name="cliente_proveedor_id" string="Persona" readonly='1'/>
+					    	
+					    	<field name="account_journal_id" string="Diario" domain="[('type','in',('bank','cash'))]" invisible="0" required="1"/>
+					    	<field name="payment_method_id" string="Métodos" domain="[('journal_id', '=', account_journal_id),('tipo_metodo','=','int')]" invisible="0" required="1"/>
+
+					    	<field name="method_generi_id" string="Métodos de Pago" domain="[('payment_type', '=', 'inbound')]" invisible="1"/>
+
+					    	<!--div class="address_format">
+					    		<h5>Monto adeudado</h5>
+						    	<field name="monto_pendiente"/>	
+						    	<field name="moneda_venta" readonly="1"/>
+						    	<h5> / </h5>	
+						    	<field name="monto_pendiente_usd"/>
+						    	<h5>$</h5>
+					    	</div-->		
+					    </group>
+					    <group>
+					    	<label for="monto" string="Monto a pagar"/>
+					    	<div class="o_row">
+					    		<field name="monto_aux" string="Monto aux" invisible="1"/>
+						    	<field name="monto" string="Monto a cancelar" readonly='0'/>
+						    	<field name="currency_id" string="Moneda" />
+					    	</div>
+					    	<field name="monto_signed" invisible="1"/>
+					    	<field name="tasa" string="Tasa del dia" readonly='0'/>
+					    	<field name="payment_date" string="Fecha de Pago"/>
+					    	
+					    </group>
+					</group>
+					<!--notebook>
+						<page name="line_ids" string="Pagos">
+							<field name="line_ids" nolabel="1" readonly="False" attrs="{'readonly': [('state', '!=','draft')]}">
+								<tree string="Registro de Pagos" editable="buttom">
+									<field name="payment_id" string="Pago id" invisible="1"/>
+	                        		<field name="payment_method_id" string="Método"/>
+	                        		<field name="currency_id" string="Moneda de Pago"/>
+	                        		<field name="monto" string="Monto"/>
+	                        		<field name="monto_bs" string="Monto (Bs)" sum="monto_bs"/>
+	                        		<field name="company_id"/>
+
+								</tree>
+							</field>
+
+						</page>
+					</notebook-->
+				</sheet>
+				<footer>
+					<button name="pagar" string="Registrar Pago" type="object" class="oe_highlight"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+</odoo>

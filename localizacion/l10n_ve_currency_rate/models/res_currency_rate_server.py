@@ -103,8 +103,8 @@ class ResCurrencyRateServer(models.Model):
             self.env['res.currency.rate'].create({
                 'currency_id': self.name.id,
                 'name': datetime.now(),
-                'sell_rate':  round(currency, 2),
-                'rate': 1 / round(currency, 2)
+                'sell_rate':  round(currency, 4),
+                'rate': 1 / round(currency, 4)
             })
             if self.tasa_euro > 1:
                 self.env['res.currency.rate'].create({
@@ -145,7 +145,7 @@ class ResCurrencyRateServer(models.Model):
 class ResCurrencyRate(models.Model):
     _inherit = 'res.currency.rate'
 
-    sell_rate = fields.Float(string='Tasa de Cambio', digits=(12, 4))
+    sell_rate = fields.Float(string='Tasa de Cambio', digits=(12, 2))
 
     @api.constrains("sell_rate")
     def set_sell_rate(self):

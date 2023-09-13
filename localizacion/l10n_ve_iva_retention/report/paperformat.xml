@@ -18,8 +18,8 @@
             <field name="name">A4 Landscape Account Resume iva</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
-            <field name="page_height">243</field>
-            <field name="page_width">399</field>
+            <field name="page_height">449</field>
+            <field name="page_width">303</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">52</field>
             <field name="margin_bottom">5</field>

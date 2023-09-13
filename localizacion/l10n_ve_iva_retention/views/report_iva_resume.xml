@@ -10,9 +10,9 @@
                                 <div class="col-3 mb4">
                                     <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
                                     <br/>
-                                    <span style="font-size:17px;">RIF:
+                                    <!--span style="font-size:17px;">RIF:
                                         <span style="font-size:17px;" t-field="o.company_id.doc_type"/>-
-                                        <span style="font-size:17px;" t-field="o.company_id.vat"/></span>
+                                        <span style="font-size:17px;" t-field="o.company_id.vat"/></span-->
                                 </div>
                                 <div class="col-9 mb4 text-right">
                                     <span style="font-size:17px;"><strong>Fecha:</strong> <span t-esc="datetime.datetime.now().strftime('%Y-%m-%d')" t-options="{'widget': 'date'}"/></span>
@@ -97,7 +97,7 @@
                                             </td>
                                             <t t-if="r['type_doc'] == '02' or r['type_doc'] == '03' ">
                                                 <td>
-                                                    <t t-esc="r['reason']"/>
+                                                    <!--t t-esc="r['reason']"/-->
                                                 </td>
                                             </t>
                                             <t t-else="">

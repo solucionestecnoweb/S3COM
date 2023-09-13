@@ -42,4 +42,4 @@ class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
 
     rate = fields.Float(string='Tasa', default=lambda x: x.env['res.currency.rate'].search([
-        ('name', '<=', fields.Date.today()), ('currency_id', '=', 2)], limit=1).sell_rate, digits=(12, 2))    
+        ('name', '<=', fields.Date.today()), ('currency_id', '=', 2)], limit=1).sell_rate, digits=(12, 4))    

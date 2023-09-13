@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_invoice_config,account.invoice.config,model_account_invoice_config,,1,1,1,1
+account_config_user,account.config.user,model_account_config_user,,1,1,1,1
+account_sessiones,account_sessiones,model_account_sessiones,,1,1,1,1

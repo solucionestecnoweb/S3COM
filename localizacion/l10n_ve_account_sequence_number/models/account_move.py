@@ -80,7 +80,10 @@ class AccountMove(models.Model):
             else:
                 self.invoice_number_seq()
                 self.invoice_control()
-                self.name= self.invoice_number_next
+                if self.move_type in ('out_invoice','out_refund','out_receipt'): # cliente
+                    self.name= self.invoice_number_next
+                if self.move_type in ('in_invoice','in_refund','in_receipt'): # proveedor
+                    self.name=self.partner_id.doc_type+"-"+str(self.partner_id.vat)+" Fact Nro: "+str(self.invoice_number_next)
                 #self.name= self.journal_id.code + "/" +self.invoice_number_next
                 #self.payment_reference=self.invoice_number_next
             for det_line_asiento in self.line_ids:
@@ -89,6 +92,7 @@ class AccountMove(models.Model):
                     det_line_asiento.name = self.journal_id.code + "/" + self.delivery_note_next_number if self.delivery_note_next_number else self.invoice_number_next
                     #det_line_asiento.nro_doc=nro_factura
         return res
+        
 
     def invoice_number_seq(self):
         if not self.is_manual:
