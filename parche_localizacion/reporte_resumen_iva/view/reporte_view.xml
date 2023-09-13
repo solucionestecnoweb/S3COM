@@ -147,7 +147,8 @@
                   <t t-set="acum_combinada" t-value="0"/>
                   <t t-set="acum_iva_ret" t-value="0"/>
 
-                  <t t-foreach="o.line.sorted(key=lambda x: (x.retenido_date,x.invoice_id.id),reverse=False)" t-as="line" >
+                  <!--t t-foreach="o.line.sorted(key=lambda x: (x.retenido_date,x.invoice_id.id),reverse=False)" t-as="line" -->
+                  <t t-foreach="o.line" t-as="line" >
                     <tbody class="table table-bordered">
                     <tr>
                     <td>
@@ -255,9 +256,10 @@
                       </div>
                     </td>
                     <td>
-                      <!--t t-if="line.vat_ret_id.state == 'done' ">
+                      <!--t t-if="line.vat_ret_id.state == 'done' "-->
+                      <t t-if="line.retenido_date != False ">
                         <t t-esc="line.formato_fecha2(line.retenido_date)"/>
-                      </t-->
+                      </t>
                     </td>
                   </tr>
                   </tbody>
