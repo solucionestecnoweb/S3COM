@@ -58,8 +58,9 @@ class AccountMove(models.Model):
 
     def button_cancel(self):
         super().button_cancel()
-        self.suma_alicuota_iguales_iva()
         self.state='cancel'
+        self.suma_alicuota_iguales_iva()
+
 
     def llenar(self):
         #temporal=self.env['account.move.line.resumen'].search([])
@@ -103,6 +104,7 @@ class AccountMove(models.Model):
             #base=0
             #total=0
             #total_impuesto=0
+
             total_exento=0
             alicuota_adicional=0
             alicuota_reducida=0
@@ -110,6 +112,7 @@ class AccountMove(models.Model):
             base_general=0
             base_reducida=0
             base_adicional=0
+
             #retenido_general=0
             #retenido_reducida=0
             #retenido_adicional=0
@@ -140,6 +143,7 @@ class AccountMove(models.Model):
                 if det_lin:
                     for det_fac in det_lin:#USAR AQUI ACOMULADORES
                         if self.state!="cancel":
+                            #raise UserError(_('dar=%s')%self.state)
                             base=base+det_fac.price_subtotal
                             total=total+det_fac.price_total
                             id_impuesto=det_fac.tax_ids.id

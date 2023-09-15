@@ -442,7 +442,8 @@
                             <td>
                               <div align="right">
                               <t t-esc="o.float_format2(acum_iva_ret)"/>
-                              <t t-set="acum_iva_ret" t-value="acum_iva_ret+line.iva_retenido"/>
+                              <!--t t-set="acum_iva_ret" t-value="acum_iva_ret+line.iva_retenido"/-->
+                              
                               </div>
                             </td>
                             <td colspan="3"> </td>
