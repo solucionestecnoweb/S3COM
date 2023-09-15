@@ -1,7 +1,8 @@
-from odoo import fields, models
+from odoo import models, fields, api, _, tools
 from datetime import datetime, timedelta
 import logging
 import base64
+from odoo.exceptions import UserError, ValidationError
 _logger = logging.getLogger(__name__)
 
 
@@ -52,6 +53,9 @@ class RetentionIvaTxt(models.TransientModel):
         start_time = datetime.now()
         desde = fields.Date.from_string(self.from_date)
         hasta = fields.Date.from_string(self.to_date)
+        ban=self.env['retention.iva'].search([('iva_date','>=',self.from_date),('iva_date','<=',self.to_date),('move_type','in',('in_invoice','in_refund','in_receipt'))])
+        if not ban:
+            raise UserError(_('No hay Informacion en este periodo'))
         query = """
         SELECT
             partner.name AS partner,
@@ -88,12 +92,13 @@ class RetentionIvaTxt(models.TransientModel):
         self._cr.execute(query)
         obj_query = self._cr.dictfetchall()
         file = open('/tmp/retencion_iva.txt', 'w')
+        #file = open('C:/REPOSITORIO/JJ21-C.A2/localizacion/l10n_ve_iva_retention/wizard/retencion_iva.txt', 'w')
         vals = {
             'from_date': self.from_date,
             'to_date': self.to_date,
             'state': 'generada',
         }
-        res = self.env['retention.txt.summary'].create(vals)
+        res = self.env['retention.txt.summary'].create(vals)     
         for line in obj_query:
             accum_exempt = 0.0
             if line['aliquot'] == 'exempt':
@@ -169,6 +174,7 @@ class RetentionIvaTxt(models.TransientModel):
 
         file.close()
         file = open('/tmp/retencion_iva.txt', 'rb')
+        #file = open('C:/REPOSITORIO/JJ21-C.A2/localizacion/l10n_ve_iva_retention/wizard/retencion_iva.txt', 'rb')
         out = file.read()
         r = base64.b64encode(out)
         action = self.env.ref('l10n_ve_iva_retention.action_account_iva_download_wizard').read()[0]

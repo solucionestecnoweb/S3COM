@@ -220,7 +220,7 @@ class libro_ventas(models.TransientModel):
         resultado=str(tipo_doc)+str(nro_doc)
         return resultado
         
-    def get_invoice(self,accion):
+    def get_invoice2(self,accion):
         t=self.env['account.wizard.pdf.ventas']
         d=t.search([])
         #d.unlink()
@@ -233,14 +233,23 @@ class libro_ventas(models.TransientModel):
                 ('invoice_id.is_delivery_note','!=',True)
                 ])
         if accion=="voucher":
-            cursor_resumen = self.env['alicuota'].search([
-                ('date_voucher','>=',self.date_from),
-                ('date_voucher','<=',self.date_to),
-                ('date_invoice','<',self.date_from),
-                #('fecha_fact','>=',self.date_to),
-                ('retention_iva_state','=','done'),
-                ('move_type','in',('out_invoice','out_refund','out_receipt'))
+            cursor_resumen = self.env['account.move.line.resumen'].search([
+                ('type','in',('out_invoice','out_refund','out_receipt')),
+                ('vat_ret_id.state','=','done'),
+                ('fecha_fact','<',self.date_from),
+                ('vat_ret_id.iva_date','>=',self.date_from),
+                ('vat_ret_id.iva_date','<=',self.date_to),
                 ])
+            #cursor_resumen = self.env['account.move.line.resumen'].search([
+                #***('fecha_comprobante','>=',self.date_from),
+                #('fecha_comprobante','<=',self.date_to),
+                #('fecha_fact','<',self.date_from),
+                ##('fecha_fact','>=',self.date_to),
+                ##****('state_voucher_iva','=','done'),
+                #('vat_ret_id.state','=','done'),
+                #('type','in',('out_invoice','out_refund','out_receipt'))
+                #])
+        #raise UserError(_('cursor_resumen= %s')%cursor_resumen)
         for det in cursor_resumen:
             alicuota_reducida=0
             alicuota_general=0
@@ -292,17 +301,17 @@ class libro_ventas(models.TransientModel):
             'invoice_id':det.invoice_id.id,
             }
             pdf_id = t.create(values)
-        #   temp = self.env['account.wizard.pdf.ventas'].search([])
-        self.line = self.env['account.wizard.pdf.ventas'].search([])
+        ##self.line = self.env['account.wizard.pdf.ventas'].search([])
 
 
     def print_facturas(self):
         self.actualiza_fecha_voucher()
         self.env['account.wizard.pdf.ventas'].search([]).unlink()
         action="voucher"
-        self.get_invoice(action)
+        self.get_invoice2(action)
         action="factura"
-        self.get_invoice(action)
+        self.get_invoice2(action)
+        self.line = self.env['account.wizard.pdf.ventas'].search([])
         return {'type': 'ir.actions.report','report_name': 'libro_ventas.reporte_factura_clientes','report_type':"qweb-pdf"}
 
 
@@ -350,9 +359,10 @@ class libro_ventas(models.TransientModel):
         self.actualiza_fecha_voucher()
         self.env['account.wizard.pdf.ventas'].search([]).unlink()
         action="voucher"
-        self.get_invoice(action)
+        self.get_invoice2(action)
         action="factura"
-        self.get_invoice(action)
+        self.get_invoice2(action)
+        self.line = self.env['account.wizard.pdf.ventas'].search([])
 
         wb1 = xlwt.Workbook(encoding='utf-8')
         ws1 = wb1.add_sheet('Ventas')
