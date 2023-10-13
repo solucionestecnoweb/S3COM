@@ -200,7 +200,14 @@
                               <td><t t-esc="contador"/></td>
                               <td><t t-esc="line.formato_fecha2(line.invoice_id.invoice_date)"/></td>
                               <td><t t-esc="line.doc_cedula(line.partner.id)"/></td>
-                              <td><t t-esc="line.partner.name"/></td>
+                              <td>
+                                <t t-if="line.invoice_id.state != 'cancel'">
+                                  <t t-esc="line.partner.name"/>
+                                </t>
+                                <t t-if="line.invoice_id.state == 'cancel'">
+                                  <span> ANULADO</span>
+                                </t>
+                              </td>
                               <!--
                                 <t t-if="line.partner.people_type == 'resident_nat_people' ">
                                   <td>PNRE</td>
