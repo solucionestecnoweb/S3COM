@@ -190,20 +190,9 @@ class libro_ventas(models.TransientModel):
     line  = fields.Many2many(comodel_name='account.wizard.pdf.compras', string='Lineas')
     
     def conv_div_nac(self,valor,selff):
-        selff.invoice_id.currency_id.id
-        fecha_contable_doc=selff.invoice_id.date
-        monto_factura=selff.invoice_id.amount_total
         valor_aux=0
-        prueba=22
-        #raise UserError(_('moneda compañia: %s')%self.company_id.currency_id.id)
         if selff.invoice_id.currency_id.id!=self.company_id.currency_id.id:
-            tasa= self.env['account.move'].search([('id','=',selff.invoice_id.id)],order="id asc")
-            for det_tasa in tasa:
-                monto_nativo=det_tasa.amount_untaxed_signed
-                monto_extran=det_tasa.amount_untaxed
-                valor_aux=abs(monto_nativo/monto_extran)
-            rate=round(valor_aux,3)  # LANTA
-            #rate=round(valor_aux,2)  # ODOO SH
+            rate=selff.invoice_id.os_currency_rate
             resultado=valor*rate
         else:
             resultado=valor
